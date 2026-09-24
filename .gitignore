@@ -1,0 +1,12 @@
+# Machine-specific settings and permissions (paths, execution grants, tokens)
+config.json
+*.bak
+projects/
+sidecars/
+_backup_agents_old/
+.migrated
+
+# Operating System files
+.DS_Store
+Thumbs.db
+*.log

@@ -1,0 +1,21 @@
+{
+  "bundleChecksum": "c13b95c3f059c90a82ae459696806e06d975ed342da645791b05fadd30bb2c3a",
+  "skills": {
+    "accidental-data-loss-prevention": {
+      "status": "installed",
+      "checksum": "b8f858f8143114ed9189b29ea8af1672378d66db3b8c92c5ec1b23712141ef1b"
+    },
+    "gcs-security-assessment": {
+      "status": "installed",
+      "checksum": "cb1a537f2b21959d35b65cad761e7ef441f602c1de2e50e8fa13a996165df60a"
+    },
+    "managing-python-dependencies": {
+      "status": "installed",
+      "checksum": "13c29bf9daedb0b4c7906f0ecf14ff09776ce24ff747e16cf2e1fd2cc0da86ea"
+    },
+    "skill-repair": {
+      "status": "installed",
+      "checksum": "276efcab0cdeb25cb412644bcf0fd5fb827f4873b44a6ba24f4e49e035d25c3e"
+    }
+  }
+}
