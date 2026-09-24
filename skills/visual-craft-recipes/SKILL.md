@@ -35,6 +35,7 @@ description: Concrete CSS token dictionaries, HTML component blueprints, and vis
 | Creative Agency, Portfolio | **Editorial Canvas** | Asymmetric layouts, oversized type, high contrast, kinetic scroll |
 | E-commerce, Retail, Fashion | **Product Theater** | Product-first imagery, minimal chrome, focus on merchandise |
 | Education, Nonprofit | **Accessible Clarity** | High contrast, generous spacing, clear hierarchy, no gimmicks |
+| Engineering, Hardware, Tech Academies, Aerospace | **Industrial Blueprint** | Ghost stroke indexes, dark mineral palette (brass/patina/steel), procedural grain over grayscale photo panels, 1px schematic drawings |
 | Real Estate, Architecture | **Spatial Luxury** | Full-bleed photography, overlay typography, cinematic transitions |
 | Kids, Gaming, Entertainment | **Playful Bounce** | Saturated palette, rounded shapes, spring physics, big icons |
 
@@ -187,6 +188,40 @@ description: Concrete CSS token dictionaries, HTML component blueprints, and vis
 
   --ease-out: cubic-bezier(0.33, 1, 0.68, 1);
   --dur: 0.25s;
+}
+```
+
+### 2.F — Industrial Blueprint & Technical Academy (Engineering / Hardware / Deep Tech)
+```css
+:root {
+  /* Warm Charcoal Canvas & Bone Ink (Never pure black or blinding white) */
+  --canvas:      #0c0a08;
+  --ink:         #e4ddd2;
+  --ink-soft:    rgba(228,221,210,0.45);
+  --ink-muted:   rgba(228,221,210,0.22);
+  --line:        rgba(228,221,210,0.06);
+  --line-strong: rgba(228,221,210,0.14);
+
+  /* Mineral & Earth Accents (Strictly non-neon) */
+  --brass:       #c4a46b; /* Aged brass */
+  --patina:      #7aaa94; /* Patina green */
+  --steel:       #8ca4bc; /* Cold steel */
+  --terracotta:  #c07d5c; /* Terracotta */
+  --amber-viol:  #a693bb; /* Violaceous amber */
+  --khaki:       #b09e7a; /* Warm khaki */
+
+  /* Typography Pairing */
+  --display:     'Big Shoulders Display', 'Bebas Neue', sans-serif;
+  --body:        'Figtree', system-ui, sans-serif;
+  --mono:        'Fira Code', 'JetBrains Mono', monospace;
+
+  /* Tight Industrial Geometry */
+  --radius:      2px;
+  --radius-md:   3px;
+
+  /* Physics */
+  --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+  --dur:         0.35s;
 }
 ```
 
@@ -428,6 +463,172 @@ For domains where rounded corners feel generic (salon, luxury, editorial), use c
 }
 ```
 
+### 3.G — Ghost Watermark Index (Industrial Scale Depth)
+For hero sections and track panels where numbers provide architectural depth without clutter.
+
+```css
+.ghost-index {
+  font-family: var(--display, sans-serif);
+  font-weight: 900;
+  font-size: clamp(100px, 18vw, 240px);
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(228,221,210,0.05); /* or ${accentColor}15 */
+  user-select: none;
+  pointer-events: none;
+  position: absolute;
+  right: -1vw;
+  top: 5%;
+  z-index: 1;
+}
+```
+
+### 3.H — Procedural Film Grain & Cinematic Grayscale Panel
+Turns photographic images into moody, archival, non-distracting background planes.
+
+```css
+/* Panel container */
+.tpanel {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  border-bottom: 1px solid var(--line);
+}
+
+/* Background image with color grading and hover scale */
+.tpanel img.bg {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: grayscale(0.65) brightness(0.38) contrast(1.05);
+  transform: scale(1.05);
+  transition: transform 1s cubic-bezier(0.16,1,0.3,1), filter 0.7s ease;
+}
+.tpanel:hover img.bg {
+  transform: scale(1);
+  filter: grayscale(0.3) brightness(0.48) contrast(1.05);
+}
+
+/* Procedural SVG grain overlay (Zero external asset needed) */
+.tpanel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  background-size: 200px;
+  opacity: 0.35;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+/* Panel content with dark-to-light vertical gradient scrim */
+.tpanel-inner {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  align-items: end;
+  min-height: 52vh;
+  padding: clamp(2rem, 4vw, 4rem);
+  background: linear-gradient(to top, rgba(12,10,8,0.96) 0%, rgba(12,10,8,0.55) 50%, rgba(12,10,8,0.15) 100%);
+}
+```
+
+### 3.I — Technical Schematic Vector Icons (Drawing vs Icon)
+Draw custom technical schematics with 1px stroke instead of repetitive generic icon packages:
+
+```tsx
+// Technical tree / topology diagram
+export const SchemaTree = ({ className = "w-10 h-10" }) => (
+  <svg className={className} viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round">
+    <circle cx="20" cy="6" r="3"/>
+    <circle cx="8" cy="20" r="3"/>
+    <circle cx="32" cy="20" r="3"/>
+    <circle cx="4" cy="34" r="3"/>
+    <circle cx="14" cy="34" r="3"/>
+    <circle cx="26" cy="34" r="3"/>
+    <circle cx="36" cy="34" r="3"/>
+    <line x1="20" y1="9" x2="8" y2="17"/>
+    <line x1="20" y1="9" x2="32" y2="17"/>
+    <line x1="8" y1="23" x2="4" y2="31"/>
+    <line x1="8" y1="23" x2="14" y2="31"/>
+    <line x1="32" y1="23" x2="26" y2="31"/>
+    <line x1="32" y1="23" x2="36" y2="31"/>
+  </svg>
+);
+
+// Database / storage cylinder schematic
+export const SchemaDatabase = ({ className = "w-10 h-10" }) => (
+  <svg className={className} viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round">
+    <ellipse cx="20" cy="10" rx="13" ry="4.5"/>
+    <line x1="7" y1="10" x2="7" y2="26"/>
+    <line x1="33" y1="10" x2="33" y2="26"/>
+    <ellipse cx="20" cy="18" rx="13" ry="4.5"/>
+    <ellipse cx="20" cy="26" rx="13" ry="4.5"/>
+    <line x1="7" y1="18" x2="7" y2="26"/>
+    <line x1="33" y1="18" x2="33" y2="26"/>
+  </svg>
+);
+```
+
+### 3.J — Interactive Track Accordion & Checkable Lesson Pills
+```css
+/* Smooth expand drawer */
+.drawer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.drawer.open { max-height: 600px; }
+
+/* Interactive lesson pill */
+.lesson-pill {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0.6rem 0.875rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  cursor: pointer;
+  background: transparent;
+  transition: background 0.15s, border-color 0.15s;
+}
+.lesson-pill:hover { background: rgba(228,221,210,0.04); }
+
+/* Ultra-thin hairline progress bar */
+.pbar-bg { height: 1px; background: rgba(228,221,210,0.1); width: 100%; }
+.pbar-fill { height: 100%; transition: width 0.7s cubic-bezier(0.4, 0, 0.2, 1); }
+```
+
+### 3.K — High-Density Industrial Telemetry Ticker
+```css
+@keyframes tick { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+.ticker-wrap {
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 0.85rem 0;
+  overflow: hidden;
+}
+
+.ticker-inner {
+  display: flex;
+  white-space: nowrap;
+  animation: tick 24s linear infinite;
+}
+
+.ticker-item {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--ink-muted);
+  padding: 0 2rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+```
+
 ---
 
 ## 4. DEPTH RECIPES (Escape Flat-Card Syndrome)
@@ -656,6 +857,16 @@ Run the Pre-Ship Visual Audit (Section 6) checkbox-by-checkbox. Any unchecked it
 - **Status**: Warm pills (amber/blue/green/red), not neon dots
 
 This project is the reference standard for the Warm Artisan archetype.
+
+### engpath — Engineering Study Platform (Industrial Blueprint & Technical Academy)
+- **Tokens**: Canvas `#0c0a08` (Charcoal Obsidian), Ink `#e4ddd2` (Warm Linen/Bone), Accents in Mineral Earth (Aged Brass `#c4a46b`, Patina Verde `#7aaa94`, Steel `#8ca4bc`, Terracotta `#c07d5c`). Zero neon.
+- **Typography**: `Big Shoulders Display` (weights 900 vs 100 high-dynamic-range display) + `Figtree` (humanist body) + `Fira Code` (micro-telemetry monospace).
+- **Depth**: Huge stroke-only ghost watermark index (`clamp(100px, 18vw, 240px)` with `WebkitTextStroke: 1px rgba(228,221,210,0.05)`).
+- **Imagery**: Full photographic panels with grayscale/contrast filter + procedural SVG fractalNoise grain overlay + gradient scrim.
+- **Iconography**: Custom 1px-stroke technical schematic drawings (trees, network layers, database cylinders, circuits) — NOT repetitive generic icon libraries.
+- **Micro-interactions**: Interactive lesson pills, hairline progress bars, smooth drawer accordions, telemetry ticker marquee.
+
+This project is the reference standard for the Industrial Blueprint archetype.
 
 ---
 
