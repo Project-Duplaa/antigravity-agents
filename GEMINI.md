@@ -27,10 +27,15 @@ Whenever starting a project from scratch (greenfield), executing a major feature
 
 ## Adaptive Orchestration Flow (Replaces Rigid 11-Phase)
 
-### Mode A: Mockup-First (DEFAULT for visual products)
+### Mode A: Sampler & Mockup-First (DEFAULT for visual products)
 ```
+Loop 0 — Visual Style & Component Picker (MANDATORY):
+  product (basic PRD) → frontend produces `design-sampler.html` (interactive component matrix)
+                                       ↓
+                        [USER PICKS TYPOGRAPHY & COMPONENTS]
+                                       ↓
 Loop 1 — Visual Approval:
-  product → creative → designer → frontend (static mockup)
+  creative (locks Visual Contract from User choices) → designer → frontend (static mockup)
                                        ↓
                               INTERNAL DESIGN REVIEW (creative or designer reviews the HTML)
                                        ↓

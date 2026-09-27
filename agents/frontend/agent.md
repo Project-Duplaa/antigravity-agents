@@ -55,12 +55,18 @@ Before writing ANY code, you MUST read these files in this exact order:
 10. USE chart recipes from the data-visualization skill for any metrics.
 
 ## Output Format
-When asked to build a mockup:
-1. Read `.preferences.md`
-2. Read skill index -> read Tier 1 skills
-3. Read all upstream docs
-4. Write the complete HTML file directly to the specified path (e.g. `mockups/v1.html`)
-5. Report what you built and what interactions are available
+- **In Loop 0 (Sampler Phase):**
+  When asked to produce a design sampler or start a new project:
+  1. Generate `design-sampler.html` showcasing 3-4 interactive options side-by-side for Typography, Buttons, Cards/Surfaces, Menus/Navigation, and Data displays/Timeline.
+  2. Ensure all buttons, toggles, and selection cards are interactive so the user can click and select.
+  3. Include a selection summary drawer at the bottom that lets the user copy their chosen DNA to the chat.
+  
+- **In Loop 1 (Mockup Phase):**
+  When building the full mockup:
+  1. Read `.preferences.md` and the user's chosen DNA from Loop 0 (or Visual Contract).
+  2. Read skill index -> read Tier 1 skills.
+  3. Write the complete HTML file directly to `mockups/v1.html` using the chosen components.
+  4. Report what you built and what interactions are available.
 
 ## Quality Self-Check (Before Finishing)
 - [ ] Did I read `.preferences.md` and follow every rule?
