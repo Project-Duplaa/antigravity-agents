@@ -1,12 +1,14 @@
-# Multi-Agent Orchestration Protocol (Mandatory)
+# Multi-Agent Orchestration Protocol (Mandatory) — v2
 
 ## Core Directive
 Whenever starting a project from scratch (greenfield), executing a major feature, or redesigning components:
 1. **NEVER** act as a monolithic developer writing and designing everything directly in a single agent loop.
 2. **ALWAYS** invoke and orchestrate the specialized subagents using the `invoke_subagent` tool.
 3. **NEVER** accept generic AI-slop design. The design must feel crafted by a world-class digital studio.
+4. **ALWAYS** follow the Mockup-First Workflow for visual products (see `mockup-first-workflow` skill).
+5. **ALWAYS** ensure every agent reads `.preferences.md` in the workspace root before producing any output. User preferences override all other rules.
 
-## Specialized Agent Roster (11 Agents)
+## Specialized Agent Roster (12 Agents)
 
 | # | Agent | Role | Invoked For |
 |---|-------|------|-------------|
@@ -16,26 +18,70 @@ Whenever starting a project from scratch (greenfield), executing a major feature
 | 4 | `database` | Data Architect & DBA | ERD modeling, DDL schemas, migration strategy, index planning, query optimization, engine config |
 | 5 | `security` | Security Engineer & DevSecOps | STRIDE, OWASP, AI/LLM security, supply chain, infra security, Security Veto |
 | 6 | `designer` | UI/UX Designer & Motion Art Director | Design tokens, motion choreography, icon system, route layouts, Anti-AI Design Veto |
-| 7 | `developer` | Senior Fullstack Developer | Backend APIs, frontend components, data access layer, tests |
-| 8 | `qa` | Lead QA & SDET | Test pyramid, BVA, E2E (Playwright), performance, accessibility, QA Veto |
-| 9 | `enhancer` | Code Quality & Optimization | Code reviews, refactoring blueprints, performance, a11y, before/after diffs |
-| 10 | `documentation` | Knowledge Architect & Docs Specialist | README, API docs (OpenAPI), CHANGELOG, Obsidian knowledge vault |
-| 11 | `orchestrator` | Pipeline Coordinator | Phase sequencing, quality gates, error recovery, progress tracking |
+| 7 | `frontend` | **Principal Frontend Engineer** | **Static mockups, interactive prototypes, HTML/CSS/GSAP/Canvas. Produces visual artifacts, not documents.** |
+| 8 | `developer` | Senior Backend Developer | Backend APIs, data access layer, server logic, tests. **Does NOT produce frontend code.** |
+| 9 | `qa` | Lead QA & SDET | Test pyramid, BVA, E2E (Playwright), performance, accessibility, QA Veto |
+| 10 | `enhancer` | Code Quality & Optimization | Code reviews, refactoring blueprints, performance, a11y, before/after diffs |
+| 11 | `documentation` | Knowledge Architect & Docs Specialist | README, API docs (OpenAPI), CHANGELOG, Obsidian knowledge vault |
+| 12 | `orchestrator` | Pipeline Coordinator | Phase sequencing, quality gates, error recovery, progress tracking |
 
-## Orchestration Flow (11 Phases)
+## Adaptive Orchestration Flow (Replaces Rigid 11-Phase)
+
+### Mode A: Mockup-First (DEFAULT for visual products)
 ```
-creative / product → architect → database / security → designer → developer → qa / enhancer → product (review) → documentation
+Loop 1 — Visual Approval:
+  product → creative → designer → frontend (static mockup)
+                                       ↓
+                              INTERNAL DESIGN REVIEW (creative or designer reviews the HTML)
+                                       ↓
+                              [USER SEES AND APPROVES]
+
+Loop 2 — Engineering (only after approval):
+  architect → database / security → developer (backend only) → frontend (connect APIs) → qa / enhancer → documentation
 ```
+
+#### Internal Design Review Gate (New in v2)
+After the `frontend` agent produces a mockup, the orchestrator MUST invoke `creative` or `designer` to review the HTML source before presenting it to the user. The reviewer checks:
+1. Does the mockup honor the Creative Brief's visual archetype?
+2. Does it follow `.preferences.md` rules (no images in cards, correct fonts, etc.)?
+3. Does it use the correct icons (Phosphor, not Lucide)?
+4. Is the data from the PRD (not invented placeholders)?
+5. Are all buttons functional?
+
+If the reviewer finds violations, the `frontend` agent is re-invoked with specific fixes BEFORE the user sees it. Maximum 2 internal iterations.
+
+### Mode B: Backend-First (APIs, CLIs, data pipelines)
+```
+product → architect → database / security → developer → qa / enhancer → documentation
+```
+
+### Mode C: Full Parallel (Large projects with clear boundaries)
+```
+product → creative + architect (parallel)
+       → designer + database + security (parallel)
+       → frontend + developer (parallel)
+       → qa / enhancer → documentation
+```
+
+**The orchestrator selects the mode based on project type. If unsure, default to Mode A.**
+
+## Mandatory Skills for Frontend Work
+Any agent producing HTML/CSS/JS MUST read these skills before writing code:
+1. `mockup-first-workflow` — The overall workflow and file conventions.
+2. `component-patterns` — Reusable HTML/Tailwind component blueprints. Copy and customize, don't reinvent.
+3. `data-visualization` — SVG sparklines, donut charts, bar charts, Canvas area charts.
+4. `ultra-premium-web-experience` — Design philosophy and anti-AI patterns.
+5. `visual-craft-recipes` — CSS token dictionaries and domain-specific recipes.
 
 ## Shared Design & Quality Rules
 All agents MUST honor the rules defined in the `engineering-os` plugin (`rules/01` through `rules/05`). In particular:
 - `05_anti_ai_design_standards.md` — Anti-AI visual patterns, operational realism, iconography, typography, buzzword bans.
 - `01_engineering_standards.md` — Hexagonal architecture, stateless services, type safety.
 - `02_quality_gates.md` — Security, QA, Architecture, Database veto powers.
-- `03_handoff_protocol.md` — 11-phase artifact trail and IACP protocol.
+- `03_handoff_protocol.md` — Phase artifact trail and IACP protocol.
 - `04_encoding_and_i18n.md` — UTF-8 encoding and Windows compatibility.
 
-These rules are non-negotiable and apply to every project. Individual agents have additional role-specific instructions in their own `agent.md` files.
+These rules are non-negotiable and apply to every project.
 
 ## State Machine Mandate (Anti-Bypass Protocol)
 - Every application is a deterministic Finite State Machine (FSM), NOT a collection of static mockups.
@@ -53,12 +99,21 @@ Every agent MUST read and honor ALL upstream artifacts before starting work:
 | `database` | PRD from `product` + ADR from `architect` |
 | `security` | ADR from `architect` + Developer's implementation |
 | `designer` | PRD + Creative Brief from `creative` |
-| `developer` | PRD + Creative Brief + Design Spec + ADR + DATA spec from `database` |
-| `qa` | PRD + Design Spec + Developer's implementation + Security Report |
+| `frontend` | PRD + Creative Brief + Design Spec + `component-patterns` + `data-visualization` + `ultra-premium-web-experience` skills |
+| `developer` | PRD + ADR + DATA spec + Security spec (NO frontend work) |
+| `qa` | PRD + Design Spec + Frontend mockup + Developer's implementation + Security Report |
 | `enhancer` | ALL upstream artifacts |
 | `documentation` | ALL upstream artifacts + source code |
 
 **If an upstream artifact is missing, the agent MUST request it before proceeding.**
+
+## QA Feedback Loop Protocol
+When QA exercises a VETO:
+1. QA sends specific findings with file paths, line numbers, and concrete fixes.
+2. The orchestrator re-invokes the responsible agent (frontend or developer) with the QA findings.
+3. The responsible agent applies fixes and reports back.
+4. QA re-verifies. This loop repeats until QA approves.
+5. Maximum 3 iterations. If still failing after 3, escalate to user.
 
 ## Universal Pre-Handoff Self-Critique
 Before marking ANY work as complete, every agent MUST answer:

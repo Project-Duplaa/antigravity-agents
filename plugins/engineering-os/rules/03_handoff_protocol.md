@@ -1,42 +1,62 @@
-# Inter-Agent Handoff Protocol (11-Phase Lifecycle)
+# Inter-Agent Handoff Protocol (Adaptive Lifecycles)
 
 Communication between agents in the Engineering OS must be backed by documented artifacts to eliminate ambiguity and prevent loss of context.
+In v2, the rigid 11-phase waterfall is replaced by three adaptive orchestration modes tailored to the project type.
+
+---
+
+## Orchestration Modes
+
+### Mode A: Mockup-First (DEFAULT for visual products, SaaS, dashboards)
+Visual validation comes BEFORE backend engineering. The user inspects and approves a standalone visual artifact before APIs or schemas are written.
+
+```
+Loop 1 — Visual Approval:
+  product → creative → designer → frontend (static HTML mockup)
+                                       │
+                                       ▼
+                              INTERNAL DESIGN REVIEW (creative or designer)
+                                       │
+                                       ▼
+                              [USER REVIEWS & APPROVES]
+
+Loop 2 — Engineering Integration (only after visual approval):
+  architect → database / security → developer (backend only) → frontend (connect APIs) → qa / enhancer → documentation
+```
+
+### Mode B: Backend-First (APIs, CLIs, data pipelines, SDKs)
+```
+product → architect → database / security → developer → qa / enhancer → documentation
+```
+
+### Mode C: Full Parallel (Large projects with clear domain boundaries)
+```
+product → creative + architect (parallel)
+       → designer + database + security (parallel)
+       → frontend + developer (parallel)
+       → qa / enhancer → documentation
+```
+
+---
 
 ## Workflow Phases & Required Artifacts
 
-```
-1. Creative Discovery (Creative) ──────► Produces `docs/creative/CREATIVE-XXX.md`
-       │                                 [Archetype, benchmarks, imagery, icon map]
-       ▼
-2. Product & UX Strategy (Product) ────► Produces `docs/prd/PRD-XXX.md`
-       │                                 [User stories, content map, mock data, state machine]
-       ▼
-3. Architecture (Architect) ───────────► Produces `docs/adr/ADR-XXX.md`
-       │                                 [Component tree, API contracts, CI/CD, data models]
-       ▼
-4. Data Architecture (Database) ───────► Produces `docs/data/DATA-XXX.md`
-       │                                 [ERD, DDL, migrations, indexes, engine config]
-       ▼
-5. Security Review (Security) ─────────► Produces `docs/security/SEC-XXX.md`
-       │                                 [Status: APPROVED | BLOCKED]
-       ▼
-6. Design System (Designer) ───────────► Produces `docs/design/DESIGN-XXX.md`
-       │                                 [Tokens, motion spec, icon system, layouts]
-       ▼
-7. Implementation (Developer) ─────────► Writes code in `src/` & tests in `src/__tests__/`
-       │                                 (Only proceeds if Security is APPROVED)
-       ▼
-8. QA Validation (QA) ────────────────► Produces `docs/qa/QA-XXX.md`
-       │                                 [Status: PASSED | FAILED]
-       ▼
-9. Code Review (Enhancer) ────────────► Produces `docs/enhancements/ENHANCE-XXX.md`
-       │                                 [Scorecard, before/after recommendations]
-       ▼
-10. Product Check (Product) ───────────► UX acceptance & Feynman validation
-       │
-       ▼
-11. Documentation (Documentation) ─────► README, API docs, CHANGELOG, Knowledge Vault
-```
+| Phase | Agent | Deliverable Artifact | Description |
+|-------|-------|----------------------|-------------|
+| 1. Product & UX | `product` | `docs/prd/PRD-XXX.md` | User stories, content map, realistic mock data, FSM |
+| 2. Creative Discovery | `creative` | `docs/creative/CREATIVE-XXX.md` | Archetype, internet benchmarks, imagery, icon mapping |
+| 3. Design Tokens | `designer` | `docs/design/DESIGN-XXX.md` | Tokens, motion spec, component state matrix, Anti-AI veto |
+| 4. Visual Mockup | `frontend` | `mockups/vX.html` | Standalone HTML mockup, zero server dependencies, hardcoded PRD data |
+| 5. Architecture | `architect` | `docs/adr/ADR-XXX.md` | Hexagonal structure, API contracts, ADRs, state boundaries |
+| 6. Data Architecture | `database` | `docs/data/DATA-XXX.md` | ERD, DDL schemas, index strategy, engine config, seed data |
+| 7. Security Audit | `security` | `docs/security/SEC-XXX.md` | STRIDE model, OWASP guardrails, encryption specs, Security Veto |
+| 8. Backend Engineering | `developer` | `src/`, `src/domain/`, etc. | REST endpoints, data access layer, server logic, unit tests |
+| 9. Frontend Connection | `frontend` | `public/index.html` | Connect approved mockup to backend REST APIs |
+| 10. QA Validation | `qa` | `docs/qa/QA-XXX.md` | Test execution matrix, BVA, accessibility, QA Veto |
+| 11. Code Optimization | `enhancer` | `docs/enhancements/ENHANCE-XXX.md` | 10-pillar code quality scorecard, before/after diffs |
+| 12. Documentation | `documentation` | `README.md`, `CHANGELOG.md`, `docs/notes/` | Comprehensive docs, Obsidian second-brain vault |
+
+---
 
 ## Mandatory Artifact Locations
 - **Creative Brief**: `docs/creative/CREATIVE-XXX-<name>.md`
@@ -45,9 +65,12 @@ Communication between agents in the Engineering OS must be backed by documented 
 - **Data Architecture**: `docs/data/DATA-XXX-<name>.md`
 - **Security**: `docs/security/SEC-XXX-<name>.md`
 - **Design System**: `docs/design/DESIGN-XXX-<name>.md`
+- **Mockup HTML**: `mockups/vX.html`
 - **QA Reports**: `docs/qa/QA-XXX-<name>.md`
 - **Enhancements**: `docs/enhancements/ENHANCE-XXX-<name>.md`
 - **Knowledge Vault**: `docs/notes/` (Obsidian-compatible)
+
+---
 
 ## IACP Communication Packets
 All inter-agent communication uses structured packets:

@@ -39,23 +39,37 @@ Never force every project into the same aesthetic. Build the design system aroun
 - **Density tokens**: Adjusted to user (high density for technical consoles, editorial breathing for lifestyle brands).
 
 ### 1.2 Typography Rules
-- **NEVER default to Inter.** Use `Geist`, `Outfit`, `Cabinet Grotesk`, `Satoshi`, `PP Neue Montreal`, or brand-appropriate alternatives.
-- **Serif is DISCOURAGED as default.** Only acceptable when the brief genuinely demands editorial/luxury AND you can articulate WHY.
-- **Font pairings**: `Geist` + `Geist Mono`, `Satoshi` + `JetBrains Mono`, `Cabinet Grotesk` + `Inter Tight`, `Outfit` + `Space Mono`.
-- **Display headlines**: `text-4xl md:text-6xl tracking-tighter leading-none`. Control hierarchy with weight + color, not raw scale.
-- **Body text**: `text-base text-gray-600 leading-relaxed max-w-[65ch]`.
+- **HARD BANNED**: `JetBrains Mono`, `Plus Jakarta Sans`. These scream AI boilerplate.
+- **NEVER default to Inter.** Use `Outfit`, `DM Sans`, `Cabinet Grotesk`, `Satoshi`, `PP Neue Montreal`, or brand-appropriate alternatives.
+- **Editorial Serif Display Encouraged**: For luxury, lifestyle, high-ticket, or precision editorial brands, embrace high-contrast serifs: `Playfair Display`, `Cinzel`, `Fraunces`, `Bodoni Moda`.
+- **Approved Font Pairings**: 
+  - *Editorial Luxury*: `Playfair Display` / `Cinzel` + `DM Sans` (The User's Gold Standard)
+  - *Swiss Precision*: `Cabinet Grotesk` + `Space Mono`
+  - *Modern Tech*: `Geist` + `Geist Mono`
+  - *Architectural*: `Outfit` + `Space Mono`
+- **Display headlines**: `text-4xl md:text-6xl tracking-tight leading-[1.1]`. Control hierarchy with weight + color, not raw scale alone.
+- **Body text**: `text-base text-gray-400 leading-relaxed max-w-[55ch]`.
 - **Emphasis**: Use italic or bold of the SAME font. Never inject a random serif word into a sans headline.
 
 ### 1.3 Color Calibration
 - **Max 1 accent color. Saturation < 80% by default.**
-- **THE LILA RULE**: AI Purple / Blue glow is DISCOURAGED as default. Use neutral bases with high-contrast singular accents.
+- **THE LILA RULE**: AI Purple / Blue glow is DISCOURAGED as default. Use neutral bases with high-contrast singular accents (e.g. Swiss gold `#C5A358`, amber `#D97742`, or phosphor emerald).
 - **COLOR CONSISTENCY LOCK**: Once an accent is chosen, it applies across the WHOLE page. No new accents appearing in section 7.
-- **No pure black (#000000).** Use off-black (zinc-950 or charcoal warm).
-- **No pure white (#ffffff).** Use off-white for depth.
+- **No pure black (#000000).** Use off-black (obsidian `#07080B`, zinc-950, or charcoal warm).
+- **No pure white (#ffffff).** Use off-white/light cream (`#F4EDE2`, `#F8F9FA`) for depth.
 
 ### 1.4 Shape & Radius Consistency
-- **SHAPE CONSISTENCY LOCK**: Pick ONE corner-radius scale and stick to it. Mixed systems allowed only with documented rules.
+- **SHAPE CONSISTENCY LOCK**: Pick ONE corner-radius scale and stick to it (0px to 2px for machined luxury; 4px to 6px for operational apps).
 - Cards are a layout tool, not a design philosophy. Use sections, dividers, editorial layouts, tables, panels, timelines, split layouts.
+
+### 1.5 Master Blueprint: Spatial Luxury & Precision Editorial (Mandatory DNA)
+Every landing page and high-craft UI designed MUST honor Section 9 of `rules/05_anti_ai_design_standards.md`:
+- Asymmetrical 50/50 editorial split hero (no centered AI template).
+- The Overlapping Floating Card (`bottom: -20px; left: -24px; z-index: 20; box-shadow: 0 20px 40px rgba(0,0,0,0.85)`).
+- Domain-specific 3-column telemetry metrics capsule below headline.
+- Asymmetrical button pair (solid gold primary + outlined dark secondary).
+- Solid architectural masthead with real-time timezone capsule.
+- Organic molten mineral lava lamp canvas or curved atmospheric horizon in background.
 
 ---
 

@@ -213,7 +213,7 @@ description: Concrete CSS token dictionaries, HTML component blueprints, and vis
   /* Typography Pairing */
   --display:     'Big Shoulders Display', 'Bebas Neue', sans-serif;
   --body:        'Figtree', system-ui, sans-serif;
-  --mono:        'Fira Code', 'JetBrains Mono', monospace;
+  --mono:        'Space Mono', 'Fira Code', monospace;
 
   /* Tight Industrial Geometry */
   --radius:      2px;
@@ -222,6 +222,37 @@ description: Concrete CSS token dictionaries, HTML component blueprints, and vis
   /* Physics */
   --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
   --dur:         0.35s;
+}
+
+### 2.G — Spatial Luxury & Precision Editorial (The User's Gold Standard)
+```css
+:root {
+  /* Canvas & Obsidian Surfaces */
+  --canvas:        #07080b; /* Deep obsidian mineral */
+  --surface:       #0e1117; /* Elevated card */
+  --surface-float: #14171e; /* Overlapping complication card */
+  --line:          rgba(255, 255, 255, 0.08);
+  --line-gold:     rgba(197, 163, 88, 0.35);
+
+  /* Gold & Warm Accents */
+  --gold:          #c5a358; /* Warm Swiss gold */
+  --gold-light:    #e5b968; /* Hover border aura */
+  --gold-glow:     rgba(229, 185, 104, 0.5);
+  --amber:         #d97742; /* Horizon warmth */
+  --cream:         #f4ede2; /* Crisp off-white headline */
+  --slate:         #94a3b8; /* Muted telemetry */
+
+  /* Typography Pairings */
+  --display:       'Playfair Display', 'Cinzel', 'Fraunces', serif;
+  --body:          'DM Sans', system-ui, sans-serif;
+  --mono:          'Space Mono', 'Geist Mono', monospace;
+
+  /* Machined Radii */
+  --radius-xs:     2px;
+  --radius-sm:     4px;
+
+  /* Physics */
+  --ease-editorial: cubic-bezier(0.16, 1, 0.3, 1);
 }
 ```
 

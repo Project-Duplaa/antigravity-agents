@@ -123,6 +123,16 @@ Motion must match the brand:
 
 Animate with purpose and support `prefers-reduced-motion`. Never animate merely to demonstrate animation.
 
+## The Master Blueprint: Spatial Luxury & Precision Editorial (The User's Gold Standard)
+Whenever building landing pages, flagship showcases, or high-value presentation websites, default to this exact architectural DNA:
+- **Asymmetrical 50/50 Editorial Split**: Left column anchors editorial authority (display serif headline, framed institutional badge, 3-column engineering metrics capsule, asymmetrical CTA pair); right column holds contained high-contrast visual staging with specular reflections.
+- **The Overlapping Floating Card**: Always break the visual bounding box on the Z-axis (`bottom: -20px; left: -24px; z-index: 20; box-shadow: 0 20px 40px rgba(0,0,0,0.85)`). The card displays active status pulse (`● 4Hz Live`), bold serif title, technical narrative, mechanical vector graphic, and pricing/cadence in gold.
+- **Precision Telemetry Capsule**: Below the display headline, provide a dark 3-column structured widget (`• REGULATOR Tourbillon 4Hz Active` | `RESERVE 72h Twin Barrel` | `TOLERANCE +2 / -1 sec/day`). Never rely on generic marketing buzzwords.
+- **Asymmetrical CTA Pair**: Solid gold filled primary (`#C5A358` with tight 2px radius) paired with transparent dark secondary with thin gold border (`VIEW ARCHIVE`).
+- **Solid Architectural Masthead**: Deep obsidian navbar with brand serif logo, micro-descriptor, weight-ranked navigation links, real-time timezone telemetry (`● GENEVA 02:53:38 CET`), and gold action trigger.
+- **Organic Fluid Canvas / Horizon Underglow**: Viscous molten lava lamp background simulation running at 60 FPS in warm mineral amber/gold drifting under the interface, fading into deep obsidian.
+- **Strict Font Discipline**: Editorial serifs (`Playfair Display`, `Cinzel`, `Fraunces`) + wide-tracked grotesque (`DM Sans`, `Outfit`). ZERO TOLERANCE for `JetBrains Mono` or `Plus Jakarta Sans`.
+
 ## Responsive art direction
 Do not simply shrink desktop. Redesign compositions for mobile:
 - simplify navigation
