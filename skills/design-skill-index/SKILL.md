@@ -12,6 +12,19 @@ description: Master index that tells agents exactly which design skills to read 
 
 ## Priority Tiers
 
+### Tier 0 — ABSOLUTE (Read before ANYTHING else)
+These define the quality bar. They are non-negotiable.
+
+0. **`.preferences.md`** → User preferences override everything.
+   Path: `.preferences.md` (workspace root)
+
+1. **`.golden-samples/`** → User-approved HTML mockups with annotated patterns.
+   Path: `.golden-samples/README.md` + at least one sample file.
+   **Study the HTML structure, class density, and compositional decisions.**
+
+2. **`visual-contract-template`** → If a Visual Contract exists for your project, read it as a literal spec.
+   Path: `.agents/skills/visual-contract-template/SKILL.md`
+
 ### Tier 1 — MANDATORY (Read before writing ANY frontend code)
 These three skills contain everything you need. Read them in this order:
 
@@ -47,11 +60,12 @@ These are domain-specific and only relevant for certain archetypes:
 
 ```
 Are you building frontend code?
-├── YES → Read Tier 1 (all 3) + User Preferences (.preferences.md)
+├── YES → Read Tier 0 FIRST (preferences + golden samples + visual contract)
+│   ├── Then read Tier 1 (all 3 pattern/recipe skills)
 │   ├── Does it still look generic? → Read Tier 2
-│   └── Is it a specific archetype (horological, cybernetic, etc.)? → Read the matching Tier 3 skill
-└── NO (writing specs/docs) → Read only ultra-premium-web-experience for vocabulary
+│   └── Is it a specific archetype? → Read the matching Tier 3 skill
+└── NO (writing specs/docs) → Read only .preferences.md + ultra-premium-web-experience for vocabulary
 ```
 
 ## The One Rule
-**Always read `.preferences.md` in the project root BEFORE any skill.** User preferences override everything.
+**Always read `.preferences.md` + `.golden-samples/` BEFORE any other skill.** User preferences and approved samples override everything.

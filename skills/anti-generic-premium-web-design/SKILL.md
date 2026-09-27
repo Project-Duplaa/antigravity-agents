@@ -94,13 +94,16 @@ Establish clear attention levels:
 Use scale, contrast, whitespace, position, color, imagery, and motion to control attention.
 
 ## Typography
-Typography is part of the composition. Choose type based on the brand and audience rather than defaulting to one familiar font. Explore editorial line breaks, display scale, weight contrast, tracking, condensed styles, and strong typographic rhythm without sacrificing readability.
+Typography is part of the composition. Choose type based on the brand and audience rather than defaulting to generic AI fonts:
+- **STRICT PROHIBITION**: NEVER use `JetBrains Mono` or `Plus Jakarta Sans`. These are the dead giveaways of AI boilerplate.
+- Explore bespoke pairs: Editorial Serif headers (*Playfair Display, Cinzel, Instrument Serif, Fraunces*) + clean modern text (*DM Sans, Space Mono, Outfit, General Sans*).
+- Explore editorial line breaks, display scale, weight contrast, tracking, and strong typographic rhythm without sacrificing readability.
 
 ## Color
 Define a coherent token system such as:
 --bg, --surface, --surface-elevated, --text-primary, --text-secondary, --border, --accent, --accent-muted.
 
-Do not use gradients simply because they look “modern.” An expensive interface may be nearly monochromatic.
+Do not use gradients simply because they look “modern.” Never use generic glowing purple or neon gradients. An expensive interface may be nearly monochromatic with warm mineral accents.
 
 ## Imagery
 Treat imagery as art direction, not decoration. Decide subject, angle, lighting, composition, color treatment, depth, and crop before selecting an image. Never use random, low-quality, stretched, unrelated, or obvious placeholder imagery.
@@ -109,20 +112,25 @@ Treat imagery as art direction, not decoration. Decide subject, angle, lighting,
 Create components because they solve communication or interaction problems, not because websites “normally have cards.” Choose patterns appropriate to the content: product showcases, editorial blocks, timelines, comparisons, galleries, data visualizations, pricing systems, interactive maps, storytelling sections, feature panels, and more.
 
 ## Visual rhythm
-Do not repeat the same section pattern throughout a long page. Alternate dense and spacious sections, imagery and typography, grids and asymmetry, static and interactive moments, and different compositions while preserving the same visual system.
+Do not repeat the same section pattern throughout a long page. Avoid vast dead voids and empty space deserts; maintain tight, balanced editorial density. Alternate dense and spacious sections, imagery and typography, grids and asymmetry, static and interactive moments, and different compositions while preserving the same visual system.
 
 ## Depth
-Create depth through composition, layering, atmospheric gradients, image overlays, controlled blur, shadows, glass surfaces, borders, overlaps, and scale relationships. Do not put the same shadow or glass effect on every element.
+Create physical multi-layered depth through composition, layering, atmospheric gradients, image overlays, controlled shadows, and scale relationships:
+- Use solid architectural mastheads/headers; NEVER use cheap, generic translucent `backdrop-blur-md` floating top bars.
+- Establish distinct physical elevations (`layer-ground`, `layer-card`, `layer-elevated`) with overlapping cards and 1px borders.
 
-## Motion
+## Motion & Autonomous Kinetic Life
 Motion must match the brand:
 - luxury: slow and restrained
 - gaming: energetic and reactive
 - enterprise: precise and subtle
 - experimental: expressive and spatial
 
-Animate with purpose and support `prefers-reduced-motion`. Never animate merely to demonstrate animation.
-
+**Autonomous Component Life (Motion Without Interaction)**:
+- Never leave a page completely frozen until hovered.
+- Provide slow, organic, non-neon ambient background motion (mineral or atmospheric drifts, 20-35s).
+- Curate **2 to 3 selective focal components per screen** with continuous, subtle autonomous animation (e.g., periodic specular light sweep on product glass every 8-12s, living mechanical 4Hz balance wheel or escapement ticking, live chronometric pulse, slow concentric calibration ring).
+- **Rule of Selective Restraint**: Exactly 2-3 focal points maximum. Never animate everything into a chaotic carnival.
 ## The Master Blueprint: Spatial Luxury & Precision Editorial (The User's Gold Standard)
 Whenever building landing pages, flagship showcases, or high-value presentation websites, default to this exact architectural DNA:
 - **Asymmetrical 50/50 Editorial Split**: Left column anchors editorial authority (display serif headline, framed institutional badge, 3-column engineering metrics capsule, asymmetrical CTA pair); right column holds contained high-contrast visual staging with specular reflections.

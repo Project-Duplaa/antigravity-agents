@@ -67,11 +67,21 @@ product → creative + architect (parallel)
 
 ## Mandatory Skills for Frontend Work
 Any agent producing HTML/CSS/JS MUST read these skills before writing code:
-1. `mockup-first-workflow` — The overall workflow and file conventions.
-2. `component-patterns` — Reusable HTML/Tailwind component blueprints. Copy and customize, don't reinvent.
-3. `data-visualization` — SVG sparklines, donut charts, bar charts, Canvas area charts.
-4. `ultra-premium-web-experience` — Design philosophy and anti-AI patterns.
-5. `visual-craft-recipes` — CSS token dictionaries and domain-specific recipes.
+1. `.preferences.md` — User preferences override everything. Read FIRST.
+2. `.golden-samples/README.md` + at least one golden sample — Study the user-approved quality bar.
+3. `visual-contract-template` — Read the Visual Contract from `creative` as a literal spec.
+4. `mockup-first-workflow` — The overall workflow and file conventions.
+5. `component-patterns` — Reusable HTML/Tailwind component blueprints. Copy and customize, don't reinvent.
+6. `data-visualization` — SVG sparklines, donut charts, bar charts, Canvas area charts.
+7. `visual-craft-recipes` — CSS token dictionaries and domain-specific recipes.
+
+## Mandatory Output Format for Creative Agent
+The `creative` agent MUST output a **Visual Contract** (NOT a prose Creative Brief).
+- Read the template at `.agents/skills/visual-contract-template/SKILL.md`.
+- Every decision must be a concrete, implementable spec with exact CSS classes/values.
+- Reference golden samples from `.golden-samples/` when applicable.
+- Paragraphs describing "vibes" or "feelings" are BANNED. Use structured tables and specs.
+
 
 ## Shared Design & Quality Rules
 All agents MUST honor the rules defined in the `engineering-os` plugin (`rules/01` through `rules/05`). In particular:
@@ -94,12 +104,12 @@ Every agent MUST read and honor ALL upstream artifacts before starting work:
 
 | Agent | MUST Read Before Starting |
 |-------|--------------------------|
-| `creative` | PRD from `product` |
+| `creative` | PRD from `product` + `.golden-samples/` (study approved patterns) + `visual-contract-template` skill |
 | `architect` | PRD from `product` |
 | `database` | PRD from `product` + ADR from `architect` |
 | `security` | ADR from `architect` + Developer's implementation |
-| `designer` | PRD + Creative Brief from `creative` |
-| `frontend` | PRD + Creative Brief + Design Spec + `component-patterns` + `data-visualization` + `ultra-premium-web-experience` skills |
+| `designer` | PRD + Visual Contract from `creative` + `.golden-samples/` (for design review) |
+| `frontend` | PRD + **Visual Contract** (NOT prose brief) + Design Spec + `.golden-samples/` + `component-patterns` + `data-visualization` + `visual-craft-recipes` |
 | `developer` | PRD + ADR + DATA spec + Security spec (NO frontend work) |
 | `qa` | PRD + Design Spec + Frontend mockup + Developer's implementation + Security Report |
 | `enhancer` | ALL upstream artifacts |

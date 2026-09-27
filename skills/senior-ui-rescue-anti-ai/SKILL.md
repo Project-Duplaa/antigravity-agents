@@ -346,13 +346,17 @@ Consider:
 - condensed display
 - technical typefaces
 
-A developer tool may benefit from a technical monospace accent.
+A developer tool may benefit from a technical monospace accent (*Space Mono, Geist Mono*).
 
-A luxury product may need editorial typography.
+A luxury product may need editorial typography (*Playfair Display, Cinzel, Fraunces*).
 
 A legal platform may benefit from restrained typography.
 
 A children's learning platform may need a different personality.
+
+> [!WARNING]
+> **STRICT BAN ON AI DEFAULT FONTS**:
+> NEVER use `JetBrains Mono` or `Plus Jakarta Sans`. These are the cliché defaults that immediately expose AI boilerplate.
 
 Typography must create **identity**, not merely readability.
 
@@ -473,6 +477,16 @@ consider:
 - retry
 
 The interaction should reveal product functionality.
+
+---
+
+# 11B. AUTONOMOUS KINETIC LIFE (MOTION WITHOUT USER INTERACTION)
+
+Never present a completely frozen, lifeless canvas where nothing moves unless hovered:
+- **Ambient Organic Atmosphere**: Slow background mineral or atmospheric light drift (20-35s duration, non-neon, opacity 0.04 to 0.08).
+- **Autonomous Component Focal Points**: Give 2 to 3 selective components continuous, subtle mechanical life (e.g. periodic specular light sheen crossing product glass every 8-12s, authentic 4Hz mechanical balance wheel oscillation, live chronometer pulse, slow concentric calibration ring).
+- **Rule of Selective Restraint**: Exactly 2-3 focal points per screen. Animating everything creates an overstimulating AI circus.
+- **Physical Multi-Layer Depth**: Ground layout with solid architectural mastheads (never cheap translucent `backdrop-blur-md` floating bars) and physical elevation layers (`layer-ground`, `layer-card`, `layer-elevated`) with tight 1px borders and balanced editorial density (no empty dead space deserts).
 
 ---
 

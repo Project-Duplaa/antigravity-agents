@@ -1,0 +1,482 @@
+<!--
+  GOLDEN SAMPLE: Executive Planner Dashboard
+  ============================================
+  Source: Chronos Planner — User-approved mockup (Sep 2026)
+  Archetype: Dark Horological Minimalist / Sovereign Precision
+  
+  WHY THIS IS GOLDEN:
+  - User drew this mockup by hand and said "esta es mi sugerencia para mejorar la visual"
+  - Every compositional decision below was approved by the user
+  - This file is the ABSOLUTE reference for dark executive dashboards
+  
+  COMPOSITIONAL PATTERNS TO EXTRACT:
+  
+  1. OVERSIZED NUMBERED LIST (The Rule of Three)
+     - Large mono numbers (text-4xl) with thick colored left border (border-l-[3px])
+     - Each item's accent color maps to its domain tag
+     - Status shown as colored dot + mono uppercase label
+     - Arrow icon on the right as interaction affordance
+     
+  2. HERO METRIC DISPLAY (91% Utilization)
+     - Number at text-[80px] font-serif, unit symbol in smaller muted color
+     - TARGET vs OVERLOAD comparison on the right
+     - Segmented progress bar (rounded-full, colored segments with gap-1)
+     - Breakdown list below with dot + label + value + percentage
+     - Footer stats grid (3 cols) with icon + value + label
+     
+  3. TIMELINE HORIZON
+     - Full-width with left legend column + right scrollable timeline
+     - "NOW" vertical line with hollow circle ornament + label above
+     - Blocks staggered vertically (even=top:0, odd=top:32px)
+     - Each block type has distinct bg opacity + border + icon
+     - Controls row: ALLOCATE, TODAY, <, >, Day View
+     
+  4. SECTION COMPOSITION
+     - Section eyebrow: colored bar (w-1.5 h-4) + mono uppercase text
+     - Serif italic motto as counterpoint: "Less noise. More progress."
+     - Section divider: border-t border-white/[0.05] + generous pt-12
+     - No exec-card wrapper on the left panel — it breathes openly
+     - Right panel IS a card with rounded-xl and backdrop-blur
+     
+  5. SIDEBAR
+     - Active item: filled icon in amber square (bg-amber-500 w-4 h-4)
+     - Numbered navigation: "01 Dashboard", "02 Focus Sprints", etc.
+     - Live engine status beacon at bottom
+     - Hard separator (h-px bg-white/5) before Settings
+     
+  6. HEADER
+     - "EXECUTIVE MODE | PLAN • FOCUS • EXECUTE" breadcrumb
+     - Live clock with date above, timezone cycle button
+     - Privacy toggle on far right
+  
+  ANTI-PATTERNS THIS SAMPLE AVOIDS:
+  ✗ No 3 identical cards in a row
+  ✗ No rounded-2xl on anything
+  ✗ No floating translucent pill navbar
+  ✗ No images inside cards
+  ✗ No generic SaaS copy
+  ✗ No Lucide/Heroicons
+  ✗ No JetBrains Mono or Plus Jakarta Sans
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Golden Sample — Executive Planner Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"DM Sans"', 'sans-serif'],
+                        serif: ['"Playfair Display"', 'serif'],
+                        mono: ['"IBM Plex Mono"', 'monospace'],
+                    },
+                    colors: {
+                        midnight: '#070B10',
+                        surface: '#0A1017',
+                        card: '#0D141F',
+                        graphite: '#8B949E',
+                        cream: '#F4EDE2'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #070B10;
+            color: #E6EDF3;
+            font-family: 'DM Sans', sans-serif;
+            overflow-x: hidden;
+        }
+        .font-serif { font-family: 'Playfair Display', serif; }
+        .font-mono { font-family: 'IBM Plex Mono', monospace; }
+        .mountain-bg {
+            position: fixed; top: 0; left: 0;
+            width: 100vw; height: 50vh;
+            pointer-events: none; z-index: 0; opacity: 0.15;
+            mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
+            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body class="antialiased flex h-screen overflow-hidden selection:bg-amber-500/30 selection:text-amber-200">
+
+<!-- Cinematic Mountain Backdrop -->
+<img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=2000&auto=format&fit=crop" class="mountain-bg" alt="">
+
+<!-- ==================== SIDEBAR ==================== -->
+<aside class="w-64 bg-[#070B10]/95 border-r border-white/5 flex flex-col justify-between py-6 px-5 z-30 shrink-0">
+    <div>
+        <div class="mb-10 px-2">
+            <h1 class="font-serif text-2xl tracking-wide text-white leading-none">Chronos</h1>
+            <p class="text-[9px] font-mono uppercase tracking-[0.35em] text-amber-500/90 mt-1">PLANNER</p>
+        </div>
+        <nav class="space-y-1.5 font-sans">
+            <!-- PATTERN: Active nav item — filled icon in colored square -->
+            <a href="#" class="flex items-center gap-3 px-3.5 py-2.5 text-xs text-white bg-white/[0.04] rounded group">
+                <div class="bg-amber-500 w-4 h-4 flex items-center justify-center rounded-sm">
+                    <i class="ph-fill ph-squares-four text-[#070B10] text-[10px]"></i>
+                </div>
+                <span class="font-mono text-white/80 text-[11px] ml-1">01</span>
+                <span class="font-medium tracking-wide">Dashboard</span>
+            </a>
+            <!-- PATTERN: Inactive nav item — duotone icon, muted text -->
+            <a href="#" class="flex items-center gap-3 px-3.5 py-2.5 text-xs text-graphite hover:text-white hover:bg-white/[0.02] transition-colors group">
+                <i class="ph-duotone ph-target text-base group-hover:text-white transition-colors"></i>
+                <span class="font-mono text-graphite/60 text-[11px]">02</span>
+                <span class="tracking-wide">Focus Sprints</span>
+            </a>
+            <a href="#" class="flex items-center gap-3 px-3.5 py-2.5 text-xs text-graphite hover:text-white hover:bg-white/[0.02] transition-colors group">
+                <i class="ph-duotone ph-waveform text-base group-hover:text-white transition-colors"></i>
+                <span class="font-mono text-graphite/60 text-[11px]">03</span>
+                <span class="tracking-wide">Analytics</span>
+            </a>
+            <a href="#" class="flex items-center gap-3 px-3.5 py-2.5 text-xs text-graphite hover:text-white hover:bg-white/[0.02] transition-colors group">
+                <i class="ph-duotone ph-check-square-offset text-base group-hover:text-white transition-colors"></i>
+                <span class="font-mono text-graphite/60 text-[11px]">04</span>
+                <span class="tracking-wide">Tasks</span>
+            </a>
+            <div class="pt-6 pb-2 px-3"><div class="h-px bg-white/5 w-full"></div></div>
+            <a href="#" class="flex items-center gap-3 px-3.5 py-2.5 text-xs text-graphite hover:text-white hover:bg-white/[0.02] transition-colors group">
+                <i class="ph-duotone ph-gear text-base group-hover:text-white transition-colors"></i>
+                <span class="tracking-wide">Settings</span>
+            </a>
+        </nav>
+    </div>
+    <!-- PATTERN: Status beacon at sidebar bottom -->
+    <div class="px-2 pt-4 border-t border-white/5 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span class="text-[10px] font-mono uppercase tracking-widest text-graphite">LIVE ENGINE</span>
+        </div>
+        <span class="text-[10px] font-mono text-emerald-400/80">ONLINE</span>
+    </div>
+</aside>
+
+<!-- ==================== MAIN CONTENT ==================== -->
+<div class="flex-1 flex flex-col h-full overflow-y-auto relative z-10">
+    
+    <!-- PATTERN: Architectural header — not a floating pill -->
+    <header class="h-16 px-10 border-b border-white/5 flex items-center justify-between shrink-0 bg-[#070B10]/80 backdrop-blur-md sticky top-0 z-20">
+        <div class="flex items-center gap-3 text-[11px] font-mono uppercase tracking-widest text-graphite">
+            <span class="text-white font-medium">EXECUTIVE MODE</span>
+            <span class="text-white/20">|</span>
+            <span>PLAN</span><span class="text-white/20">•</span>
+            <span>FOCUS</span><span class="text-white/20">•</span>
+            <span>EXECUTE</span>
+        </div>
+        <div class="flex items-center gap-8 text-xs font-mono">
+            <div class="flex items-center gap-4">
+                <div class="text-right">
+                    <div class="text-[10px] uppercase tracking-wider text-graphite/70">SUN, 27 SEP 2026</div>
+                    <div class="text-lg text-white font-semibold tracking-tight">20:19</div>
+                </div>
+                <button class="px-2 py-1 bg-white/5 hover:bg-white/10 border border-white/10 transition-colors text-[10px] text-amber-400 flex items-center gap-1.5">
+                    <span>GVA</span>
+                    <i class="ph-fill ph-sun text-xs text-amber-400"></i>
+                </button>
+            </div>
+            <button class="flex items-center gap-2 px-3.5 py-1.5 border border-white/10 hover:border-amber-500/40 bg-white/[0.02] text-xs font-sans uppercase tracking-widest text-cream hover:text-amber-400 transition-all">
+                <i class="ph-bold ph-lock-key text-amber-500 text-sm"></i>
+                <span>PRIVACY</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="p-10 space-y-8 flex-1">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-8 relative z-10">
+            
+            <!-- ===== LEFT: The Rule of Three (Open Panel, No Card) ===== -->
+            <div class="lg:col-span-8 flex flex-col relative">
+                <div class="flex justify-between items-start mb-6">
+                    <div>
+                        <!-- PATTERN: Section eyebrow with colored bar -->
+                        <div class="flex items-center gap-2 text-[10px] font-mono uppercase tracking-[0.25em] text-amber-500 mb-4">
+                            <span class="w-1.5 h-4 bg-amber-500 block"></span>
+                            TODAY'S FOCUS
+                        </div>
+                        <h2 class="text-5xl font-serif text-white tracking-tight leading-tight mb-2">The Rule of Three</h2>
+                        <p class="text-[10px] font-mono uppercase tracking-[0.25em] text-graphite">NON-NEGOTIABLE DEEP WORK</p>
+                    </div>
+                    <div class="flex flex-col items-end">
+                        <!-- PATTERN: Italic serif counterpoint motto -->
+                        <span class="font-serif italic text-graphite/60 text-sm mb-6">"Less noise. More progress."</span>
+                        <button class="px-5 py-2.5 border border-amber-500/40 text-amber-400 text-xs font-mono tracking-widest uppercase flex items-center gap-2 transition-all hover:bg-amber-500/10 rounded-sm">
+                            <i class="ph-bold ph-plus text-xs"></i> ADD FOCUS
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- PATTERN: Oversized numbered task list -->
+                <div class="space-y-6 mt-4">
+                    
+                    <!-- Task 01 — Amber (Engineering) — IN PROGRESS -->
+                    <div class="flex items-center gap-6 border-b border-white/[0.05] pb-6 cursor-pointer group">
+                        <div class="flex items-center gap-6 w-32 border-l-[3px] border-amber-500 pl-4">
+                            <span class="text-4xl font-mono text-white/80 group-hover:text-amber-400 transition-colors">01</span>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-base text-white font-medium mb-3 group-hover:text-amber-400 transition-colors">Review cryptographic enclave architecture</h3>
+                            <div class="flex items-center gap-3">
+                                <span class="px-2 py-1 bg-amber-500/10 border border-amber-500/20 text-amber-400 text-[9px] font-mono uppercase tracking-wider rounded-sm">ENGINEERING</span>
+                                <span class="px-2 py-1 border border-white/10 text-graphite text-[9px] font-mono uppercase tracking-wider rounded-sm">- HIGH PRIORITY</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-12 text-right">
+                            <div>
+                                <div class="text-white font-mono text-sm mb-2">150 min</div>
+                                <div class="flex items-center justify-end gap-2 text-[9px] font-mono uppercase tracking-widest text-amber-400">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span> IN PROGRESS
+                                </div>
+                            </div>
+                            <i class="ph-light ph-arrow-right text-graphite text-xl group-hover:text-white transition-colors"></i>
+                        </div>
+                    </div>
+
+                    <!-- Task 02 — Blue (Strategy) — UP NEXT -->
+                    <div class="flex items-center gap-6 border-b border-white/[0.05] pb-6 cursor-pointer group">
+                        <div class="flex items-center gap-6 w-32 border-l-[3px] border-blue-500 pl-4">
+                            <span class="text-4xl font-mono text-white/80 group-hover:text-blue-400 transition-colors">02</span>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-base text-white font-medium mb-3 group-hover:text-blue-400 transition-colors">Finalize Q3 Board Deck narrative</h3>
+                            <div class="flex items-center gap-3">
+                                <span class="px-2 py-1 bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[9px] font-mono uppercase tracking-wider rounded-sm">STRATEGY</span>
+                                <span class="px-2 py-1 border border-white/10 text-graphite text-[9px] font-mono uppercase tracking-wider rounded-sm">- HIGH PRIORITY</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-12 text-right">
+                            <div>
+                                <div class="text-white font-mono text-sm mb-2">120 min</div>
+                                <div class="flex items-center justify-end gap-2 text-[9px] font-mono uppercase tracking-widest text-blue-400">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span> UP NEXT
+                                </div>
+                            </div>
+                            <i class="ph-light ph-arrow-right text-graphite text-xl group-hover:text-white transition-colors"></i>
+                        </div>
+                    </div>
+
+                    <!-- Task 03 — Emerald (Legal) — QUEUED -->
+                    <div class="flex items-center gap-6 border-b border-white/[0.05] pb-6 cursor-pointer group">
+                        <div class="flex items-center gap-6 w-32 border-l-[3px] border-emerald-500 pl-4">
+                            <span class="text-4xl font-mono text-white/80 group-hover:text-emerald-400 transition-colors">03</span>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-base text-white font-medium mb-3 group-hover:text-emerald-400 transition-colors">Sign Series B term sheet revision</h3>
+                            <div class="flex items-center gap-3">
+                                <span class="px-2 py-1 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[9px] font-mono uppercase tracking-wider rounded-sm">LEGAL</span>
+                                <span class="px-2 py-1 border border-white/10 text-graphite text-[9px] font-mono uppercase tracking-wider rounded-sm">- NORMAL PRIORITY</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-12 text-right">
+                            <div>
+                                <div class="text-white font-mono text-sm mb-2">60 min</div>
+                                <div class="flex items-center justify-end gap-2 text-[9px] font-mono uppercase tracking-widest text-graphite">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-graphite"></span> QUEUED
+                                </div>
+                            </div>
+                            <i class="ph-light ph-arrow-right text-graphite text-xl group-hover:text-white transition-colors"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== RIGHT: Cognitive Load Panel (Card) ===== -->
+            <div class="lg:col-span-4 bg-[#0a0f16]/90 border border-white/[0.04] p-8 flex flex-col justify-between rounded-xl shadow-2xl backdrop-blur-sm">
+                <div>
+                    <div class="flex justify-between items-start mb-10">
+                        <span class="text-[10px] font-mono uppercase tracking-[0.25em] text-graphite">COGNITIVE LOAD</span>
+                        <i class="ph-light ph-info text-graphite text-lg cursor-help"></i>
+                    </div>
+
+                    <!-- PATTERN: Hero metric — oversized serif number + diminished unit -->
+                    <div class="flex justify-between items-end mb-8">
+                        <div>
+                            <div class="text-[80px] font-serif text-white tracking-tighter leading-none">91<span class="text-4xl text-graphite">%</span></div>
+                            <div class="text-[10px] font-mono uppercase tracking-[0.2em] text-graphite mt-4">UTILIZATION</div>
+                        </div>
+                        <div class="text-right font-mono text-xs flex flex-col gap-4">
+                            <div>
+                                <div class="text-graphite uppercase tracking-wider block text-[9px] mb-1">TARGET</div>
+                                <div class="text-blue-400">85% -</div>
+                            </div>
+                            <div>
+                                <div class="text-red-400 text-lg mb-1">+6%</div>
+                                <div class="text-graphite uppercase tracking-wider text-[9px]">OVERLOAD</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PATTERN: Segmented progress bar -->
+                    <div class="h-2 w-full bg-white/5 flex gap-1 mb-10 overflow-hidden rounded-full">
+                        <div class="bg-amber-500 h-full rounded-full" style="width: 60%;"></div>
+                        <div class="bg-blue-500 h-full rounded-full" style="width: 23%;"></div>
+                        <div class="bg-emerald-500 h-full rounded-full" style="width: 17%;"></div>
+                    </div>
+
+                    <!-- PATTERN: Breakdown list — dot + label + value + percentage -->
+                    <div class="space-y-4 text-xs font-mono border-b border-white/[0.05] pb-8 mb-8">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+                                <span class="text-graphite text-[11px]">Deep Work</span>
+                            </div>
+                            <div class="flex gap-6">
+                                <span class="text-white text-[11px]">270 min</span>
+                                <span class="text-graphite w-10 text-right text-[11px]">60%</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <span class="w-2 h-2 rounded-full bg-blue-500"></span>
+                                <span class="text-graphite text-[11px]">Tactical / Syncs</span>
+                            </div>
+                            <div class="flex gap-6">
+                                <span class="text-white text-[11px]">105 min</span>
+                                <span class="text-graphite w-10 text-right text-[11px]">23%</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                                <span class="text-graphite text-[11px]">Buffer / Rest</span>
+                            </div>
+                            <div class="flex gap-6">
+                                <span class="text-white text-[11px]">60 min</span>
+                                <span class="text-graphite w-10 text-right text-[11px]">17%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PATTERN: Footer stats grid — icon + value + label -->
+                    <div class="grid grid-cols-3 gap-2 text-center">
+                        <div class="flex flex-col items-center justify-center border-r border-white/5">
+                            <div class="flex items-center gap-2 mb-2 text-amber-500">
+                                <i class="ph-light ph-clock text-lg"></i>
+                                <span class="text-white font-mono text-xs">7h 15m</span>
+                            </div>
+                            <div class="text-[8px] font-mono uppercase tracking-widest text-graphite">TOTAL PLANNED</div>
+                        </div>
+                        <div class="flex flex-col items-center justify-center border-r border-white/5">
+                            <div class="flex items-center gap-2 mb-2 text-amber-500">
+                                <i class="ph-light ph-target text-lg"></i>
+                                <span class="text-white font-mono text-xs">3</span>
+                            </div>
+                            <div class="text-[8px] font-mono uppercase tracking-widest text-graphite">FOCUS BLOCKS</div>
+                        </div>
+                        <div class="flex flex-col items-center justify-center">
+                            <div class="flex items-center gap-2 mb-2 text-amber-500">
+                                <i class="ph-light ph-lightning text-lg"></i>
+                                <span class="text-white font-mono text-xs">78%</span>
+                            </div>
+                            <div class="text-[8px] font-mono uppercase tracking-widest text-graphite">FOCUS SCORE</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== DAILY ALLOCATION HORIZON ===== -->
+        <div class="mt-12 border-t border-white/[0.05] pt-12 relative z-10">
+            <div class="flex justify-between items-end mb-8">
+                <h2 class="text-2xl font-serif text-white tracking-tight">Daily Allocation Horizon</h2>
+                <div class="flex items-center gap-6">
+                    <div class="flex items-center gap-2 text-[10px] font-mono text-graphite uppercase tracking-widest">
+                        <i class="ph-light ph-calendar text-sm"></i> SUN, 27 SEP 2026
+                    </div>
+                    <div class="flex items-center gap-2 text-[10px] font-mono">
+                        <button class="px-4 py-2 border border-white/10 hover:bg-white/5 text-white transition-colors rounded-sm">TODAY</button>
+                        <button class="px-2 py-2 border border-white/10 hover:bg-white/5 text-white transition-colors rounded-sm"><i class="ph-bold ph-caret-left"></i></button>
+                        <button class="px-2 py-2 border border-white/10 hover:bg-white/5 text-white transition-colors rounded-sm"><i class="ph-bold ph-caret-right"></i></button>
+                        <button class="px-4 py-2 border border-white/10 hover:bg-white/5 text-white transition-colors flex items-center gap-2 rounded-sm">Day View <i class="ph-bold ph-caret-down"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex gap-12 mt-8">
+                <!-- Legend -->
+                <div class="w-32 shrink-0 space-y-6 pt-12">
+                    <div class="flex items-center gap-3 text-[10px] font-mono text-graphite uppercase tracking-widest">
+                        <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span> Deep Work
+                    </div>
+                    <div class="flex items-center gap-3 text-[10px] font-mono text-graphite uppercase tracking-widest">
+                        <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span> Tactical
+                    </div>
+                    <div class="flex items-center gap-3 text-[10px] font-mono text-graphite uppercase tracking-widest">
+                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> Buffer
+                    </div>
+                    <div class="flex items-center gap-3 text-[10px] font-mono text-graphite uppercase tracking-widest">
+                        <span class="w-2.5 h-2.5 rounded-full bg-gray-500"></span> Meetings
+                    </div>
+                </div>
+
+                <!-- Timeline -->
+                <div class="flex-1 relative">
+                    <div class="flex justify-between text-[10px] font-mono text-graphite mb-6 select-none">
+                        <span>07:00</span><span>08:00</span><span>09:00</span><span>10:00</span><span>11:00</span><span>12:00</span><span>13:00</span><span>14:00</span><span>15:00</span><span>16:00</span><span>17:00</span><span>18:00</span><span>19:00</span><span>20:00</span>
+                    </div>
+                    <div class="relative h-48 border-t border-b border-white/[0.05]">
+                        <!-- NOW Line -->
+                        <div class="absolute top-0 bottom-0 z-30 pointer-events-none flex flex-col items-center" style="left: 26.5%;">
+                            <div class="text-[10px] font-mono text-amber-500 font-bold mb-1 -mt-5">NOW</div>
+                            <div class="w-2 h-2 rounded-full border-2 border-amber-500 bg-transparent mb-1"></div>
+                            <div class="w-px h-full bg-amber-500"></div>
+                        </div>
+
+                        <!-- Timeline blocks (staggered top positions) -->
+                        <div class="absolute inset-0 z-20 top-6">
+                            <!-- Deep Work block (top:0) -->
+                            <div class="absolute bg-amber-500/10 border border-amber-500/50 rounded-md p-3 flex gap-3 top-0" style="left: 15.38%; width: 19.23%;">
+                                <div class="w-6 h-6 flex items-center justify-center border border-amber-500/30 rounded shrink-0">
+                                    <i class="ph-light ph-cube text-amber-500 text-sm"></i>
+                                </div>
+                                <div>
+                                    <div class="text-[10px] font-mono text-white font-medium mb-1">Review cryptographic<br>enclave architecture</div>
+                                    <div class="text-[8px] font-mono text-graphite">09:00 - 11:30 • 150m</div>
+                                </div>
+                            </div>
+                            <!-- Meeting block (top:32px, staggered) -->
+                            <div class="absolute bg-gray-500/10 border border-gray-500/30 rounded-md p-2 flex items-center gap-2 top-8" style="left: 30.76%; width: 7.69%;">
+                                <i class="ph-light ph-users text-gray-400"></i>
+                                <div>
+                                    <div class="text-[9px] font-mono text-white">Team Sync</div>
+                                    <div class="text-[8px] font-mono text-graphite">11:30 - 12:00</div>
+                                </div>
+                            </div>
+                            <!-- Buffer block (top:0) -->
+                            <div class="absolute bg-emerald-500/10 border border-emerald-500/40 rounded-md p-2 flex gap-2 top-0" style="left: 38.46%; width: 7.69%;">
+                                <i class="ph-light ph-coffee text-emerald-400 mt-0.5"></i>
+                                <div>
+                                    <div class="text-[10px] font-mono text-white">Buffer</div>
+                                    <div class="text-[8px] font-mono text-graphite">12:00 - 13:00</div>
+                                </div>
+                            </div>
+                            <!-- Strategy block (top:0) -->
+                            <div class="absolute bg-blue-500/10 border border-blue-500/40 rounded-md p-3 flex gap-3 top-0" style="left: 46.15%; width: 15.38%;">
+                                <i class="ph-light ph-file-text text-blue-400 text-lg"></i>
+                                <div>
+                                    <div class="text-[10px] font-mono text-white font-medium mb-1">Finalize Q3 Board Deck</div>
+                                    <div class="text-[8px] font-mono text-graphite">13:00 - 15:00 • 120m</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+</div>
+
+</body>
+</html>
