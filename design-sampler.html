@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Design Matrix & Component Sampler — Antigravity</title>
+    <title>Design Matrix & Component Sampler — Studio Edition</title>
     
-    <!-- Google Fonts: Diverse Pairings -->
+    <!-- Google Fonts: Diverse Premium Pairings -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=IBM+Plex+Mono:wght@400;500;600&family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=IBM+Plex+Mono:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@500;600;700;800&display=swap" rel="stylesheet">
     
     <!-- Phosphor Icons -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
@@ -23,6 +23,7 @@
                         'sans-dm': ['"DM Sans"', 'sans-serif'],
                         'serif-playfair': ['"Playfair Display"', 'serif'],
                         'serif-fraunces': ['"Fraunces"', 'serif'],
+                        'serif-cinzel': ['"Cinzel"', 'serif'],
                         'mono-ibm': ['"IBM Plex Mono"', 'monospace'],
                         'sans-space': ['"Space Grotesk"', 'sans-serif'],
                         'mono-space': ['"Space Mono"', 'monospace'],
@@ -39,29 +40,33 @@
             background-color: #06090E;
             color: #E6EDF3;
             font-family: 'DM Sans', sans-serif;
-            selection-background-color: #F59E0B;
         }
 
         /* Biselado a 45 grados */
+        .clip-bevel-sm {
+            clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+        }
         .clip-bevel {
-            clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+            clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
         }
         .clip-bevel-lg {
-            clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
+            clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
         }
 
         /* Tarjeta seleccionada highlight */
         .sample-card {
-            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
             cursor: pointer;
         }
         .sample-card:hover {
             transform: translateY(-2px);
+            border-color: rgba(255, 255, 255, 0.2) !important;
         }
         .sample-card.selected {
             border-color: #F59E0B !important;
-            box-shadow: 0 0 0 1px #F59E0B, 0 12px 30px -10px rgba(245, 158, 11, 0.2);
+            box-shadow: 0 0 0 1px #F59E0B, 0 12px 30px -10px rgba(245, 158, 11, 0.25);
+            background-color: rgba(13, 20, 31, 0.95);
         }
         .sample-card.selected .check-badge {
             opacity: 1;
@@ -71,7 +76,7 @@
         /* Badge de selección */
         .check-badge {
             opacity: 0;
-            transform: scale(0.7);
+            transform: scale(0.6);
             transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
@@ -82,248 +87,431 @@
 
         /* Background grid */
         .bg-grid-pattern {
-            background-size: 32px 32px;
+            background-size: 36px 36px;
             background-image: 
                 linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
                 linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
         }
+
+        /* Dot pattern */
+        .bg-dots-pattern {
+            background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+            background-size: 16px 16px;
+        }
     </style>
 </head>
-<body class="bg-grid-pattern min-h-screen pb-40">
+<body class="bg-grid-pattern min-h-screen pb-48">
 
-    <!-- ==================== HEADER MASTHEAD ==================== -->
-    <header class="sticky top-0 z-50 bg-[#06090E]/90 backdrop-blur-xl border-b border-white/[0.08] px-6 lg:px-12 py-4">
+    <!-- ==================== STICKY HEADER ==================== -->
+    <header class="sticky top-0 z-50 bg-[#06090E]/95 backdrop-blur-xl border-b border-white/[0.08] px-6 lg:px-12 py-3.5">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
             <div>
                 <div class="flex items-center gap-2 text-[10px] font-mono tracking-[0.25em] text-amber-500 uppercase">
-                    <span class="w-1.5 h-3 bg-amber-500"></span>
-                    ANTIGRAVITY DESIGN MATRIX
+                    <span class="w-1.5 h-3 bg-amber-500 block"></span>
+                    CHRONOS COMPONENT LAB
                 </div>
-                <h1 class="text-xl lg:text-2xl font-serif text-white tracking-tight mt-0.5">
-                    Muestrario Visual de Componentes & Estilos
+                <h1 class="text-xl lg:text-2xl font-serif text-white tracking-tight leading-none mt-0.5">
+                    Catálogo de Selección Visual Multiestilo
                 </h1>
-                <p class="text-xs text-neutral-400 mt-0.5">
-                    Haz clic en tus elementos favoritos para armar la dirección visual de tu proyecto.
+                <p class="text-xs text-neutral-400 mt-1">
+                    9 Bloques de diseño completos. Haz clic en tus favoritos para armar la dirección estética de tu proyecto.
                 </p>
             </div>
 
-            <!-- Selector summary counter & quick jump -->
+            <!-- Sticky controls -->
             <div class="flex items-center gap-3">
                 <a href="#summary-box" class="px-4 py-2 bg-amber-500/10 border border-amber-500/30 hover:bg-amber-500/20 text-amber-400 text-xs font-mono tracking-wider uppercase rounded-sm flex items-center gap-2 transition-all">
                     <i class="ph-bold ph-sliders text-sm"></i>
-                    <span id="nav-counter">0/5 Seleccionados</span>
+                    <span id="nav-counter">0/9 Seleccionados</span>
                 </a>
-                <button onclick="copyCurrentSelection()" class="px-4 py-2 bg-amber-500 hover:bg-amber-400 text-[#070B10] text-xs font-mono font-bold tracking-wider uppercase rounded-sm transition-all flex items-center gap-2 shadow-lg shadow-amber-500/20">
+                <button onclick="copyCurrentSelection()" class="px-5 py-2.5 bg-amber-500 hover:bg-amber-400 text-[#070B10] text-xs font-mono font-bold tracking-wider uppercase rounded-sm transition-all flex items-center gap-2 shadow-lg shadow-amber-500/20">
                     <i class="ph-bold ph-copy text-sm"></i>
                     Copiar Elección
                 </button>
             </div>
         </div>
+
+        <!-- Quick Jump Navigation Sub-bar -->
+        <div class="max-w-7xl mx-auto mt-3 pt-2.5 border-t border-white/[0.05] flex gap-2 overflow-x-auto text-[11px] font-mono scrollbar-none">
+            <a href="#section-palettes" class="px-2.5 py-1 text-neutral-400 hover:text-amber-400 hover:bg-white/5 rounded whitespace-nowrap">01. Paletas</a>
+            <a href="#section-typography" class="px-2.5 py-1 text-neutral-400 hover:text-amber-400 hover:bg-white/5 rounded whitespace-nowrap">02. Tipografías</a>
+            <a href="#section-buttons" class="px-2.5 py-1 text-neutral-400 hover:text-amber-400 hover:bg-white/5 rounded whitespace-nowrap">03. Botones</a>
+            <a href="#section-cards" class="px-2.5 py-1 text-neutral-400 hover:text-amber-400 hover:bg-white/5 rounded whitespace-nowrap">04. Cards & Paneles</a>
+            <a href="#section-menus" class="px-2.5 py-1 text-neutral-400 hover:text-amber-400 hover:bg-white/5 rounded whitespace-nowrap">05. Navegación</a>
+            <a href="#section-kpis" class="px-2.5 py-1 text-neutral-400 hover:text-amber-400 hover:bg-white/5 rounded whitespace-nowrap">06. Métricas & KPIs</a>
+            <a href="#section-timeline" class="px-2.5 py-1 text-neutral-400 hover:text-amber-400 hover:bg-white/5 rounded whitespace-nowrap">07. Líneas de Tiempo</a>
+            <a href="#section-tables" class="px-2.5 py-1 text-neutral-400 hover:text-amber-400 hover:bg-white/5 rounded whitespace-nowrap">08. Tablas & Feeds</a>
+            <a href="#section-inputs" class="px-2.5 py-1 text-neutral-400 hover:text-amber-400 hover:bg-white/5 rounded whitespace-nowrap">09. Inputs & Filtros</a>
+        </div>
     </header>
 
-    <main class="max-w-7xl mx-auto px-6 lg:px-12 pt-10 space-y-16">
+    <main class="max-w-7xl mx-auto px-6 lg:px-12 pt-10 space-y-20">
 
-        <!-- ==================== SECCIÓN 1: TIPOGRAFÍAS EN VIVO ==================== -->
-        <section id="section-typography">
+        <!-- ==================== 01. PALETAS DE COLOR ==================== -->
+        <section id="section-palettes">
             <div class="flex justify-between items-end mb-6 border-b border-white/[0.06] pb-3">
                 <div>
                     <span class="text-[10px] font-mono tracking-[0.25em] text-amber-500 uppercase">BLOQUE 01</span>
-                    <h2 class="text-2xl font-serif text-white mt-1">Tríos Tipográficos (Titular + Interfaz + Números)</h2>
-                    <p class="text-xs text-neutral-400">Cómo se leen tus titulares, textos de lectura y métricas en números grandes.</p>
+                    <h2 class="text-2xl font-serif text-white mt-1">Paletas Cromáticas & Atmósferas</h2>
+                    <p class="text-xs text-neutral-400">El alma visual del proyecto: fondos minerales, acentos y tonalidades de contraste.</p>
                 </div>
-                <span class="text-xs font-mono text-neutral-500 hidden sm:inline">Elige 1 de las 4 opciones</span>
+                <span class="text-xs font-mono text-neutral-500 hidden sm:inline">8 opciones disponibles</span>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 
-                <!-- Tipo 1: Horological Sovereign -->
-                <div class="sample-card bg-[#0A1017] border border-white/[0.08] p-6 rounded-sm relative" onclick="selectItem('typography', 'Opción 1: Editorial Suizo (Playfair Display + DM Sans + IBM Plex Mono)', this)">
-                    <div class="check-badge absolute top-4 right-4 bg-amber-500 text-[#070B10] w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs">
-                        <i class="ph-bold ph-check"></i>
+                <!-- Paleta 1: Midnight Slate Multi-Accent -->
+                <div class="sample-card bg-[#0A1017] border border-white/[0.08] p-4 rounded-sm" onclick="selectItem('palette', 'Paleta 1: Midnight Slate Multi-Accent (Obsidiana #070B10, Ámbar #F59E0B, Cobalto #3B82F6, Esmeralda #10B981)', this)">
+                    <div class="check-badge absolute top-3 right-3 bg-amber-500 text-[#070B10] w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px]"><i class="ph-bold ph-check"></i></div>
+                    <div class="text-[10px] font-mono text-amber-400 uppercase tracking-widest mb-2">Paleta 01 • Midnight Multi-Accent</div>
+                    <p class="text-[11px] text-neutral-400 mb-3">Tu paleta actual: fondo pizarra oscura con acentos funcionales por dominio.</p>
+                    <div class="flex h-6 rounded-sm overflow-hidden gap-1 mb-2">
+                        <div class="flex-1 bg-[#070B10] border border-white/10" title="Canvas #070B10"></div>
+                        <div class="flex-1 bg-[#F59E0B]" title="Amber #F59E0B"></div>
+                        <div class="flex-1 bg-[#3B82F6]" title="Cobalt #3B82F6"></div>
+                        <div class="flex-1 bg-[#10B981]" title="Mint #10B981"></div>
+                        <div class="flex-1 bg-[#F4EDE2]" title="Cream #F4EDE2"></div>
                     </div>
-                    <div class="text-[10px] font-mono text-amber-400 uppercase tracking-widest mb-3">Opción 1 • Editorial Suizo Clásico</div>
-                    <div class="space-y-4">
-                        <div>
-                            <h3 class="font-serif-playfair text-3xl text-white tracking-tight leading-tight">The Rule of Three</h3>
-                            <p class="font-mono-ibm text-[10px] uppercase tracking-[0.25em] text-neutral-400 mt-1">NON-NEGOTIABLE DEEP WORK • 2026</p>
-                        </div>
-                        <p class="font-sans-dm text-sm text-neutral-300 leading-relaxed">
-                            Review cryptographic enclave architecture with principal security auditor. Pacing target: 150 minutes of undivided cognitive energy.
-                        </p>
-                        <div class="pt-3 border-t border-white/[0.06] flex items-baseline justify-between">
-                            <span class="font-serif-playfair text-5xl text-white tracking-tighter">91<span class="font-sans-dm text-2xl text-neutral-500">%</span></span>
-                            <span class="font-mono-ibm text-xs text-amber-400">07:00 — 20:00 • 780m</span>
-                        </div>
+                    <span class="text-[9px] font-mono text-neutral-500">Ejecutivo / Precision B2B</span>
+                </div>
+
+                <!-- Paleta 2: Swiss Horological Gold -->
+                <div class="sample-card bg-[#0A1017] border border-white/[0.08] p-4 rounded-sm" onclick="selectItem('palette', 'Paleta 2: Swiss Horological Gold (Negro Mineral #05070A, Oro Suizo #C5A358, Marfil #F4EDE2, Grafito #8B8D98)', this)">
+                    <div class="check-badge absolute top-3 right-3 bg-amber-500 text-[#070B10] w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px]"><i class="ph-bold ph-check"></i></div>
+                    <div class="text-[10px] font-mono text-yellow-500 uppercase tracking-widest mb-2">Paleta 02 • Swiss Horological Gold</div>
+                    <p class="text-[11px] text-neutral-400 mb-3">Elegancia de alta relojería: negro carbón con toques de oro envejecido y marfil.</p>
+                    <div class="flex h-6 rounded-sm overflow-hidden gap-1 mb-2">
+                        <div class="flex-1 bg-[#05070A] border border-white/10"></div>
+                        <div class="flex-1 bg-[#C5A358]"></div>
+                        <div class="flex-1 bg-[#E5B968]"></div>
+                        <div class="flex-1 bg-[#8B8D98]"></div>
+                        <div class="flex-1 bg-[#F4EDE2]"></div>
+                    </div>
+                    <span class="text-[9px] font-mono text-neutral-500">Sovereign Wealth / Luxury FinTech</span>
+                </div>
+
+                <!-- Paleta 3: Industrial Blueprint -->
+                <div class="sample-card bg-[#0A1017] border border-white/[0.08] p-4 rounded-sm" onclick="selectItem('palette', 'Paleta 3: Industrial Blueprint (Carbón Mineral #0C0A08, Latón #C4A46B, Pátina Verde #7AAA94, Acero #8CA4BC)', this)">
+                    <div class="check-badge absolute top-3 right-3 bg-amber-500 text-[#070B10] w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px]"><i class="ph-bold ph-check"></i></div>
+                    <div class="text-[10px] font-mono text-emerald-400 uppercase tracking-widest mb-2">Paleta 03 • Industrial Blueprint</div>
+                    <p class="text-[11px] text-neutral-400 mb-3">Tono arquitectónico y aeroespacial: latón pulido, pátina y acero frío.</p>
+                    <div class="flex h-6 rounded-sm overflow-hidden gap-1 mb-2">
+                        <div class="flex-1 bg-[#0C0A08] border border-white/10"></div>
+                        <div class="flex-1 bg-[#C4A46B]"></div>
+                        <div class="flex-1 bg-[#7AAA94]"></div>
+                        <div class="flex-1 bg-[#8CA4BC]"></div>
+                        <div class="flex-1 bg-[#E4DDD2]"></div>
+                    </div>
+                    <span class="text-[9px] font-mono text-neutral-500">Hardware / Deep Tech / Academia</span>
+                </div>
+
+                <!-- Paleta 4: Terminal Neon Matrix -->
+                <div class="sample-card bg-[#0A1017] border border-white/[0.08] p-4 rounded-sm" onclick="selectItem('palette', 'Paleta 4: Terminal Neon Matrix (Verde Fósforo #05FFA1, Bosque Oscuro #04140D, Negro #020805, Grafito)', this)">
+                    <div class="check-badge absolute top-3 right-3 bg-amber-500 text-[#070B10] w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px]"><i class="ph-bold ph-check"></i></div>
+                    <div class="text-[10px] font-mono text-emerald-300 uppercase tracking-widest mb-2">Paleta 04 • Terminal Neon Matrix</div>
+                    <p class="text-[11px] text-neutral-400 mb-3">Estética hacker/analítica: negro azabache con fósforo verde de alta luminancia.</p>
+                    <div class="flex h-6 rounded-sm overflow-hidden gap-1 mb-2">
+                        <div class="flex-1 bg-[#020805] border border-white/10"></div>
+                        <div class="flex-1 bg-[#05FFA1]"></div>
+                        <div class="flex-1 bg-[#10B981]"></div>
+                        <div class="flex-1 bg-[#064E3B]"></div>
+                        <div class="flex-1 bg-[#E6F4EA]"></div>
+                    </div>
+                    <span class="text-[9px] font-mono text-neutral-500">Security / Cryptography / DevTools</span>
+                </div>
+
+                <!-- Paleta 5: Nordic Monolithic Monochrome -->
+                <div class="sample-card bg-[#0A1017] border border-white/[0.08] p-4 rounded-sm" onclick="selectItem('palette', 'Paleta 5: Nordic Monochrome (Negro Puro #08090B, Blanco Hielo #F8FAFC, Pizarra Neutra #64748B, Líneas 1px)', this)">
+                    <div class="check-badge absolute top-3 right-3 bg-amber-500 text-[#070B10] w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px]"><i class="ph-bold ph-check"></i></div>
+                    <div class="text-[10px] font-mono text-neutral-300 uppercase tracking-widest mb-2">Paleta 05 • Nordic Monochrome</div>
+                    <p class="text-[11px] text-neutral-400 mb-3">Cero colores chillones. Solo escala de grises perfecta, blancos tiza y sombras nítidas.</p>
+                    <div class="flex h-6 rounded-sm overflow-hidden gap-1 mb-2">
+                        <div class="flex-1 bg-[#08090B] border border-white/10"></div>
+                        <div class="flex-1 bg-[#334155]"></div>
+                        <div class="flex-1 bg-[#64748B]"></div>
+                        <div class="flex-1 bg-[#94A3B8]"></div>
+                        <div class="flex-1 bg-[#F8FAFC]"></div>
+                    </div>
+                    <span class="text-[9px] font-mono text-neutral-500">Brutalism / Editorial Design</span>
+                </div>
+
+                <!-- Paleta 6: Crimson Bio-Enclave -->
+                <div class="sample-card bg-[#0A1017] border border-white/[0.08] p-4 rounded-sm" onclick="selectItem('palette', 'Paleta 6: Crimson Bio-Enclave (Plum Oscuro #0E070B, Carmesí #E11D48, Coral #FB7185, Nácar #FFF1F2)', this)">
+                    <div class="check-badge absolute top-3 right-3 bg-amber-500 text-[#070B10] w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px]"><i class="ph-bold ph-check"></i></div>
+                    <div class="text-[10px] font-mono text-rose-400 uppercase tracking-widest mb-2">Paleta 06 • Crimson Bio-Enclave</div>
+                    <p class="text-[11px] text-neutral-400 mb-3">Acentos en rojo carmesí y ciruela oscuro para interfaces audaces y urgentes.</p>
+                    <div class="flex h-6 rounded-sm overflow-hidden gap-1 mb-2">
+                        <div class="flex-1 bg-[#0E070B] border border-white/10"></div>
+                        <div class="flex-1 bg-[#E11D48]"></div>
+                        <div class="flex-1 bg-[#FB7185]"></div>
+                        <div class="flex-1 bg-[#881337]"></div>
+                        <div class="flex-1 bg-[#FFF1F2]"></div>
+                    </div>
+                    <span class="text-[9px] font-mono text-neutral-500">Biotech / Critical Alert / Edge</span>
+                </div>
+
+                <!-- Paleta 7: Deep Space Cobalt & Violet -->
+                <div class="sample-card bg-[#0A1017] border border-white/[0.08] p-4 rounded-sm" onclick="selectItem('palette', 'Paleta 7: Deep Space Cobalt (Azul Marino Profundo #040814, Cobalto Eléctrico #2563EB, Violeta #8B5CF6, Hielo)', this)">
+                    <div class="check-badge absolute top-3 right-3 bg-amber-500 text-[#070B10] w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px]"><i class="ph-bold ph-check"></i></div>
+                    <div class="text-[10px] font-mono text-indigo-400 uppercase tracking-widest mb-2">Paleta 07 • Deep Space Cobalt</div>
+                    <p class="text-[11px] text-neutral-400 mb-3">Profundidad galáctica: cobalto eléctrico y ultravioleta suave sobre azul noche.</p>
+                    <div class="flex h-6 rounded-sm overflow-hidden gap-1 mb-2">
+                        <div class="flex-1 bg-[#040814] border border-white/10"></div>
+                        <div class="flex-1 bg-[#2563EB]"></div>
+                        <div class="flex-1 bg-[#8B5CF6]"></div>
+                        <div class="flex-1 bg-[#1E293B]"></div>
+                        <div class="flex-1 bg-[#E0F2FE]"></div>
+                    </div>
+                    <span class="text-[9px] font-mono text-neutral-500">AI Lab / Quantitative / Web3</span>
+                </div>
+
+                <!-- Paleta 8: Terracotta Earth & Sand -->
+                <div class="sample-card bg-[#0A1017] border border-white/[0.08] p-4 rounded-sm" onclick="selectItem('palette', 'Paleta 8: Terracotta & Sand (Negro Café #14110F, Terracota #C2410C, Ámbar Cálido #D97706, Crema Hueso)', this)">
+                    <div class="check-badge absolute top-3 right-3 bg-amber-500 text-[#070B10] w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px]"><i class="ph-bold ph-check"></i></div>
+                    <div class="text-[10px] font-mono text-orange-400 uppercase tracking-widest mb-2">Paleta 08 • Terracotta & Warm Sand</div>
+                    <p class="text-[11px] text-neutral-400 mb-3">Tonalidades terrosas cálidas: arcilla, ocre y café tostado con crema suave.</p>
+                    <div class="flex h-6 rounded-sm overflow-hidden gap-1 mb-2">
+                        <div class="flex-1 bg-[#14110F] border border-white/10"></div>
+                        <div class="flex-1 bg-[#C2410C]"></div>
+                        <div class="flex-1 bg-[#D97706]"></div>
+                        <div class="flex-1 bg-[#78350F]"></div>
+                        <div class="flex-1 bg-[#FEF3C7]"></div>
+                    </div>
+                    <span class="text-[9px] font-mono text-neutral-500">Artisan / Hospitality / Architecture</span>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ==================== 02. TIPOGRAFÍAS EN VIVO ==================== -->
+        <section id="section-typography">
+            <div class="flex justify-between items-end mb-6 border-b border-white/[0.06] pb-3">
+                <div>
+                    <span class="text-[10px] font-mono tracking-[0.25em] text-amber-500 uppercase">BLOQUE 02</span>
+                    <h2 class="text-2xl font-serif text-white mt-1">Tríos Tipográficos (Titular + Interfaz + Números)</h2>
+                    <p class="text-xs text-neutral-400">Cómo se estructuran los tamaños, tracking, serifs y fuentes de código.</p>
+                </div>
+                <span class="text-xs font-mono text-neutral-500 hidden sm:inline">6 opciones en vivo</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- Tipo 1 -->
+                <div class="sample-card bg-[#0A1017] border border-white/[0.08] p-5 rounded-sm" onclick="selectItem('typography', 'Opción 1: Editorial Suizo (Playfair Display + DM Sans + IBM Plex Mono)', this)">
+                    <div class="check-badge absolute top-3 right-3 bg-amber-500 text-[#070B10] w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px]"><i class="ph-bold ph-check"></i></div>
+                    <div class="text-[10px] font-mono text-amber-400 uppercase tracking-widest mb-2">Opción 1 • Editorial Suizo</div>
+                    <h3 class="font-serif-playfair text-2xl text-white tracking-tight leading-snug mb-1">Executive Horizon</h3>
+                    <p class="font-mono-ibm text-[9px] text-neutral-400 uppercase tracking-widest mb-3">NON-NEGOTIABLE DEEP WORK • 2026</p>
+                    <p class="font-sans-dm text-xs text-neutral-300 leading-relaxed mb-4">
+                        Revisión de arquitectura y contratos criptográficos con equipo senior de auditoría.
+                    </p>
+                    <div class="pt-2.5 border-t border-white/[0.06] flex items-baseline justify-between">
+                        <span class="font-serif-playfair text-4xl text-white">91<span class="text-xl text-neutral-500">%</span></span>
+                        <span class="font-mono-ibm text-[10px] text-amber-400">07:00 — 20:00</span>
                     </div>
                 </div>
 
-                <!-- Tipo 2: Technical Monolith -->
-                <div class="sample-card bg-[#0A1017] border border-white/[0.08] p-6 rounded-sm relative" onclick="selectItem('typography', 'Opción 2: Monolito Técnico (Space Grotesk + Inter/DM + Space Mono)', this)">
-                    <div class="check-badge absolute top-4 right-4 bg-amber-500 text-[#070B10] w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs">
-                        <i class="ph-bold ph-check"></i>
-                    </div>
-                    <div class="text-[10px] font-mono text-blue-400 uppercase tracking-widest mb-3">Opción 2 • Industrial / Deep Tech</div>
-                    <div class="space-y-4">
-                        <div>
-                            <h3 class="font-sans-space text-3xl font-bold text-white tracking-tight leading-tight">THE RULE OF THREE</h3>
-                            <p class="font-mono-space text-[10px] uppercase tracking-[0.2em] text-neutral-400 mt-1">SYS.METRIC // CORE_ALLOCATION</p>
-                        </div>
-                        <p class="font-sans-dm text-sm text-neutral-300 leading-relaxed">
-                            Review cryptographic enclave architecture with principal security auditor. Pacing target: 150 minutes of undivided cognitive energy.
-                        </p>
-                        <div class="pt-3 border-t border-white/[0.06] flex items-baseline justify-between">
-                            <span class="font-sans-space text-5xl font-extrabold text-white tracking-tighter">91<span class="font-mono-space text-2xl text-blue-400">%</span></span>
-                            <span class="font-mono-space text-xs text-blue-400">07:00 — 20:00 [780M]</span>
-                        </div>
+                <!-- Tipo 2 -->
+                <div class="sample-card bg-[#0A1017] border border-white/[0.08] p-5 rounded-sm" onclick="selectItem('typography', 'Opción 2: Monolito Técnico (Space Grotesk + Inter/DM + Space Mono)', this)">
+                    <div class="check-badge absolute top-3 right-3 bg-amber-500 text-[#070B10] w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px]"><i class="ph-bold ph-check"></i></div>
+                    <div class="text-[10px] font-mono text-blue-400 uppercase tracking-widest mb-2">Opción 2 • Monolito Técnico</div>
+                    <h3 class="font-sans-space text-2xl font-bold text-white tracking-tight leading-snug mb-1">EXECUTIVE HORIZON</h3>
+                    <p class="font-mono-space text-[9px] text-neutral-400 uppercase tracking-widest mb-3">SYS.METRIC // CORE_ALLOCATION</p>
+                    <p class="font-sans-dm text-xs text-neutral-300 leading-relaxed mb-4">
+                        Revisión de arquitectura y contratos criptográficos con equipo senior de auditoría.
+                    </p>
+                    <div class="pt-2.5 border-t border-white/[0.06] flex items-baseline justify-between">
+                        <span class="font-sans-space text-4xl font-extrabold text-white">91<span class="text-xl text-blue-400">%</span></span>
+                        <span class="font-mono-space text-[10px] text-blue-400">[780 MIN]</span>
                     </div>
                 </div>
 
-                <!-- Tipo 3: Warm Architectural -->
-                <div class="sample-card bg-[#0A1017] border border-white/[0.08] p-6 rounded-sm relative" onclick="selectItem('typography', 'Opción 3: Arquitectura Cálida (Fraunces + Outfit + IBM Mono)', this)">
-                    <div class="check-badge absolute top-4 right-4 bg-amber-500 text-[#070B10] w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs">
-                        <i class="ph-bold ph-check"></i>
-                    </div>
-                    <div class="text-[10px] font-mono text-emerald-400 uppercase tracking-widest mb-3">Opción 3 • Humanista Moderno</div>
-                    <div class="space-y-4">
-                        <div>
-                            <h3 class="font-serif-fraunces text-3xl font-semibold text-white tracking-normal leading-tight">The Rule of Three</h3>
-                            <p class="font-sans-outfit text-xs uppercase tracking-[0.2em] text-neutral-400 mt-1">Non-Negotiable Deep Work</p>
-                        </div>
-                        <p class="font-sans-outfit text-sm text-neutral-300 leading-relaxed font-light">
-                            Review cryptographic enclave architecture with principal security auditor. Pacing target: 150 minutes of undivided cognitive energy.
-                        </p>
-                        <div class="pt-3 border-t border-white/[0.06] flex items-baseline justify-between">
-                            <span class="font-serif-fraunces text-5xl font-normal text-white">91<span class="font-sans-outfit text-2xl text-emerald-400">%</span></span>
-                            <span class="font-mono-ibm text-xs text-neutral-400">07:00 — 20:00</span>
-                        </div>
+                <!-- Tipo 3 -->
+                <div class="sample-card bg-[#0A1017] border border-white/[0.08] p-5 rounded-sm" onclick="selectItem('typography', 'Opción 3: Humanista Esculpido (Fraunces + Outfit + IBM Mono)', this)">
+                    <div class="check-badge absolute top-3 right-3 bg-amber-500 text-[#070B10] w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px]"><i class="ph-bold ph-check"></i></div>
+                    <div class="text-[10px] font-mono text-emerald-400 uppercase tracking-widest mb-2">Opción 3 • Humanista Esculpido</div>
+                    <h3 class="font-serif-fraunces text-2xl font-semibold text-white leading-snug mb-1">Executive Horizon</h3>
+                    <p class="font-sans-outfit text-[9px] text-neutral-400 uppercase tracking-widest mb-3">Priority Cognitive Pace</p>
+                    <p class="font-sans-outfit text-xs text-neutral-300 leading-relaxed font-light mb-4">
+                        Revisión de arquitectura y contratos criptográficos con equipo senior de auditoría.
+                    </p>
+                    <div class="pt-2.5 border-t border-white/[0.06] flex items-baseline justify-between">
+                        <span class="font-serif-fraunces text-4xl text-white">91<span class="text-xl text-emerald-400">%</span></span>
+                        <span class="font-mono-ibm text-[10px] text-neutral-400">Pacing Ok</span>
                     </div>
                 </div>
 
-                <!-- Tipo 4: High-Velocity Futuristic -->
-                <div class="sample-card bg-[#0A1017] border border-white/[0.08] p-6 rounded-sm relative" onclick="selectItem('typography', 'Opción 4: Cyber Terminal (Syne Display + DM Sans + Space Mono)', this)">
-                    <div class="check-badge absolute top-4 right-4 bg-amber-500 text-[#070B10] w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs">
-                        <i class="ph-bold ph-check"></i>
+                <!-- Tipo 4 -->
+                <div class="sample-card bg-[#0A1017] border border-white/[0.08] p-5 rounded-sm" onclick="selectItem('typography', 'Opción 4: Cyber Avant-Garde (Syne Display + DM Sans + Space Mono)', this)">
+                    <div class="check-badge absolute top-3 right-3 bg-amber-500 text-[#070B10] w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px]"><i class="ph-bold ph-check"></i></div>
+                    <div class="text-[10px] font-mono text-purple-400 uppercase tracking-widest mb-2">Opción 4 • Cyber Avant-Garde</div>
+                    <h3 class="font-display-syne text-2xl font-extrabold text-white tracking-wide uppercase leading-snug mb-1">Executive Horizon</h3>
+                    <p class="font-mono-space text-[9px] text-purple-400 uppercase tracking-widest mb-3">// PROTOCOL_01</p>
+                    <p class="font-sans-dm text-xs text-neutral-300 leading-relaxed mb-4">
+                        Revisión de arquitectura y contratos criptográficos con equipo senior de auditoría.
+                    </p>
+                    <div class="pt-2.5 border-t border-white/[0.06] flex items-baseline justify-between">
+                        <span class="font-display-syne text-4xl font-black text-white">91<span class="text-xl text-purple-400">%</span></span>
+                        <span class="font-mono-space text-[10px] text-purple-400">STATUS: HOT</span>
                     </div>
-                    <div class="text-[10px] font-mono text-purple-400 uppercase tracking-widest mb-3">Opción 4 • Cyber Avant-Garde</div>
-                    <div class="space-y-4">
-                        <div>
-                            <h3 class="font-display-syne text-3xl font-extrabold text-white tracking-wide leading-tight uppercase">Rule of Three</h3>
-                            <p class="font-mono-space text-[10px] text-purple-400 uppercase tracking-[0.3em] mt-1">// EXEC_HORIZON_STATE</p>
-                        </div>
-                        <p class="font-sans-dm text-sm text-neutral-300 leading-relaxed">
-                            Review cryptographic enclave architecture with principal security auditor. Pacing target: 150 minutes of undivided cognitive energy.
-                        </p>
-                        <div class="pt-3 border-t border-white/[0.06] flex items-baseline justify-between">
-                            <span class="font-display-syne text-5xl font-black text-white">91<span class="text-purple-400 text-2xl">%</span></span>
-                            <span class="font-mono-space text-xs text-purple-400">STATE: ACTIVE</span>
-                        </div>
+                </div>
+
+                <!-- Tipo 5 -->
+                <div class="sample-card bg-[#0A1017] border border-white/[0.08] p-5 rounded-sm" onclick="selectItem('typography', 'Opción 5: Sovereign Roman Heritage (Cinzel Imperial + Outfit + IBM Mono)', this)">
+                    <div class="check-badge absolute top-3 right-3 bg-amber-500 text-[#070B10] w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px]"><i class="ph-bold ph-check"></i></div>
+                    <div class="text-[10px] font-mono text-yellow-500 uppercase tracking-widest mb-2">Opción 5 • Sovereign Roman</div>
+                    <h3 class="font-serif-cinzel text-xl font-bold text-white tracking-widest uppercase leading-snug mb-1">Executive Horizon</h3>
+                    <p class="font-mono-ibm text-[9px] text-neutral-400 uppercase tracking-widest mb-3">Imperium / Precision</p>
+                    <p class="font-sans-outfit text-xs text-neutral-300 leading-relaxed mb-4 font-light">
+                        Revisión de arquitectura y contratos criptográficos con equipo senior de auditoría.
+                    </p>
+                    <div class="pt-2.5 border-t border-white/[0.06] flex items-baseline justify-between">
+                        <span class="font-serif-cinzel text-3xl font-bold text-white">91<span class="text-lg text-yellow-500">%</span></span>
+                        <span class="font-mono-ibm text-[10px] text-neutral-400">GVA • 2026</span>
+                    </div>
+                </div>
+
+                <!-- Tipo 6 -->
+                <div class="sample-card bg-[#0A1017] border border-white/[0.08] p-5 rounded-sm" onclick="selectItem('typography', 'Opción 6: Pure Monospace Brutalist (Space Mono en titulares y cifras)', this)">
+                    <div class="check-badge absolute top-3 right-3 bg-amber-500 text-[#070B10] w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px]"><i class="ph-bold ph-check"></i></div>
+                    <div class="text-[10px] font-mono text-neutral-400 uppercase tracking-widest mb-2">Opción 6 • Pure Monospace</div>
+                    <h3 class="font-mono-space text-xl font-bold text-white tracking-tight leading-snug mb-1">> EXECUTIVE_HORIZON</h3>
+                    <p class="font-mono-space text-[9px] text-neutral-500 uppercase tracking-widest mb-3">[KERNEL_ALLOCATION_780M]</p>
+                    <p class="font-mono-space text-xs text-neutral-300 leading-relaxed mb-4">
+                        Revisión de arquitectura y contratos criptográficos con auditor senior.
+                    </p>
+                    <div class="pt-2.5 border-t border-white/[0.06] flex items-baseline justify-between">
+                        <span class="font-mono-space text-3xl font-bold text-white">91.00<span class="text-lg text-neutral-500">%</span></span>
+                        <span class="font-mono-space text-[10px] text-amber-500">EXEC_OK</span>
                     </div>
                 </div>
 
             </div>
         </section>
 
-        <!-- ==================== SECCIÓN 2: BOTONES Y ESTADOS TÁCTILES ==================== -->
+        <!-- ==================== 03. BOTONES Y ESTADOS TÁCTILES ==================== -->
         <section id="section-buttons">
             <div class="flex justify-between items-end mb-6 border-b border-white/[0.06] pb-3">
                 <div>
-                    <span class="text-[10px] font-mono tracking-[0.25em] text-amber-500 uppercase">BLOQUE 02</span>
-                    <h2 class="text-2xl font-serif text-white mt-1">Estilos de Botones e Interacción (Pruébalos con clic)</h2>
-                    <p class="text-xs text-neutral-400">Diferentes sensaciones táctiles, bordes y micro-interacciones al interactuar.</p>
+                    <span class="text-[10px] font-mono tracking-[0.25em] text-amber-500 uppercase">BLOQUE 03</span>
+                    <h2 class="text-2xl font-serif text-white mt-1">Estilos de Botones e Interacción (Haz clic para probar)</h2>
+                    <p class="text-xs text-neutral-400">Diferentes geometrías, biseles, bordes de luz y respuestas al clic.</p>
                 </div>
-                <span class="text-xs font-mono text-neutral-500 hidden sm:inline">Elige 1 de las 4 opciones</span>
+                <span class="text-xs font-mono text-neutral-500 hidden sm:inline">6 familias de botones</span>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 
-                <!-- Botón 1: Machined Precision (Sharp Edge, Flat, Inset Border) -->
-                <div class="sample-card bg-[#0A1017] border border-white/[0.08] p-5 rounded-sm flex flex-col justify-between" onclick="selectItem('buttons', 'Estilo 1: Mecanizado de Precisión (Bordes afilados, Micro-depresión táctil, Reflejo superior)', this)">
-                    <div class="check-badge absolute top-3 right-3 bg-amber-500 text-[#070B10] w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px]">
-                        <i class="ph-bold ph-check"></i>
-                    </div>
+                <!-- Botón 1: Machined Precision -->
+                <div class="sample-card bg-[#0A1017] border border-white/[0.08] p-5 rounded-sm flex flex-col justify-between" onclick="selectItem('buttons', 'Estilo 1: Mecanizado de Precisión (Bordes afilados 0px, Micro-depresión táctil, Reflejo superior)', this)">
+                    <div class="check-badge absolute top-3 right-3 bg-amber-500 text-[#070B10] w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px]"><i class="ph-bold ph-check"></i></div>
                     <div>
-                        <div class="text-[10px] font-mono text-amber-400 uppercase tracking-widest mb-1">Estilo 1 • Precisión Mecanizada</div>
-                        <p class="text-[11px] text-neutral-400 mb-6">Bordes nítidos (rounded-none/sm), micro-depresión al clic y contraste sólido.</p>
+                        <div class="text-[10px] font-mono text-amber-400 uppercase tracking-widest mb-1">Estilo 1 • Mecanizado de Precisión</div>
+                        <p class="text-[11px] text-neutral-400 mb-4">Esquinas rectas (`rounded-none/sm`), reflejo superior y micro-depresión.</p>
                     </div>
-
-                    <div class="space-y-3">
-                        <button class="btn-tactile w-full py-2.5 px-4 bg-amber-500 hover:bg-amber-400 text-[#070B10] font-mono text-xs font-bold uppercase tracking-widest rounded-sm transition-all shadow-[inset_0_1px_0_rgba(255,255,255,0.4)] flex items-center justify-center gap-2">
-                            <i class="ph-bold ph-plus"></i> ADD FOCUS
+                    <div class="space-y-2.5">
+                        <button class="btn-tactile w-full py-2.5 px-4 bg-amber-500 hover:bg-amber-400 text-[#070B10] font-mono text-xs font-bold uppercase tracking-widest rounded-none transition-all shadow-[inset_0_1px_0_rgba(255,255,255,0.4)] flex items-center justify-center gap-2">
+                            <i class="ph-bold ph-plus"></i> ADD FOCUS OBJECTIVE
                         </button>
-                        <button class="btn-tactile w-full py-2.5 px-4 bg-white/[0.03] hover:bg-white/[0.08] border border-white/10 text-white font-mono text-xs uppercase tracking-widest rounded-sm transition-all flex items-center justify-center gap-2">
+                        <button class="btn-tactile w-full py-2.5 px-4 bg-white/[0.03] hover:bg-white/[0.08] border border-white/10 text-white font-mono text-xs uppercase tracking-widest rounded-none transition-all flex items-center justify-center gap-2">
                             <i class="ph-light ph-play"></i> START SPRINT
-                        </button>
-                        <button class="btn-tactile w-full py-2 px-3 text-neutral-400 hover:text-white font-mono text-[11px] uppercase tracking-wider transition-colors flex items-center justify-center gap-1.5">
-                            DISMISS
                         </button>
                     </div>
                 </div>
 
-                <!-- Botón 2: Biselado Geométrico (Clip-Path 45deg) -->
-                <div class="sample-card bg-[#0A1017] border border-white/[0.08] p-5 rounded-sm flex flex-col justify-between" onclick="selectItem('buttons', 'Estilo 2: Biselado Geométrico 45° (Esquinas recortadas, Estilo Sci-Fi/Industrial)', this)">
-                    <div class="check-badge absolute top-3 right-3 bg-amber-500 text-[#070B10] w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px]">
-                        <i class="ph-bold ph-check"></i>
-                    </div>
+                <!-- Botón 2: Biselado Geométrico 45° -->
+                <div class="sample-card bg-[#0A1017] border border-white/[0.08] p-5 rounded-sm flex flex-col justify-between" onclick="selectItem('buttons', 'Estilo 2: Biselado Geométrico 45° (Esquinas cortadas con clip-path, look militar/sci-fi)', this)">
+                    <div class="check-badge absolute top-3 right-3 bg-amber-500 text-[#070B10] w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px]"><i class="ph-bold ph-check"></i></div>
                     <div>
-                        <div class="text-[10px] font-mono text-blue-400 uppercase tracking-widest mb-1">Estilo 2 • Biselado 45°</div>
-                        <p class="text-[11px] text-neutral-400 mb-6">Esquinas cortadas con clip-path geométrico. Muy distintivo y no convencional.</p>
+                        <div class="text-[10px] font-mono text-blue-400 uppercase tracking-widest mb-1">Estilo 2 • Biselado Geométrico 45°</div>
+                        <p class="text-[11px] text-neutral-400 mb-4">Esquinas cortadas con clip-path 12px. Aspecto de consola táctica.</p>
                     </div>
-
-                    <div class="space-y-3">
+                    <div class="space-y-2.5">
                         <button class="btn-tactile clip-bevel w-full py-2.5 px-4 bg-blue-500 hover:bg-blue-400 text-white font-mono text-xs font-bold uppercase tracking-widest transition-all flex items-center justify-center gap-2">
-                            <i class="ph-bold ph-plus"></i> ADD FOCUS
+                            <i class="ph-bold ph-plus"></i> ADD FOCUS OBJECTIVE
                         </button>
                         <button class="btn-tactile clip-bevel w-full py-2.5 px-4 bg-blue-500/10 hover:bg-blue-500/20 border border-blue-500/40 text-blue-300 font-mono text-xs uppercase tracking-widest transition-all flex items-center justify-center gap-2">
                             <i class="ph-light ph-play"></i> START SPRINT
                         </button>
-                        <button class="btn-tactile w-full py-2 px-3 text-neutral-400 hover:text-white font-mono text-[11px] uppercase tracking-wider transition-colors flex items-center justify-center gap-1.5">
-                            DISMISS
-                        </button>
                     </div>
                 </div>
 
-                <!-- Botón 3: Outlined Glow / Minimalist Wireframe -->
-                <div class="sample-card bg-[#0A1017] border border-white/[0.08] p-5 rounded-sm flex flex-col justify-between" onclick="selectItem('buttons', 'Estilo 3: Wireframe con Aura (Líneas ultra-finas 1px, Brillo sutil en hover)', this)">
-                    <div class="check-badge absolute top-3 right-3 bg-amber-500 text-[#070B10] w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px]">
-                        <i class="ph-bold ph-check"></i>
-                    </div>
+                <!-- Botón 3: Wireframe con Aura Glow -->
+                <div class="sample-card bg-[#0A1017] border border-white/[0.08] p-5 rounded-sm flex flex-col justify-between" onclick="selectItem('buttons', 'Estilo 3: Wireframe con Aura Glow (Línea fina 1px con retroiluminación en hover)', this)">
+                    <div class="check-badge absolute top-3 right-3 bg-amber-500 text-[#070B10] w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px]"><i class="ph-bold ph-check"></i></div>
                     <div>
                         <div class="text-[10px] font-mono text-emerald-400 uppercase tracking-widest mb-1">Estilo 3 • Wireframe & Aura</div>
-                        <p class="text-[11px] text-neutral-400 mb-6">Líneas finas de 1px con retroiluminación sutil en estado hover.</p>
+                        <p class="text-[11px] text-neutral-400 mb-4">Líneas de 1px con brillo sutil difuminado en estado hover.</p>
                     </div>
-
-                    <div class="space-y-3">
+                    <div class="space-y-2.5">
                         <button class="btn-tactile w-full py-2.5 px-4 border border-emerald-400/60 bg-emerald-500/10 hover:bg-emerald-500/25 hover:border-emerald-300 hover:shadow-[0_0_15px_rgba(16,185,129,0.3)] text-emerald-300 font-mono text-xs uppercase tracking-widest rounded-sm transition-all flex items-center justify-center gap-2">
-                            <i class="ph-bold ph-plus"></i> ADD FOCUS
+                            <i class="ph-bold ph-plus"></i> ADD FOCUS OBJECTIVE
                         </button>
                         <button class="btn-tactile w-full py-2.5 px-4 border border-white/10 hover:border-white/30 bg-transparent text-neutral-300 font-mono text-xs uppercase tracking-widest rounded-sm transition-all flex items-center justify-center gap-2">
                             <i class="ph-light ph-play"></i> START SPRINT
                         </button>
-                        <button class="btn-tactile w-full py-2 px-3 text-neutral-400 hover:text-white font-mono text-[11px] uppercase tracking-wider transition-colors flex items-center justify-center gap-1.5">
-                            DISMISS
+                    </div>
+                </div>
+
+                <!-- Botón 4: Neobrutalist Hard Shadow -->
+                <div class="sample-card bg-[#0A1017] border border-white/[0.08] p-5 rounded-sm flex flex-col justify-between" onclick="selectItem('buttons', 'Estilo 4: Neobrutalista Oscuro (Sombra dura 3px sin desenfoque, borde grueso blanco)', this)">
+                    <div class="check-badge absolute top-3 right-3 bg-amber-500 text-[#070B10] w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px]"><i class="ph-bold ph-check"></i></div>
+                    <div>
+                        <div class="text-[10px] font-mono text-yellow-400 uppercase tracking-widest mb-1">Estilo 4 • Neobrutalista Hard Shadow</div>
+                        <p class="text-[11px] text-neutral-400 mb-4">Bordes negros sólidos con sombras duras sin blur (`shadow-[3px_3px_0px_#F59E0B]`).</p>
+                    </div>
+                    <div class="space-y-3">
+                        <button class="btn-tactile w-full py-2 px-4 bg-amber-500 text-[#070B10] font-mono text-xs font-bold uppercase tracking-wider border-2 border-white/80 shadow-[3px_3px_0px_#FFF] transition-all flex items-center justify-center gap-2 active:translate-x-[2px] active:translate-y-[2px] active:shadow-none">
+                            <i class="ph-bold ph-plus"></i> ADD FOCUS OBJECTIVE
+                        </button>
+                        <button class="btn-tactile w-full py-2 px-4 bg-[#070B10] text-white font-mono text-xs uppercase tracking-wider border border-white/40 shadow-[3px_3px_0px_rgba(255,255,255,0.2)] transition-all flex items-center justify-center gap-2 active:translate-x-[2px] active:translate-y-[2px] active:shadow-none">
+                            <i class="ph-light ph-play"></i> START SPRINT
                         </button>
                     </div>
                 </div>
 
-                <!-- Botón 4: Pill Tech / Minimal Rounded-md -->
-                <div class="sample-card bg-[#0A1017] border border-white/[0.08] p-5 rounded-sm flex flex-col justify-between" onclick="selectItem('buttons', 'Estilo 4: Ejecutivo Refinado (Bordes 6px sutiles, Gradiente oscuro interno)', this)">
-                    <div class="check-badge absolute top-3 right-3 bg-amber-500 text-[#070B10] w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px]">
-                        <i class="ph-bold ph-check"></i>
-                    </div>
+                <!-- Botón 5: Split Segmented Trigger -->
+                <div class="sample-card bg-[#0A1017] border border-white/[0.08] p-5 rounded-sm flex flex-col justify-between" onclick="selectItem('buttons', 'Estilo 5: Segmentado Dual (Acción principal dividida de selector de opciones)', this)">
+                    <div class="check-badge absolute top-3 right-3 bg-amber-500 text-[#070B10] w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px]"><i class="ph-bold ph-check"></i></div>
                     <div>
-                        <div class="text-[10px] font-mono text-neutral-300 uppercase tracking-widest mb-1">Estilo 4 • Ejecutivo Refinado</div>
-                        <p class="text-[11px] text-neutral-400 mb-6">Curvatura mínima de 6px (rounded-md), con gradiente sutil y tipografía sans.</p>
+                        <div class="text-[10px] font-mono text-purple-400 uppercase tracking-widest mb-1">Estilo 5 • Dual Segmented Action</div>
+                        <p class="text-[11px] text-neutral-400 mb-4">Botón compuesto: botón de acción a la izquierda + dropdown selector a la derecha.</p>
                     </div>
+                    <div class="space-y-2.5">
+                        <div class="inline-flex w-full rounded-sm overflow-hidden border border-amber-500/40">
+                            <button class="btn-tactile flex-1 py-2.5 px-3 bg-amber-500 hover:bg-amber-400 text-[#070B10] font-mono text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-1.5">
+                                <i class="ph-bold ph-play"></i> LAUNCH SPRINT
+                            </button>
+                            <button class="px-3 bg-amber-600 hover:bg-amber-500 text-[#070B10] border-l border-amber-700 flex items-center justify-center">
+                                <i class="ph-bold ph-caret-down text-xs"></i>
+                            </button>
+                        </div>
+                        <div class="inline-flex w-full rounded-sm overflow-hidden border border-white/10">
+                            <button class="btn-tactile flex-1 py-2 px-3 bg-white/[0.03] hover:bg-white/[0.08] text-white font-mono text-xs uppercase tracking-wider flex items-center justify-center gap-1.5">
+                                50M DEEP BLOCK
+                            </button>
+                            <button class="px-2.5 bg-white/5 hover:bg-white/10 text-neutral-400 border-l border-white/10 flex items-center justify-center">
+                                <i class="ph-bold ph-clock text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
 
-                    <div class="space-y-3">
-                        <button class="btn-tactile w-full py-2.5 px-4 bg-gradient-to-r from-neutral-200 to-white hover:from-white hover:to-neutral-100 text-neutral-950 font-sans font-semibold text-xs tracking-wide rounded-md transition-all flex items-center justify-center gap-2 shadow-md">
-                            <i class="ph-bold ph-plus"></i> Add Focus
+                <!-- Botón 6: Ghost Underline Minimalist -->
+                <div class="sample-card bg-[#0A1017] border border-white/[0.08] p-5 rounded-sm flex flex-col justify-between" onclick="selectItem('buttons', 'Estilo 6: Ghost con Flecha Deslizante (Sin caja, solo texto con subrayado activo)', this)">
+                    <div class="check-badge absolute top-3 right-3 bg-amber-500 text-[#070B10] w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px]"><i class="ph-bold ph-check"></i></div>
+                    <div>
+                        <div class="text-[10px] font-mono text-neutral-300 uppercase tracking-widest mb-1">Estilo 6 • Ghost Arrow Hover</div>
+                        <p class="text-[11px] text-neutral-400 mb-4">Cero cajas. Botones hiper-minimalistas que expanden una flecha en hover.</p>
+                    </div>
+                    <div class="space-y-3 pt-2">
+                        <button class="group flex items-center justify-between w-full py-2 border-b border-amber-500/40 hover:border-amber-400 text-amber-400 font-mono text-xs uppercase tracking-widest transition-all">
+                            <span>ADD FOCUS OBJECTIVE</span>
+                            <i class="ph-light ph-arrow-right transition-transform group-hover:translate-x-1.5"></i>
                         </button>
-                        <button class="btn-tactile w-full py-2.5 px-4 bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 text-neutral-200 font-sans font-medium text-xs tracking-wide rounded-md transition-all flex items-center justify-center gap-2">
-                            <i class="ph-light ph-play"></i> Start Sprint
-                        </button>
-                        <button class="btn-tactile w-full py-2 px-3 text-neutral-400 hover:text-white font-sans text-xs transition-colors flex items-center justify-center gap-1.5">
-                            Dismiss
+                        <button class="group flex items-center justify-between w-full py-2 border-b border-white/10 hover:border-white text-neutral-400 hover:text-white font-mono text-xs uppercase tracking-widest transition-all">
+                            <span>START QUICK SPRINT</span>
+                            <i class="ph-light ph-arrow-right transition-transform group-hover:translate-x-1.5"></i>
                         </button>
                     </div>
                 </div>
@@ -331,73 +519,220 @@
             </div>
         </section>
 
-        <!-- ==================== SECCIÓN 3: CARDS Y CONTENEDORES ==================== -->
+        <!-- ==================== 04. CARDS Y CONTENEDORES ==================== -->
         <section id="section-cards">
             <div class="flex justify-between items-end mb-6 border-b border-white/[0.06] pb-3">
                 <div>
-                    <span class="text-[10px] font-mono tracking-[0.25em] text-amber-500 uppercase">BLOQUE 03</span>
-                    <h2 class="text-2xl font-serif text-white mt-1">Estilos de Tarjetas & Paneles de Datos</h2>
-                    <p class="text-xs text-neutral-400">Cómo se estructuran los bloques de información y las filas de tareas.</p>
+                    <span class="text-[10px] font-mono tracking-[0.25em] text-amber-500 uppercase">BLOQUE 04</span>
+                    <h2 class="text-2xl font-serif text-white mt-1">Cards, Superficies y Contenedores de Información</h2>
+                    <p class="text-xs text-neutral-400">Cómo viven las listas de tareas, widgets y paneles de control.</p>
                 </div>
-                <span class="text-xs font-mono text-neutral-500 hidden sm:inline">Elige 1 de las 4 opciones</span>
+                <span class="text-xs font-mono text-neutral-500 hidden sm:inline">6 estilos de cards</span>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
-                <!-- Card 1: Borde de Acento Grueso Izquierdo (Tu estilo aprobado) -->
-                <div class="sample-card bg-[#0A1017] border border-white/[0.08] p-6 rounded-sm relative" onclick="selectItem('cards', 'Estilo 1: Fila Asimétrica con Borde Grueso (3px) + Gran Número Mono', this)">
-                    <div class="check-badge absolute top-4 right-4 bg-amber-500 text-[#070B10] w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs">
-                        <i class="ph-bold ph-check"></i>
-                    </div>
-                    <div class="text-[10px] font-mono text-amber-400 uppercase tracking-widest mb-3">Estilo 1 • Filas Asimétricas con Borde 3px</div>
-                    <p class="text-xs text-neutral-400 mb-4">Filas con línea divisoria fina, borde de color grueso a la izquierda para categoría y número mono grande.</p>
-
-                    <div class="space-y-3">
-                        <div class="flex items-center gap-4 border-b border-white/[0.05] pb-3">
-                            <div class="border-l-[3px] border-amber-500 pl-3">
-                                <span class="text-2xl font-mono text-white/80">01</span>
+                <!-- Card 1 -->
+                <div class="sample-card bg-[#0A1017] border border-white/[0.08] p-5 rounded-sm" onclick="selectItem('cards', 'Card Estilo 1: Fila Asimétrica Borde 3px (Índice mono grande 01 + Borde grueso de color)', this)">
+                    <div class="check-badge absolute top-3 right-3 bg-amber-500 text-[#070B10] w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px]"><i class="ph-bold ph-check"></i></div>
+                    <div class="text-[10px] font-mono text-amber-400 uppercase tracking-widest mb-2">Card 01 • Fila con Borde Izquierdo 3px</div>
+                    <p class="text-[11px] text-neutral-400 mb-3">Tu diseño actual aprobado: bordes nítidos de color para categorizar y grandes números 01.</p>
+                    <div class="border-l-[3px] border-amber-500 bg-[#070B10] pl-3 py-2.5 pr-3 border-y border-r border-white/5 flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <span class="text-2xl font-mono text-white/80">01</span>
+                            <div>
+                                <div class="text-xs text-white font-medium">Review enclave</div>
+                                <div class="text-[9px] font-mono text-amber-400">ENGINEERING • 150M</div>
                             </div>
-                            <div class="flex-1">
-                                <h4 class="text-sm text-white font-medium">Review cryptographic enclave</h4>
-                                <div class="flex items-center gap-2 mt-1">
-                                    <span class="px-2 py-0.5 bg-amber-500/10 border border-amber-500/20 text-amber-400 text-[9px] font-mono uppercase">ENGINEERING</span>
-                                    <span class="text-[9px] font-mono text-neutral-500">150 MIN</span>
-                                </div>
-                            </div>
-                            <i class="ph-light ph-arrow-right text-neutral-500"></i>
                         </div>
+                        <i class="ph-light ph-arrow-right text-neutral-500"></i>
+                    </div>
+                </div>
 
-                        <div class="flex items-center gap-4 border-b border-white/[0.05] pb-3">
-                            <div class="border-l-[3px] border-blue-500 pl-3">
-                                <span class="text-2xl font-mono text-white/80">02</span>
-                            </div>
-                            <div class="flex-1">
-                                <h4 class="text-sm text-white font-medium">Finalize Q3 Board Deck narrative</h4>
-                                <div class="flex items-center gap-2 mt-1">
-                                    <span class="px-2 py-0.5 bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[9px] font-mono uppercase">STRATEGY</span>
-                                    <span class="text-[9px] font-mono text-neutral-500">120 MIN</span>
-                                </div>
-                            </div>
-                            <i class="ph-light ph-arrow-right text-neutral-500"></i>
+                <!-- Card 2 -->
+                <div class="sample-card bg-[#0D141F]/80 backdrop-blur-md border border-white/[0.08] shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] p-5 rounded-xl" onclick="selectItem('cards', 'Card Estilo 2: Vidrio Ahumado Depth Glass (Backdrop blur, Reflejo superior, rounded-xl)', this)">
+                    <div class="check-badge absolute top-3 right-3 bg-amber-500 text-[#070B10] w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px]"><i class="ph-bold ph-check"></i></div>
+                    <div class="text-[10px] font-mono text-blue-400 uppercase tracking-widest mb-2">Card 02 • Vidrio Ahumado (Depth Glass)</div>
+                    <p class="text-[11px] text-neutral-400 mb-3">Aspecto aeroespacial moderno: desenfoque translúcido y suave halo de luz interna.</p>
+                    <div class="p-3 bg-[#070B10]/60 border border-white/[0.06] rounded-lg">
+                        <div class="flex justify-between items-center text-[10px] font-mono text-neutral-400 mb-1">
+                            <span>COGNITIVE LOAD</span>
+                            <span class="text-blue-400">91%</span>
+                        </div>
+                        <div class="h-1.5 w-full bg-white/5 rounded-full overflow-hidden flex gap-0.5">
+                            <div class="bg-blue-500 h-full w-[60%]"></div>
+                            <div class="bg-amber-500 h-full w-[40%]"></div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Card 2: Vidrio Ahumado Elevado con Reflejo Interno (Depth Card) -->
-                <div class="sample-card bg-[#0D141F]/80 backdrop-blur-md border border-white/[0.08] shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] p-6 rounded-xl relative" onclick="selectItem('cards', 'Estilo 2: Vidrio Ahumado Elevado (Backdrop-blur, Reflejo interno superior, rounded-xl)', this)">
-                    <div class="check-badge absolute top-4 right-4 bg-amber-500 text-[#070B10] w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs">
-                        <i class="ph-bold ph-check"></i>
+                <!-- Card 3 -->
+                <div class="sample-card bg-[#07090C] border border-white/[0.06] p-5 rounded-none overflow-hidden" onclick="selectItem('cards', 'Card Estilo 3: Monolito Industrial con Marca de Agua (Ghost Index gigante de fondo)', this)">
+                    <div class="check-badge absolute top-3 right-3 bg-amber-500 text-[#070B10] w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px] z-10"><i class="ph-bold ph-check"></i></div>
+                    <div class="absolute right-0 bottom-0 text-[80px] font-mono font-bold text-white/[0.02] pointer-events-none select-none leading-none -mb-3 -mr-2">01</div>
+                    <div class="text-[10px] font-mono text-emerald-400 uppercase tracking-widest mb-2 relative z-10">Card 03 • Monolito con Ghost Index</div>
+                    <p class="text-[11px] text-neutral-400 mb-3 relative z-10">Ángulos rectos puros (sin redondear) con numeración titánica de fondo casi invisible.</p>
+                    <div class="border border-white/10 p-3 bg-black/40 relative z-10">
+                        <span class="text-[9px] font-mono text-amber-500 block mb-0.5">// TASK_01</span>
+                        <div class="text-xs text-white font-mono">Review enclave architecture</div>
                     </div>
-                    <div class="text-[10px] font-mono text-blue-400 uppercase tracking-widest mb-3">Estilo 2 • Vidrio Ahumado Elevado (Cards)</div>
-                    <p class="text-xs text-neutral-400 mb-4">Tarjetas flotantes con desenfoque de fondo, reflejo superior milimétrico y bordes curvados elegantes.</p>
+                </div>
 
-                    <div class="p-4 bg-[#070B10]/60 border border-white/[0.06] rounded-lg">
-                        <div class="flex justify-between items-start mb-2">
-                            <span class="text-[10px] font-mono text-neutral-400 uppercase">COGNITIVE LOAD</span>
-                            <span class="text-xs font-mono text-emerald-400">OPTIMAL</span>
+                <!-- Card 4 -->
+                <div class="sample-card bg-transparent border-2 border-dashed border-white/[0.12] p-5 rounded-sm" onclick="selectItem('cards', 'Card Estilo 4: Panel Abierto Respirable (Sin caja contenedora, flota sobre el wallpaper)', this)">
+                    <div class="check-badge absolute top-3 right-3 bg-amber-500 text-[#070B10] w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px]"><i class="ph-bold ph-check"></i></div>
+                    <div class="text-[10px] font-mono text-purple-400 uppercase tracking-widest mb-2">Card 04 • Lienzo Abierto (Sin Caja)</div>
+                    <p class="text-[11px] text-neutral-400 mb-3">Máximo minimalismo: la información flota directamente sobre la imagen de fondo.</p>
+                    <div class="space-y-2 border-t border-b border-white/10 py-2">
+                        <div class="flex justify-between text-xs text-white">
+                            <span>Review cryptographic enclave</span>
+                            <span class="font-mono text-amber-400">150m</span>
                         </div>
-                        <div class="text-3xl font-serif text-white">91<span class="text-xl text-neutral-500">%</span></div>
-                        <div class="h-1.5 w-full bg-white/5 rounded-full mt-3 overflow-hidden flex gap-1">
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="sample-card bg-[#0A1017] border border-white/[0.08] p-5 rounded-sm bg-dots-pattern" onclick="selectItem('cards', 'Card Estilo 5: Matriz de Puntos Táctica (Fondo dot-grid con badge de esquina tipo chip)', this)">
+                    <div class="check-badge absolute top-3 right-3 bg-amber-500 text-[#070B10] w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px]"><i class="ph-bold ph-check"></i></div>
+                    <div class="text-[10px] font-mono text-yellow-400 uppercase tracking-widest mb-2">Card 05 • Matriz de Puntos & Chip</div>
+                    <p class="text-[11px] text-neutral-400 mb-3">Fondo técnico micro-punteado con badge de esquina estilo procesador de datos.</p>
+                    <div class="bg-[#05080C]/90 border border-white/10 p-3 rounded-sm flex items-center justify-between">
+                        <div>
+                            <span class="text-[8px] font-mono text-neutral-500 uppercase tracking-widest">CORE ENCLAVE</span>
+                            <div class="text-xs text-white font-mono mt-0.5">CHIP_REV_04</div>
+                        </div>
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="sample-card clip-bevel bg-[#0A1017] border border-blue-500/30 p-5 rounded-none" onclick="selectItem('cards', 'Card Estilo 6: Hexagonal Bevel Cut (Toda la tarjeta tiene esquinas cortadas a 45°)', this)">
+                    <div class="check-badge absolute top-3 right-3 bg-amber-500 text-[#070B10] w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px]"><i class="ph-bold ph-check"></i></div>
+                    <div class="text-[10px] font-mono text-blue-400 uppercase tracking-widest mb-2">Card 06 • Beveled Container</div>
+                    <p class="text-[11px] text-neutral-400 mb-3">La tarjeta completa tiene un recorte geométrico de 12px en sus esquinas diagonales.</p>
+                    <div class="clip-bevel-sm bg-blue-500/10 border border-blue-500/40 p-2.5 text-xs font-mono text-blue-200">
+                        STATUS: ANOMALY_ZERO // 100% OPERATIONAL
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ==================== 05. NAVEGACIÓN Y MENÚS ==================== -->
+        <section id="section-menus">
+            <div class="flex justify-between items-end mb-6 border-b border-white/[0.06] pb-3">
+                <div>
+                    <span class="text-[10px] font-mono tracking-[0.25em] text-amber-500 uppercase">BLOQUE 05</span>
+                    <h2 class="text-2xl font-serif text-white mt-1">Esquemas de Menú y Arquitectura de Pantalla</h2>
+                    <p class="text-xs text-neutral-400">Cómo se estructuran los accesos a las diferentes vistas de tu aplicación.</p>
+                </div>
+                <span class="text-xs font-mono text-neutral-500 hidden sm:inline">5 esquemas de navegación</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- Nav 1 -->
+                <div class="sample-card bg-[#0A1017] border border-white/[0.08] p-5 rounded-sm" onclick="selectItem('navigation', 'Esquema 1: Sidebar Vertical Izquierdo con Numeración Mono (01 Dashboard, 02 Sprints)', this)">
+                    <div class="check-badge absolute top-3 right-3 bg-amber-500 text-[#070B10] w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px]"><i class="ph-bold ph-check"></i></div>
+                    <div class="text-[10px] font-mono text-amber-400 uppercase tracking-widest mb-1">Esquema 01 • Sidebar Numerado</div>
+                    <p class="text-[11px] text-neutral-400 mb-3">Barra vertical lateral izquierda con icono en cuadrado de acento y números mono.</p>
+                    <div class="space-y-1 p-2 bg-[#06090E] border border-white/5 rounded-sm text-xs">
+                        <div class="flex items-center gap-2 px-2 py-1.5 bg-white/[0.04] text-white">
+                            <span class="bg-amber-500 w-3.5 h-3.5 flex items-center justify-center rounded-sm text-[#070B10]"><i class="ph-fill ph-squares-four text-[9px]"></i></span>
+                            <span class="font-mono text-neutral-400 text-[10px]">01</span>
+                            <span>Dashboard</span>
+                        </div>
+                        <div class="flex items-center gap-2 px-2 py-1 text-neutral-400">
+                            <i class="ph-duotone ph-target text-xs"></i>
+                            <span class="font-mono text-neutral-600 text-[10px]">02</span>
+                            <span>Sprints</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Nav 2 -->
+                <div class="sample-card bg-[#0A1017] border border-white/[0.08] p-5 rounded-sm" onclick="selectItem('navigation', 'Esquema 2: Masthead Superior Horizontal de Comando (Todo arriba, 100% ancho libre abajo)', this)">
+                    <div class="check-badge absolute top-3 right-3 bg-amber-500 text-[#070B10] w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px]"><i class="ph-bold ph-check"></i></div>
+                    <div class="text-[10px] font-mono text-blue-400 uppercase tracking-widest mb-1">Esquema 02 • Masthead Superior</div>
+                    <p class="text-[11px] text-neutral-400 mb-3">Cero sidebar. Todo vive en la cabecera superior fija con reloj y estado.</p>
+                    <div class="p-2.5 bg-[#06090E] border border-white/5 rounded-sm">
+                        <div class="flex justify-between items-center text-xs mb-2">
+                            <span class="font-serif font-bold text-white">CHRONOS</span>
+                            <span class="font-mono text-[9px] text-amber-400">20:19 GVA</span>
+                        </div>
+                        <div class="flex gap-3 text-[10px] font-mono">
+                            <span class="text-amber-400 border-b border-amber-400 pb-0.5">DASHBOARD</span>
+                            <span class="text-neutral-500">SPRINTS</span>
+                            <span class="text-neutral-500">ANALYTICS</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Nav 3 -->
+                <div class="sample-card bg-[#0A1017] border border-white/[0.08] p-5 rounded-sm" onclick="selectItem('navigation', 'Esquema 3: Dock Táctico Segmentado Flotante (Cápsula centrada estilo centro de control)', this)">
+                    <div class="check-badge absolute top-3 right-3 bg-amber-500 text-[#070B10] w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px]"><i class="ph-bold ph-check"></i></div>
+                    <div class="text-[10px] font-mono text-emerald-400 uppercase tracking-widest mb-1">Esquema 03 • Dock Táctico Flotante</div>
+                    <p class="text-[11px] text-neutral-400 mb-3">Pestañas encapsuladas en un dock flotante centrado en pantalla.</p>
+                    <div class="p-3 bg-[#06090E] border border-white/5 rounded-sm flex justify-center">
+                        <div class="inline-flex bg-white/5 p-1 border border-white/10 rounded-sm gap-1 text-[11px]">
+                            <span class="px-2.5 py-0.5 bg-amber-500 text-[#070B10] font-bold rounded-sm">Dashboard</span>
+                            <span class="px-2.5 py-0.5 text-neutral-400">Sprints</span>
+                            <span class="px-2.5 py-0.5 text-neutral-400">Tasks</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Nav 4 -->
+                <div class="sample-card bg-[#0A1017] border border-white/[0.08] p-5 rounded-sm" onclick="selectItem('navigation', 'Esquema 4: Icon Rail Ultra-Compacto (Barra delgada de solo iconos con tooltips)', this)">
+                    <div class="check-badge absolute top-3 right-3 bg-amber-500 text-[#070B10] w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px]"><i class="ph-bold ph-check"></i></div>
+                    <div class="text-[10px] font-mono text-purple-400 uppercase tracking-widest mb-1">Esquema 04 • Icon Rail Delgado</div>
+                    <p class="text-[11px] text-neutral-400 mb-3">Sidebar estrecho (w-16) solo con iconografía de alta precisión para maximizar espacio.</p>
+                    <div class="p-2 bg-[#06090E] border border-white/5 rounded-sm flex gap-2 justify-center">
+                        <span class="p-2 bg-purple-500/20 text-purple-300 border border-purple-500/40 rounded-sm"><i class="ph-bold ph-squares-four text-sm"></i></span>
+                        <span class="p-2 text-neutral-500 hover:text-white"><i class="ph-light ph-target text-sm"></i></span>
+                        <span class="p-2 text-neutral-500 hover:text-white"><i class="ph-light ph-waveform text-sm"></i></span>
+                    </div>
+                </div>
+
+                <!-- Nav 5 -->
+                <div class="sample-card bg-[#0A1017] border border-white/[0.08] p-5 rounded-sm" onclick="selectItem('navigation', 'Esquema 5: Línea de Pestañas Tipo Terminal (Tabs con línea inferior luminosa activa)', this)">
+                    <div class="check-badge absolute top-3 right-3 bg-amber-500 text-[#070B10] w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px]"><i class="ph-bold ph-check"></i></div>
+                    <div class="text-[10px] font-mono text-yellow-500 uppercase tracking-widest mb-1">Esquema 05 • Terminal Header Tabs</div>
+                    <p class="text-[11px] text-neutral-400 mb-3">Estilo consola IDE: pestañas con borde inferior iluminado y cerrar pestañas.</p>
+                    <div class="p-2 bg-[#06090E] border border-white/5 rounded-sm flex gap-1 border-b border-white/10 text-[11px] font-mono">
+                        <span class="px-3 py-1 bg-white/[0.04] text-amber-400 border-b-2 border-amber-500 font-medium">dashboard.fsm</span>
+                        <span class="px-3 py-1 text-neutral-500">sprints.log</span>
+                        <span class="px-3 py-1 text-neutral-500">telemetry.json</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ==================== 06. MÉTRICAS & KPIS ==================== -->
+        <section id="section-kpis">
+            <div class="flex justify-between items-end mb-6 border-b border-white/[0.06] pb-3">
+                <div>
+                    <span class="text-[10px] font-mono tracking-[0.25em] text-amber-500 uppercase">BLOQUE 06</span>
+                    <h2 class="text-2xl font-serif text-white mt-1">Widgets de Métricas, KPIs y Telemetría</h2>
+                    <p class="text-xs text-neutral-400">Cómo se proyectan los indicadores de carga cognitiva, porcentajes y progresos.</p>
+                </div>
+                <span class="text-xs font-mono text-neutral-500 hidden sm:inline">5 variantes de métricas</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- Metric 1 -->
+                <div class="sample-card bg-[#0A1017] border border-white/[0.08] p-5 rounded-sm" onclick="selectItem('metrics', 'Métrica 1: Hero Metric 80px Serif + Barra Segmentada Multicolor (Tu diseño actual)', this)">
+                    <div class="check-badge absolute top-3 right-3 bg-amber-500 text-[#070B10] w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px]"><i class="ph-bold ph-check"></i></div>
+                    <div class="text-[10px] font-mono text-amber-400 uppercase tracking-widest mb-1">Métrica 01 • Hero 80px + Barra Segmentada</div>
+                    <p class="text-[11px] text-neutral-400 mb-3">Enorme número 91% en tipografía Serif con sufijo atenuado y barra segmentada.</p>
+                    <div class="p-3 bg-[#070B10] border border-white/5 rounded-sm">
+                        <div class="flex justify-between items-baseline mb-2">
+                            <span class="text-4xl font-serif text-white">91<span class="text-xl text-neutral-500">%</span></span>
+                            <span class="text-[10px] font-mono text-red-400">+6% OVERLOAD</span>
+                        </div>
+                        <div class="h-2 w-full bg-white/5 flex gap-0.5 rounded-full overflow-hidden">
                             <div class="bg-amber-500 h-full w-[60%]"></div>
                             <div class="bg-blue-500 h-full w-[25%]"></div>
                             <div class="bg-emerald-500 h-full w-[15%]"></div>
@@ -405,200 +740,174 @@
                     </div>
                 </div>
 
-                <!-- Card 3: Panel Industrial Técnico con Ghost Index -->
-                <div class="sample-card bg-[#07090C] border border-white/[0.06] p-6 rounded-none relative overflow-hidden" onclick="selectItem('cards', 'Estilo 3: Monolito Industrial (Esquinas en ángulo recto puro, Marca de agua gigante de fondo)', this)">
-                    <div class="check-badge absolute top-4 right-4 bg-amber-500 text-[#070B10] w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs z-10">
-                        <i class="ph-bold ph-check"></i>
-                    </div>
-                    <!-- Ghost watermark -->
-                    <div class="absolute right-0 bottom-0 text-[100px] font-mono font-bold text-white/[0.02] pointer-events-none select-none leading-none -mb-4 -mr-2">
-                        01
-                    </div>
-                    <div class="text-[10px] font-mono text-neutral-400 uppercase tracking-widest mb-3">Estilo 3 • Monolito con Watermark</div>
-                    <p class="text-xs text-neutral-400 mb-4 relative z-10">Estructura austera sin ningún redondeo (`rounded-none`), con grandes índices técnicos al fondo.</p>
-
-                    <div class="border border-white/10 p-4 bg-black/40 relative z-10">
-                        <div class="flex justify-between items-center text-xs font-mono text-amber-500 mb-1">
-                            <span>TASK // 01</span>
-                            <span>[ACTIVE]</span>
+                <!-- Metric 2 -->
+                <div class="sample-card bg-[#0A1017] border border-white/[0.08] p-5 rounded-sm" onclick="selectItem('metrics', 'Métrica 2: Anillo SVG Circular Donut Gauge (Gráfico radial de carga en porcentaje)', this)">
+                    <div class="check-badge absolute top-3 right-3 bg-amber-500 text-[#070B10] w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px]"><i class="ph-bold ph-check"></i></div>
+                    <div class="text-[10px] font-mono text-blue-400 uppercase tracking-widest mb-1">Métrica 02 • Donut Gauge SVG</div>
+                    <p class="text-[11px] text-neutral-400 mb-3">Medidor circular radial continuo con valor central destacado.</p>
+                    <div class="p-3 bg-[#070B10] border border-white/5 rounded-sm flex items-center justify-between">
+                        <div>
+                            <div class="text-[9px] font-mono text-neutral-400 uppercase">ENERGY LEVEL</div>
+                            <div class="text-2xl font-mono font-bold text-white mt-0.5">85%</div>
+                            <div class="text-[9px] font-mono text-blue-400">Pacing Target Ok</div>
                         </div>
-                        <h4 class="text-sm text-white font-mono font-medium">Review cryptographic enclave</h4>
-                        <div class="text-[10px] font-mono text-neutral-500 mt-2">TIMESTAMP: 09:00 — 11:30 // 150M</div>
+                        <svg class="w-14 h-14 -rotate-90" viewBox="0 0 36 36">
+                            <path class="text-white/10" stroke-width="3" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                            <path class="text-blue-500" stroke-dasharray="85, 100" stroke-width="3" stroke-linecap="round" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                        </svg>
                     </div>
                 </div>
 
-                <!-- Card 4: Panel Abierto Asimétrico (Minimalista sin contenedor) -->
-                <div class="sample-card bg-transparent border-2 border-dashed border-white/[0.12] p-6 rounded-sm relative" onclick="selectItem('cards', 'Estilo 4: Panel Abierto Respirable (Sin caja contenedora, Respira directo sobre el wallpaper)', this)">
-                    <div class="check-badge absolute top-4 right-4 bg-amber-500 text-[#070B10] w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs">
-                        <i class="ph-bold ph-check"></i>
-                    </div>
-                    <div class="text-[10px] font-mono text-purple-400 uppercase tracking-widest mb-3">Estilo 4 • Lienzo Abierto (Sin Caja)</div>
-                    <p class="text-xs text-neutral-400 mb-4">El contenido flota directamente sobre el fondo sin estar encerrado en una caja cerrada.</p>
-
-                    <div class="space-y-3">
-                        <div class="flex items-center justify-between border-b border-white/10 pb-2">
-                            <span class="text-sm font-medium text-white">Review cryptographic enclave</span>
-                            <span class="font-mono text-xs text-amber-400">150m</span>
+                <!-- Metric 3 -->
+                <div class="sample-card bg-[#0A1017] border border-white/[0.08] p-5 rounded-sm" onclick="selectItem('metrics', 'Métrica 3: Mini Sparkline de 7 Días (Tendencia semanal en barra o curva continua)', this)">
+                    <div class="check-badge absolute top-3 right-3 bg-amber-500 text-[#070B10] w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px]"><i class="ph-bold ph-check"></i></div>
+                    <div class="text-[10px] font-mono text-emerald-400 uppercase tracking-widest mb-1">Métrica 03 • Sparkline Semanal</div>
+                    <p class="text-[11px] text-neutral-400 mb-3">Métrica combinada con micro-gráfico de barras para ver evolución histórica.</p>
+                    <div class="p-3 bg-[#070B10] border border-white/5 rounded-sm flex items-end justify-between">
+                        <div>
+                            <span class="text-[9px] font-mono text-neutral-400 uppercase">FOCUS SCORE</span>
+                            <div class="text-2xl font-mono text-white mt-0.5">78%</div>
                         </div>
-                        <div class="flex items-center justify-between border-b border-white/10 pb-2">
-                            <span class="text-sm font-medium text-white">Finalize Q3 Board Deck narrative</span>
-                            <span class="font-mono text-xs text-blue-400">120m</span>
+                        <div class="flex items-end gap-1.5 h-8">
+                            <span class="w-2 bg-amber-500/20 h-[30%]"></span>
+                            <span class="w-2 bg-amber-500/30 h-[50%]"></span>
+                            <span class="w-2 bg-amber-500/40 h-[70%]"></span>
+                            <span class="w-2 bg-amber-500/30 h-[40%]"></span>
+                            <span class="w-2 bg-amber-500/60 h-[85%]"></span>
+                            <span class="w-2 bg-amber-500 h-[78%]"></span>
                         </div>
                     </div>
                 </div>
 
-            </div>
-        </section>
-
-        <!-- ==================== SECCIÓN 4: NAVEGACIÓN Y MENÚS ==================== -->
-        <section id="section-menus">
-            <div class="flex justify-between items-end mb-6 border-b border-white/[0.06] pb-3">
-                <div>
-                    <span class="text-[10px] font-mono tracking-[0.25em] text-amber-500 uppercase">BLOQUE 04</span>
-                    <h2 class="text-2xl font-serif text-white mt-1">Esquemas de Menú y Navegación</h2>
-                    <p class="text-xs text-neutral-400">Cómo te desplazas entre las diferentes pantallas de la plataforma.</p>
-                </div>
-                <span class="text-xs font-mono text-neutral-500 hidden sm:inline">Elige 1 de las 3 opciones</span>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-
-                <!-- Menú 1: Sidebar Arquitectónico Vertical con Números -->
-                <div class="sample-card bg-[#0A1017] border border-white/[0.08] p-5 rounded-sm relative" onclick="selectItem('navigation', 'Esquema 1: Sidebar Vertical Izquierdo con Numeración Mono (01 Dashboard, 02 Sprints)', this)">
-                    <div class="check-badge absolute top-3 right-3 bg-amber-500 text-[#070B10] w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px]">
-                        <i class="ph-bold ph-check"></i>
-                    </div>
-                    <div class="text-[10px] font-mono text-amber-400 uppercase tracking-widest mb-1">Esquema 1 • Sidebar Vertical con Números</div>
-                    <p class="text-xs text-neutral-400 mb-4">Barra lateral izquierda persistente con números mono e icono en cuadrado de acento.</p>
-
-                    <div class="space-y-1.5 p-3 bg-[#06090E] border border-white/5 rounded-sm">
-                        <!-- Active -->
-                        <div class="flex items-center gap-2.5 px-2.5 py-1.5 bg-white/[0.04] rounded-sm text-white text-xs">
-                            <div class="bg-amber-500 w-3.5 h-3.5 flex items-center justify-center rounded-sm text-[#070B10]">
-                                <i class="ph-fill ph-squares-four text-[9px]"></i>
-                            </div>
-                            <span class="font-mono text-white/70 text-[10px]">01</span>
-                            <span class="font-medium">Dashboard</span>
+                <!-- Metric 4 -->
+                <div class="sample-card bg-[#0A1017] border border-white/[0.08] p-5 rounded-sm" onclick="selectItem('metrics', 'Métrica 4: Telemetry Cells 3-Col (Trío de mini-tarjetas con icono + cifra + micro-label)', this)">
+                    <div class="check-badge absolute top-3 right-3 bg-amber-500 text-[#070B10] w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px]"><i class="ph-bold ph-check"></i></div>
+                    <div class="text-[10px] font-mono text-purple-400 uppercase tracking-widest mb-1">Métrica 04 • Celdas de Telemetría 3-Col</div>
+                    <p class="text-[11px] text-neutral-400 mb-3">Tres columnas compactas separadas por bordes finos con iconos temáticos.</p>
+                    <div class="grid grid-cols-3 gap-1 bg-[#070B10] p-2 border border-white/5 text-center text-xs font-mono">
+                        <div class="border-r border-white/10 pr-1">
+                            <div class="text-amber-500 text-sm"><i class="ph-light ph-clock"></i></div>
+                            <div class="text-white font-bold text-[11px] mt-0.5">7h 15m</div>
+                            <div class="text-[7px] text-neutral-500 uppercase">PLANNED</div>
                         </div>
-                        <!-- Inactive -->
-                        <div class="flex items-center gap-2.5 px-2.5 py-1.5 text-neutral-400 text-xs hover:text-white">
-                            <i class="ph-duotone ph-target text-sm"></i>
-                            <span class="font-mono text-neutral-600 text-[10px]">02</span>
-                            <span>Focus Sprints</span>
+                        <div class="border-r border-white/10 pr-1">
+                            <div class="text-amber-500 text-sm"><i class="ph-light ph-target"></i></div>
+                            <div class="text-white font-bold text-[11px] mt-0.5">3</div>
+                            <div class="text-[7px] text-neutral-500 uppercase">BLOCKS</div>
                         </div>
-                        <div class="flex items-center gap-2.5 px-2.5 py-1.5 text-neutral-400 text-xs hover:text-white">
-                            <i class="ph-duotone ph-waveform text-sm"></i>
-                            <span class="font-mono text-neutral-600 text-[10px]">03</span>
-                            <span>Analytics</span>
+                        <div>
+                            <div class="text-amber-500 text-sm"><i class="ph-light ph-lightning"></i></div>
+                            <div class="text-white font-bold text-[11px] mt-0.5">78%</div>
+                            <div class="text-[7px] text-neutral-500 uppercase">SCORE</div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Menú 2: Masthead Superior Horizontal de Comando -->
-                <div class="sample-card bg-[#0A1017] border border-white/[0.08] p-5 rounded-sm relative" onclick="selectItem('navigation', 'Esquema 2: Masthead Superior Horizontal (Todo en cabecera con separadores y reloj)', this)">
-                    <div class="check-badge absolute top-3 right-3 bg-amber-500 text-[#070B10] w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px]">
-                        <i class="ph-bold ph-check"></i>
-                    </div>
-                    <div class="text-[10px] font-mono text-blue-400 uppercase tracking-widest mb-1">Esquema 2 • Masthead Superior Horizontal</div>
-                    <p class="text-xs text-neutral-400 mb-4">Todo el menú vive en la cabecera horizontal superior, liberando el 100% del ancho.</p>
-
-                    <div class="p-3 bg-[#06090E] border border-white/5 rounded-sm">
-                        <div class="flex items-center justify-between border-b border-white/10 pb-2 mb-2 text-xs">
-                            <span class="font-serif font-bold text-white">CHRONOS</span>
-                            <span class="font-mono text-[10px] text-amber-400">20:19 GVA</span>
+                <!-- Metric 5 -->
+                <div class="sample-card bg-[#0A1017] border border-white/[0.08] p-5 rounded-sm" onclick="selectItem('metrics', 'Métrica 5: Indicador LED de Estado de Motor (Baliza en vivo con pulso 2Hz)', this)">
+                    <div class="check-badge absolute top-3 right-3 bg-amber-500 text-[#070B10] w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px]"><i class="ph-bold ph-check"></i></div>
+                    <div class="text-[10px] font-mono text-emerald-300 uppercase tracking-widest mb-1">Métrica 05 • Baliza de Estado LED</div>
+                    <p class="text-[11px] text-neutral-400 mb-3">Faro de estado continuo con pulso animado para monitoreo de sistemas en vivo.</p>
+                    <div class="p-3 bg-[#070B10] border border-white/5 rounded-sm flex items-center justify-between">
+                        <div class="flex items-center gap-2.5">
+                            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_#10B981]"></span>
+                            <span class="text-xs font-mono text-white">LIVE ENGINE ACTIVE</span>
                         </div>
-                        <div class="flex gap-4 text-xs font-mono">
-                            <span class="text-amber-400 border-b border-amber-400 pb-0.5">DASHBOARD</span>
-                            <span class="text-neutral-500 hover:text-white">SPRINTS</span>
-                            <span class="text-neutral-500 hover:text-white">ANALYTICS</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Menú 3: Segmented Dock Flotante / Tab Bar Inferior -->
-                <div class="sample-card bg-[#0A1017] border border-white/[0.08] p-5 rounded-sm relative" onclick="selectItem('navigation', 'Esquema 3: Segmented Floating Dock (Botones flotantes centrados estilo panel táctico)', this)">
-                    <div class="check-badge absolute top-3 right-3 bg-amber-500 text-[#070B10] w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px]">
-                        <i class="ph-bold ph-check"></i>
-                    </div>
-                    <div class="text-[10px] font-mono text-emerald-400 uppercase tracking-widest mb-1">Esquema 3 • Dock Táctico Segmentado</div>
-                    <p class="text-xs text-neutral-400 mb-4">Pestañas segmentadas contenidas en un dock compacto centrado.</p>
-
-                    <div class="p-4 bg-[#06090E] border border-white/5 rounded-sm flex justify-center">
-                        <div class="inline-flex bg-white/5 p-1 border border-white/10 rounded-md gap-1 text-xs">
-                            <span class="px-3 py-1 bg-amber-500 text-[#070B10] font-bold rounded-sm">Dashboard</span>
-                            <span class="px-3 py-1 text-neutral-400 hover:text-white">Sprints</span>
-                            <span class="px-3 py-1 text-neutral-400 hover:text-white">Tasks</span>
-                        </div>
+                        <span class="text-[9px] font-mono px-2 py-0.5 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 rounded-sm">0ms LATENCY</span>
                     </div>
                 </div>
 
             </div>
         </section>
 
-        <!-- ==================== SECCIÓN 5: LÍNEAS DE TIEMPO Y TIMELINE ==================== -->
+        <!-- ==================== 07. LÍNEAS DE TIEMPO ==================== -->
         <section id="section-timeline">
             <div class="flex justify-between items-end mb-6 border-b border-white/[0.06] pb-3">
                 <div>
-                    <span class="text-[10px] font-mono tracking-[0.25em] text-amber-500 uppercase">BLOQUE 05</span>
-                    <h2 class="text-2xl font-serif text-white mt-1">Diseño de Líneas de Tiempo (Horizon Timeline)</h2>
-                    <p class="text-xs text-neutral-400">Cómo se representan los bloques de tiempo a lo largo del día.</p>
+                    <span class="text-[10px] font-mono tracking-[0.25em] text-amber-500 uppercase">BLOQUE 07</span>
+                    <h2 class="text-2xl font-serif text-white mt-1">Líneas de Tiempo, Agendas y Planificadores</h2>
+                    <p class="text-xs text-neutral-400">Cómo se representa el horizonte diario y la distribución horaria.</p>
                 </div>
-                <span class="text-xs font-mono text-neutral-500 hidden sm:inline">Elige 1 de las 2 opciones</span>
+                <span class="text-xs font-mono text-neutral-500 hidden sm:inline">4 formatos de timeline</span>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-                <!-- Timeline 1: Bloques Escalonados con Marcador NOW (Tu estilo aprobado) -->
-                <div class="sample-card bg-[#0A1017] border border-white/[0.08] p-6 rounded-sm relative" onclick="selectItem('timeline', 'Línea de Tiempo 1: Horizon Escalonado (Stagger vertical con aguja NOW y círculos ornamento)', this)">
-                    <div class="check-badge absolute top-4 right-4 bg-amber-500 text-[#070B10] w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs">
-                        <i class="ph-bold ph-check"></i>
-                    </div>
-                    <div class="text-[10px] font-mono text-amber-400 uppercase tracking-widest mb-2">Opción 1 • Horizon Escalonado + Aguja NOW</div>
-                    <p class="text-xs text-neutral-400 mb-4">Bloques flotantes con alturas alternadas (top:0 y top:32px) para evitar colisiones, con línea indicadora NOW vertical.</p>
-
-                    <div class="bg-[#05080C] p-4 border border-white/5 rounded-sm relative h-28 overflow-hidden">
-                        <!-- NOW line -->
+                <!-- Timeline 1 -->
+                <div class="sample-card bg-[#0A1017] border border-white/[0.08] p-5 rounded-sm" onclick="selectItem('timeline', 'Timeline 1: Horizon Escalonado (Stagger vertical con aguja NOW y círculos ornamento)', this)">
+                    <div class="check-badge absolute top-3 right-3 bg-amber-500 text-[#070B10] w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px]"><i class="ph-bold ph-check"></i></div>
+                    <div class="text-[10px] font-mono text-amber-400 uppercase tracking-widest mb-1">Timeline 01 • Horizon Escalonado + Aguja NOW</div>
+                    <p class="text-[11px] text-neutral-400 mb-3">Tu diseño actual: bloques alternados en altura (top:0 y top:32px) con aguja de tiempo NOW.</p>
+                    <div class="bg-[#05080C] p-3 border border-white/5 rounded-sm relative h-24 overflow-hidden">
                         <div class="absolute top-0 bottom-0 left-[35%] w-px bg-amber-500 flex flex-col items-center z-20">
                             <span class="text-[8px] font-mono text-amber-500 -mt-0.5">NOW</span>
                             <div class="w-1.5 h-1.5 rounded-full border border-amber-500 bg-[#05080C]"></div>
                         </div>
+                        <div class="absolute top-2 left-[10%] w-[30%] bg-amber-500/10 border border-amber-500/50 p-1.5 rounded-sm flex items-center gap-1.5">
+                            <i class="ph-light ph-cube text-amber-500 text-xs"></i>
+                            <span class="text-[9px] text-white font-mono truncate">Review enclave</span>
+                        </div>
+                        <div class="absolute top-12 left-[45%] w-[25%] bg-blue-500/10 border border-blue-500/40 p-1.5 rounded-sm flex items-center gap-1.5">
+                            <i class="ph-light ph-file-text text-blue-400 text-xs"></i>
+                            <span class="text-[9px] text-white font-mono truncate">Board Deck</span>
+                        </div>
+                    </div>
+                </div>
 
-                        <!-- Block 1 -->
-                        <div class="absolute top-2 left-[10%] w-[30%] bg-amber-500/10 border border-amber-500/50 p-2 rounded-sm flex items-center gap-2">
-                            <i class="ph-light ph-cube text-amber-500 text-sm"></i>
-                            <div>
-                                <div class="text-[10px] text-white font-mono truncate">Review enclave</div>
-                                <div class="text-[8px] text-neutral-500 font-mono">09:00 - 11:30</div>
+                <!-- Timeline 2 -->
+                <div class="sample-card bg-[#0A1017] border border-white/[0.08] p-5 rounded-sm" onclick="selectItem('timeline', 'Timeline 2: Carril Continuo Proporcional (Barra dividida con segmentos coloreados)', this)">
+                    <div class="check-badge absolute top-3 right-3 bg-amber-500 text-[#070B10] w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px]"><i class="ph-bold ph-check"></i></div>
+                    <div class="text-[10px] font-mono text-blue-400 uppercase tracking-widest mb-1">Timeline 02 • Carril Continuo Proporcional</div>
+                    <p class="text-[11px] text-neutral-400 mb-3">Una sola barra continua dividida en segmentos coloreados proporcionales a su duración.</p>
+                    <div class="bg-[#05080C] p-3 border border-white/5 rounded-sm">
+                        <div class="flex justify-between text-[8px] font-mono text-neutral-500 mb-1.5">
+                            <span>08:00</span><span>12:00</span><span>16:00</span><span>20:00</span>
+                        </div>
+                        <div class="h-8 w-full bg-white/5 flex gap-0.5 overflow-hidden rounded-sm">
+                            <div class="bg-amber-500/30 border-l border-amber-500 h-full w-[45%] flex items-center px-2 text-[9px] font-mono text-amber-300 truncate">Deep Work (150m)</div>
+                            <div class="bg-emerald-500/30 border-l border-emerald-500 h-full w-[20%] flex items-center px-2 text-[9px] font-mono text-emerald-300 truncate">Buffer</div>
+                            <div class="bg-blue-500/30 border-l border-blue-500 h-full w-[35%] flex items-center px-2 text-[9px] font-mono text-blue-300 truncate">Tactical</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timeline 3 -->
+                <div class="sample-card bg-[#0A1017] border border-white/[0.08] p-5 rounded-sm" onclick="selectItem('timeline', 'Timeline 3: Pistas Horizontales Agrupadas (3 carriles fijos: Deep Work, Tactical, Buffer)', this)">
+                    <div class="check-badge absolute top-3 right-3 bg-amber-500 text-[#070B10] w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px]"><i class="ph-bold ph-check"></i></div>
+                    <div class="text-[10px] font-mono text-emerald-400 uppercase tracking-widest mb-1">Timeline 03 • Pistas por Carriles (Swimlanes)</div>
+                    <p class="text-[11px] text-neutral-400 mb-3">3 carriles horizontales independientes agrupados por tipo de actividad.</p>
+                    <div class="bg-[#05080C] p-2.5 border border-white/5 rounded-sm space-y-1.5 font-mono text-[9px]">
+                        <div class="flex items-center gap-2">
+                            <span class="w-14 text-neutral-500 truncate">DEEP WORK</span>
+                            <div class="flex-1 bg-white/5 h-4 relative rounded-sm">
+                                <span class="absolute left-[15%] w-[40%] bg-amber-500/40 text-amber-300 border border-amber-500/50 h-full block rounded-sm px-1 truncate">Enclave</span>
                             </div>
                         </div>
-
-                        <!-- Block 2 (staggered) -->
-                        <div class="absolute top-12 left-[45%] w-[25%] bg-blue-500/10 border border-blue-500/40 p-2 rounded-sm flex items-center gap-2">
-                            <i class="ph-light ph-file-text text-blue-400 text-sm"></i>
-                            <div>
-                                <div class="text-[10px] text-white font-mono truncate">Board Deck</div>
-                                <div class="text-[8px] text-neutral-500 font-mono">13:00 - 15:00</div>
+                        <div class="flex items-center gap-2">
+                            <span class="w-14 text-neutral-500 truncate">TACTICAL</span>
+                            <div class="flex-1 bg-white/5 h-4 relative rounded-sm">
+                                <span class="absolute left-[60%] w-[30%] bg-blue-500/40 text-blue-300 border border-blue-500/50 h-full block rounded-sm px-1 truncate">Board Sync</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Timeline 2: Agenda Continua Minimalista (Compact Lane) -->
-                <div class="sample-card bg-[#0A1017] border border-white/[0.08] p-6 rounded-sm relative" onclick="selectItem('timeline', 'Línea de Tiempo 2: Carril Continuo Minimalista (Barra corrida horizontal compacta)', this)">
-                    <div class="check-badge absolute top-4 right-4 bg-amber-500 text-[#070B10] w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs">
-                        <i class="ph-bold ph-check"></i>
-                    </div>
-                    <div class="text-[10px] font-mono text-neutral-400 uppercase tracking-widest mb-2">Opción 2 • Carril Continuo Compacto</div>
-                    <p class="text-xs text-neutral-400 mb-4">Una sola barra continua dividida en segmentos coloreados proporcionales a su duración.</p>
-
-                    <div class="bg-[#05080C] p-4 border border-white/5 rounded-sm">
-                        <div class="flex justify-between text-[9px] font-mono text-neutral-500 mb-2">
-                            <span>08:00</span><span>12:00</span><span>16:00</span><span>20:00</span>
+                <!-- Timeline 4 -->
+                <div class="sample-card bg-[#0A1017] border border-white/[0.08] p-5 rounded-sm" onclick="selectItem('timeline', 'Timeline 4: Feed Vertical Conectado por Línea de Tiempo (Vertical Activity Timeline)', this)">
+                    <div class="check-badge absolute top-3 right-3 bg-amber-500 text-[#070B10] w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px]"><i class="ph-bold ph-check"></i></div>
+                    <div class="text-[10px] font-mono text-purple-400 uppercase tracking-widest mb-1">Timeline 04 • Feed Vertical Conectado</div>
+                    <p class="text-[11px] text-neutral-400 mb-3">Línea de tiempo vertical descendente conectada por nodos temporales.</p>
+                    <div class="bg-[#05080C] p-3 border border-white/5 rounded-sm pl-4 relative font-mono text-xs">
+                        <div class="absolute left-2 top-3 bottom-3 w-px bg-white/10"></div>
+                        <div class="relative pl-3 mb-2">
+                            <div class="w-1.5 h-1.5 rounded-full bg-amber-400 absolute -left-[15px] top-1"></div>
+                            <span class="text-[9px] text-amber-400 block">09:00 — 11:30</span>
+                            <span class="text-xs text-white">Review cryptographic enclave</span>
                         </div>
-                        <div class="h-8 w-full bg-white/5 flex gap-0.5 overflow-hidden rounded-sm">
-                            <div class="bg-amber-500/30 border-l border-amber-500 h-full w-[40%] flex items-center px-2 text-[9px] font-mono text-amber-300 truncate">Deep Work (150m)</div>
-                            <div class="bg-emerald-500/30 border-l border-emerald-500 h-full w-[20%] flex items-center px-2 text-[9px] font-mono text-emerald-300 truncate">Buffer</div>
-                            <div class="bg-blue-500/30 border-l border-blue-500 h-full w-[40%] flex items-center px-2 text-[9px] font-mono text-blue-300 truncate">Tactical Sync</div>
+                        <div class="relative pl-3">
+                            <div class="w-1.5 h-1.5 rounded-full bg-blue-400 absolute -left-[15px] top-1"></div>
+                            <span class="text-[9px] text-blue-400 block">13:00 — 15:00</span>
+                            <span class="text-xs text-white">Finalize Q3 Board Deck</span>
                         </div>
                     </div>
                 </div>
@@ -606,17 +915,160 @@
             </div>
         </section>
 
-        <!-- ==================== DRAWER RESUMEN / EXPORT ==================== -->
-        <section id="summary-box" class="bg-[#0D141F] border border-amber-500/40 p-8 rounded-lg shadow-2xl relative">
+        <!-- ==================== 08. TABLAS & FEEDS ==================== -->
+        <section id="section-tables">
+            <div class="flex justify-between items-end mb-6 border-b border-white/[0.06] pb-3">
+                <div>
+                    <span class="text-[10px] font-mono tracking-[0.25em] text-amber-500 uppercase">BLOQUE 08</span>
+                    <h2 class="text-2xl font-serif text-white mt-1">Formatos de Tabla & Registros de Datos</h2>
+                    <p class="text-xs text-neutral-400">Cómo se leen las listas largas, historiales de sprints y logs de sesión.</p>
+                </div>
+                <span class="text-xs font-mono text-neutral-500 hidden sm:inline">3 estilos de tablas</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                <!-- Table 1 -->
+                <div class="sample-card bg-[#0A1017] border border-white/[0.08] p-5 rounded-sm" onclick="selectItem('tables', 'Tabla 1: Tabla Ejecutiva con Badges de Dominio (Filas alternadas con hover sutil)', this)">
+                    <div class="check-badge absolute top-3 right-3 bg-amber-500 text-[#070B10] w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px]"><i class="ph-bold ph-check"></i></div>
+                    <div class="text-[10px] font-mono text-amber-400 uppercase tracking-widest mb-1">Tabla 01 • Ejecutiva con Badges</div>
+                    <p class="text-[11px] text-neutral-400 mb-3">Líneas limpias de 1px con etiquetas de categoría y estados claros.</p>
+                    <div class="bg-[#05080C] p-2 border border-white/5 rounded-sm overflow-x-auto text-[10px] font-mono">
+                        <table class="w-full text-left">
+                            <tr class="border-b border-white/10 text-neutral-500">
+                                <th class="pb-1">TASK</th>
+                                <th class="pb-1">STATUS</th>
+                            </tr>
+                            <tr class="border-b border-white/5">
+                                <td class="py-1 text-white truncate max-w-[90px]">Enclave Audit</td>
+                                <td class="py-1 text-amber-400">IN FOCUS</td>
+                            </tr>
+                            <tr>
+                                <td class="py-1 text-white truncate max-w-[90px]">Board Deck</td>
+                                <td class="py-1 text-emerald-400">DONE</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Table 2 -->
+                <div class="sample-card bg-[#0A1017] border border-white/[0.08] p-5 rounded-sm" onclick="selectItem('tables', 'Tabla 2: Terminal Financiero de Alta Densidad (Monoespaciada pura estilo Bloomberg)', this)">
+                    <div class="check-badge absolute top-3 right-3 bg-amber-500 text-[#070B10] w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px]"><i class="ph-bold ph-check"></i></div>
+                    <div class="text-[10px] font-mono text-blue-400 uppercase tracking-widest mb-1">Tabla 02 • Terminal Alta Densidad</div>
+                    <p class="text-[11px] text-neutral-400 mb-3">Máximo aprovechamiento de datos por centímetro cuadrado tipo terminal bancario.</p>
+                    <div class="bg-black p-2 border border-white/10 rounded-none text-[9px] font-mono">
+                        <div class="flex justify-between border-b border-white/10 pb-1 text-neutral-500">
+                            <span>ID // REF</span>
+                            <span>DUR</span>
+                            <span>VAL</span>
+                        </div>
+                        <div class="flex justify-between py-0.5 text-white">
+                            <span>ENCLAVE_01</span>
+                            <span>150m</span>
+                            <span class="text-blue-400">+12%</span>
+                        </div>
+                        <div class="flex justify-between py-0.5 text-white">
+                            <span>BOARD_02</span>
+                            <span>120m</span>
+                            <span class="text-emerald-400">+08%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Table 3 -->
+                <div class="sample-card bg-[#0A1017] border border-white/[0.08] p-5 rounded-sm" onclick="selectItem('tables', 'Tabla 3: Tarjetas Kanban de Estado (Columnas de flujo de trabajo tipo pipeline)', this)">
+                    <div class="check-badge absolute top-3 right-3 bg-amber-500 text-[#070B10] w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px]"><i class="ph-bold ph-check"></i></div>
+                    <div class="text-[10px] font-mono text-emerald-400 uppercase tracking-widest mb-1">Tabla 03 • Columnas Kanban</div>
+                    <p class="text-[11px] text-neutral-400 mb-3">Separación en columnas visuales de flujo (`Active` / `Queued` / `Done`).</p>
+                    <div class="grid grid-cols-2 gap-1.5 text-[9px] font-mono">
+                        <div class="bg-white/5 p-1.5 rounded-sm">
+                            <span class="text-amber-400 font-bold block mb-1">ACTIVE [1]</span>
+                            <div class="bg-[#05080C] p-1 border border-white/10 text-white rounded-sm">Enclave</div>
+                        </div>
+                        <div class="bg-white/5 p-1.5 rounded-sm">
+                            <span class="text-neutral-400 font-bold block mb-1">QUEUED [2]</span>
+                            <div class="bg-[#05080C] p-1 border border-white/10 text-neutral-300 rounded-sm">Board Deck</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ==================== 09. INPUTS & FILTROS ==================== -->
+        <section id="section-inputs">
+            <div class="flex justify-between items-end mb-6 border-b border-white/[0.06] pb-3">
+                <div>
+                    <span class="text-[10px] font-mono tracking-[0.25em] text-amber-500 uppercase">BLOQUE 09</span>
+                    <h2 class="text-2xl font-serif text-white mt-1">Inputs, Selectores y Filtros de Búsqueda</h2>
+                    <p class="text-xs text-neutral-400">Cómo interactúas con los modales, campos de texto y filtros por categoría.</p>
+                </div>
+                <span class="text-xs font-mono text-neutral-500 hidden sm:inline">3 estilos de formulario</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                <!-- Input 1 -->
+                <div class="sample-card bg-[#0A1017] border border-white/[0.08] p-5 rounded-sm" onclick="selectItem('inputs', 'Inputs Estilo 1: Dark Boxed con Foco de Acento Ámbar (Campos sólidos con borde fino)', this)">
+                    <div class="check-badge absolute top-3 right-3 bg-amber-500 text-[#070B10] w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px]"><i class="ph-bold ph-check"></i></div>
+                    <div class="text-[10px] font-mono text-amber-400 uppercase tracking-widest mb-1">Inputs 01 • Dark Boxed</div>
+                    <p class="text-[11px] text-neutral-400 mb-3">Cajas oscuras sólidas con borde sutil que enciende en ámbar al enfocar.</p>
+                    <div class="space-y-2">
+                        <input type="text" placeholder="E.g. Review enclave..." class="w-full bg-[#05080C] border border-white/10 text-white p-2 text-xs font-mono focus:outline-none focus:border-amber-500 rounded-sm">
+                        <div class="flex gap-2">
+                            <span class="px-2 py-1 bg-amber-500 text-[#070B10] font-mono text-[9px] font-bold rounded-sm cursor-pointer">ALL</span>
+                            <span class="px-2 py-1 bg-white/5 hover:bg-white/10 text-neutral-400 font-mono text-[9px] rounded-sm cursor-pointer">ENGINEERING</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Input 2 -->
+                <div class="sample-card bg-[#0A1017] border border-white/[0.08] p-5 rounded-sm" onclick="selectItem('inputs', 'Inputs Estilo 2: Underline Minimalista (Sin caja, solo línea inferior activa)', this)">
+                    <div class="check-badge absolute top-3 right-3 bg-amber-500 text-[#070B10] w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px]"><i class="ph-bold ph-check"></i></div>
+                    <div class="text-[10px] font-mono text-blue-400 uppercase tracking-widest mb-1">Inputs 02 • Underline Minimal</div>
+                    <p class="text-[11px] text-neutral-400 mb-3">Sin bordes laterales ni superior; solo una línea inferior limpia.</p>
+                    <div class="space-y-2">
+                        <input type="text" placeholder="Type new objective..." class="w-full bg-transparent border-b border-white/20 text-white py-1.5 text-xs font-serif focus:outline-none focus:border-blue-400">
+                        <div class="flex gap-3 text-[10px] font-mono">
+                            <span class="text-blue-400 border-b border-blue-400">All</span>
+                            <span class="text-neutral-500">Legal</span>
+                            <span class="text-neutral-500">Strategy</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Input 3 -->
+                <div class="sample-card bg-[#0A1017] border border-white/[0.08] p-5 rounded-sm" onclick="selectItem('inputs', 'Inputs Estilo 3: Pills Segmentadas con Toggle Mecánico (Filtros en cápsula)', this)">
+                    <div class="check-badge absolute top-3 right-3 bg-amber-500 text-[#070B10] w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px]"><i class="ph-bold ph-check"></i></div>
+                    <div class="text-[10px] font-mono text-emerald-400 uppercase tracking-widest mb-1">Inputs 03 • Segmented Capsule</div>
+                    <p class="text-[11px] text-neutral-400 mb-3">Interruptores mecánicos con cápsulas redondeadas de selección rápida.</p>
+                    <div class="space-y-3">
+                        <div class="inline-flex bg-white/5 p-1 rounded-full border border-white/10 w-full justify-between text-[10px] font-mono">
+                            <span class="px-3 py-0.5 bg-emerald-500 text-[#070B10] font-bold rounded-full">High</span>
+                            <span class="px-3 py-0.5 text-neutral-400">Medium</span>
+                            <span class="px-3 py-0.5 text-neutral-400">Low</span>
+                        </div>
+                        <div class="flex items-center justify-between text-xs font-mono text-neutral-400">
+                            <span>FOCUS MODE</span>
+                            <div class="w-8 h-4 bg-emerald-500 rounded-full relative cursor-pointer"><div class="w-3 h-3 bg-[#070B10] rounded-full absolute right-0.5 top-0.5"></div></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ==================== RESUMEN DE SELECCIÓN EXPORTABLE ==================== -->
+        <section id="summary-box" class="bg-[#0D141F] border-2 border-amber-500/50 p-8 rounded-lg shadow-2xl relative">
             <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
                 <div>
                     <div class="flex items-center gap-2 text-[10px] font-mono tracking-[0.25em] text-amber-500 uppercase">
-                        <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
-                        TU SELECCIÓN VISUAL LISTA
+                        <span class="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse"></span>
+                        TU SELECCIÓN VISUAL COMPLETA
                     </div>
                     <h3 class="text-2xl font-serif text-white mt-1">¿Listo para construir el proyecto?</h3>
                     <p class="text-xs text-neutral-400 mt-1">
-                        Copia este texto y pégalo en nuestro chat para que los agentes diseñen exactamente con esta combinación.
+                        Copia este resumen y pégalo en nuestro chat. Los agentes bloquearán esta combinación exacta para tu mockup.
                     </p>
                 </div>
                 <button onclick="copyCurrentSelection()" class="px-6 py-3.5 bg-amber-500 hover:bg-amber-400 text-[#070B10] font-mono font-bold text-xs uppercase tracking-widest rounded-sm transition-all flex items-center gap-2 shrink-0 shadow-lg shadow-amber-500/30">
@@ -625,31 +1077,51 @@
                 </button>
             </div>
 
-            <!-- Preview box -->
-            <div class="mt-6 p-4 bg-[#05080C] border border-white/10 rounded-sm font-mono text-xs text-neutral-300 space-y-1.5" id="selection-output">
-                <div><span class="text-neutral-500">1. Tipografía:</span> <span id="out-typography" class="text-amber-400">Opción 1: Editorial Suizo (Playfair Display + DM Sans + IBM Plex Mono) [Por Defecto]</span></div>
-                <div><span class="text-neutral-500">2. Botones:</span> <span id="out-buttons" class="text-amber-400">Estilo 1: Mecanizado de Precisión (Bordes afilados, Micro-depresión táctil) [Por Defecto]</span></div>
-                <div><span class="text-neutral-500">3. Cards / Paneles:</span> <span id="out-cards" class="text-amber-400">Estilo 1: Fila Asimétrica con Borde Grueso (3px) + Gran Número Mono [Por Defecto]</span></div>
-                <div><span class="text-neutral-500">4. Navegación:</span> <span id="out-navigation" class="text-amber-400">Esquema 1: Sidebar Vertical Izquierdo con Numeración Mono [Por Defecto]</span></div>
-                <div><span class="text-neutral-500">5. Línea de Tiempo:</span> <span id="out-timeline" class="text-amber-400">Línea de Tiempo 1: Horizon Escalonado + Aguja NOW [Por Defecto]</span></div>
+            <!-- Dynamic Output Preview Box -->
+            <div class="mt-6 p-4 bg-[#05080C] border border-white/10 rounded-sm font-mono text-xs text-neutral-300 grid grid-cols-1 md:grid-cols-2 gap-3" id="selection-output">
+                <div><span class="text-neutral-500">1. Paleta Cromática:</span> <div id="out-palette" class="text-amber-400 font-medium">Paleta 1: Midnight Slate Multi-Accent</div></div>
+                <div><span class="text-neutral-500">2. Trío Tipográfico:</span> <div id="out-typography" class="text-amber-400 font-medium">Opción 1: Editorial Suizo (Playfair + DM Sans + IBM Mono)</div></div>
+                <div><span class="text-neutral-500">3. Estilo de Botones:</span> <div id="out-buttons" class="text-amber-400 font-medium">Estilo 1: Mecanizado de Precisión (Bordes nítidos)</div></div>
+                <div><span class="text-neutral-500">4. Cards & Superficies:</span> <div id="out-cards" class="text-amber-400 font-medium">Card Estilo 1: Fila Asimétrica Borde 3px</div></div>
+                <div><span class="text-neutral-500">5. Navegación & Menú:</span> <div id="out-navigation" class="text-amber-400 font-medium">Esquema 1: Sidebar Vertical Izquierdo Numerado</div></div>
+                <div><span class="text-neutral-500">6. Métricas & KPIs:</span> <div id="out-metrics" class="text-amber-400 font-medium">Métrica 1: Hero Metric 80px + Barra Segmentada</div></div>
+                <div><span class="text-neutral-500">7. Línea de Tiempo:</span> <div id="out-timeline" class="text-amber-400 font-medium">Timeline 1: Horizon Escalonado + Aguja NOW</div></div>
+                <div><span class="text-neutral-500">8. Tablas & Datos:</span> <div id="out-tables" class="text-amber-400 font-medium">Tabla 1: Tabla Ejecutiva con Badges</div></div>
+                <div class="md:col-span-2"><span class="text-neutral-500">9. Inputs & Filtros:</span> <div id="out-inputs" class="text-amber-400 font-medium">Inputs Estilo 1: Dark Boxed con Foco Ámbar</div></div>
             </div>
         </section>
 
     </main>
 
-    <!-- Toast de copiado -->
-    <div id="toast" class="fixed bottom-6 right-6 bg-amber-500 text-[#070B10] px-4 py-2.5 rounded-sm font-mono text-xs font-bold uppercase tracking-wider shadow-2xl flex items-center gap-2 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none z-50">
-        <i class="ph-bold ph-check text-base"></i>
-        <span>¡Selección copiada al portapapeles!</span>
+    <!-- Floating Sticky Bar at Bottom -->
+    <div class="fixed bottom-0 inset-x-0 bg-[#070B10]/95 backdrop-blur-xl border-t border-white/10 px-6 py-3.5 z-40 flex justify-between items-center max-w-7xl mx-auto shadow-2xl">
+        <div class="flex items-center gap-3">
+            <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+            <span class="text-xs font-mono text-white" id="sticky-status">9/9 componentes seleccionados</span>
+        </div>
+        <button onclick="copyCurrentSelection()" class="px-5 py-2 bg-amber-500 hover:bg-amber-400 text-[#070B10] font-mono font-bold text-xs uppercase tracking-widest rounded-sm transition-all flex items-center gap-2 shadow-md">
+            <i class="ph-bold ph-copy"></i>
+            Copiar Selección al Chat
+        </button>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-16 right-6 bg-amber-500 text-[#070B10] px-5 py-3 rounded-sm font-mono text-xs font-bold uppercase tracking-wider shadow-2xl flex items-center gap-2.5 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none z-50">
+        <i class="ph-bold ph-check text-lg"></i>
+        <span>¡Resumen copiado al portapapeles! Pégalo en el chat.</span>
     </div>
 
     <script>
         const state = {
+            palette: 'Paleta 1: Midnight Slate Multi-Accent (Obsidiana #070B10, Ámbar, Cobalto, Esmeralda)',
             typography: 'Opción 1: Editorial Suizo (Playfair Display + DM Sans + IBM Plex Mono)',
-            buttons: 'Estilo 1: Mecanizado de Precisión (Bordes afilados, Micro-depresión táctil)',
-            cards: 'Estilo 1: Fila Asimétrica con Borde Grueso (3px) + Gran Número Mono',
-            navigation: 'Esquema 1: Sidebar Vertical Izquierdo con Numeración Mono',
-            timeline: 'Línea de Tiempo 1: Horizon Escalonado + Aguja NOW'
+            buttons: 'Estilo 1: Mecanizado de Precisión (Bordes afilados 0px, Micro-depresión táctil)',
+            cards: 'Card Estilo 1: Fila Asimétrica Borde 3px (Índice mono grande 01 + Borde de color)',
+            navigation: 'Esquema 1: Sidebar Vertical Izquierdo con Numeración Mono (01 Dashboard)',
+            metrics: 'Métrica 1: Hero Metric 80px Serif + Barra Segmentada Multicolor',
+            timeline: 'Timeline 1: Horizon Escalonado (Stagger vertical con aguja NOW y círculos)',
+            tables: 'Tabla 1: Tabla Ejecutiva con Badges de Dominio',
+            inputs: 'Inputs Estilo 1: Dark Boxed con Foco de Acento Ámbar'
         };
 
         function selectItem(category, value, el) {
@@ -661,28 +1133,36 @@
             el.classList.add('selected');
 
             // Update output view
-            document.getElementById(`out-${category}`).innerText = value;
+            const outEl = document.getElementById(`out-${category}`);
+            if (outEl) outEl.innerText = value;
             updateCounter();
         }
 
         function updateCounter() {
             let count = Object.keys(state).length;
-            document.getElementById('nav-counter').innerText = `${count}/5 Listos`;
+            const counterText = `${count}/9 Seleccionados`;
+            const navCounter = document.getElementById('nav-counter');
+            if (navCounter) navCounter.innerText = counterText;
+            const stickyStatus = document.getElementById('sticky-status');
+            if (stickyStatus) stickyStatus.innerText = `${count}/9 componentes seleccionados`;
         }
 
         function copyCurrentSelection() {
-            const promptText = `Quiero construir la interfaz usando esta selección de diseño aprobada:\n` +
-                `- Tipografía: ${state.typography}\n` +
-                `- Botones: ${state.buttons}\n` +
-                `- Cards y Paneles: ${state.cards}\n` +
-                `- Menú y Navegación: ${state.navigation}\n` +
-                `- Línea de Tiempo: ${state.timeline}\n` +
-                `Por favor bloquea estos componentes en el Visual Contract y genera el proyecto en base a ellos.`;
+            const promptText = `Quiero construir mi proyecto usando esta selección exacta de componentes y estilos:\n\n` +
+                `1. Paleta Cromática: ${state.palette}\n` +
+                `2. Trío Tipográfico: ${state.typography}\n` +
+                `3. Estilo de Botones: ${state.buttons}\n` +
+                `4. Cards & Contenedores: ${state.cards}\n` +
+                `5. Esquema de Navegación: ${state.navigation}\n` +
+                `6. Widgets & Métricas: ${state.metrics}\n` +
+                `7. Línea de Tiempo / Agenda: ${state.timeline}\n` +
+                `8. Tablas & Feeds: ${state.tables}\n` +
+                `9. Inputs & Filtros: ${state.inputs}\n\n` +
+                `Por favor bloquea esta selección en el Visual Contract y genera el mockup de la aplicación usando exclusivamente este ADN.`;
 
             navigator.clipboard.writeText(promptText).then(() => {
                 showToast();
             }).catch(err => {
-                // Fallback
                 const ta = document.createElement('textarea');
                 ta.value = promptText;
                 document.body.appendChild(ta);
@@ -701,7 +1181,7 @@
             }, 2500);
         }
 
-        // Marcar los iniciales por defecto al cargar
+        // Marcar los primeros por defecto al cargar
         document.addEventListener('DOMContentLoaded', () => {
             document.querySelectorAll('section').forEach(sec => {
                 const firstCard = sec.querySelector('.sample-card');
