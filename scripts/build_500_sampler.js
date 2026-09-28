@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import { avantGarde } from './data/avant_garde.js';
 import { palettes } from './data/palettes.js';
 import { typography } from './data/typography.js';
 import { buttons } from './data/buttons.js';
@@ -11,9 +12,10 @@ import { tables } from './data/tables.js';
 import { inputs } from './data/inputs.js';
 import { modals } from './data/modals.js';
 
-console.log('Compilando Mega Catálogo Studio de 500 componentes...');
+console.log('Compilando Mega Catálogo Studio de 550 componentes con sección Avant-Garde...');
 
 const categories = [
+  { id: 'avant_garde', name: '⚡ Avant-Garde & Vanguardia (Rompen lo Usual)', icon: 'ph-lightning', count: avantGarde.length, data: avantGarde, highlight: true },
   { id: 'palettes', name: 'Paletas Cromáticas & Atmósferas', icon: 'ph-palette', count: palettes.length, data: palettes },
   { id: 'typography', name: 'Tríos Tipográficos Curados', icon: 'ph-text-aa', count: typography.length, data: typography },
   { id: 'buttons', name: 'Botones & Interacciones Táctiles', icon: 'ph-cursor-click', count: buttons.length, data: buttons },
@@ -25,6 +27,8 @@ const categories = [
   { id: 'inputs', name: 'Inputs, Selectores & Formularios', icon: 'ph-keyboard', count: inputs.length, data: inputs },
   { id: 'modals', name: 'Modales, Overlays & Notificaciones', icon: 'ph-browsers', count: modals.length, data: modals },
 ];
+
+const totalCount = categories.reduce((sum, c) => sum + c.count, 0);
 
 function renderCard(catId, item) {
   const tagsHtml = (item.tags || []).map(t => `<span class="tag-pill text-[10px] font-mono px-2 py-0.5 rounded bg-white/5 text-slate-400 border border-white/10 hover:border-amber-400 hover:text-amber-300 transition-colors cursor-pointer" onclick="filterByTag('${t}', event)">${t}</span>`).join(' ');
@@ -55,15 +59,19 @@ function renderCard(catId, item) {
       </div>
     `;
   } else {
+    const minHeightClass = catId === 'avant_garde' ? 'min-h-[130px] p-2 sm:p-4' : 'min-h-[90px] p-4';
     previewHtml = `
-      <div class="p-4 rounded-lg bg-black/50 border border-white/10 mb-3 flex items-center justify-center min-h-[90px] overflow-hidden">
+      <div class="${minHeightClass} rounded-lg bg-black/50 border border-white/10 mb-3 flex items-center justify-center overflow-hidden">
         ${item.html}
       </div>
     `;
   }
 
+  const isAvantGarde = catId === 'avant_garde';
+  const cardBorderClass = isAvantGarde ? 'border-amber-500/30 hover:border-amber-400/70 bg-[#0C1018]' : '';
+
   return `
-    <div class="sample-card p-4 rounded-xl flex flex-col justify-between" 
+    <div class="sample-card p-4 rounded-xl flex flex-col justify-between ${cardBorderClass}" 
          id="${item.id}"
          data-category="${catId}" 
          data-id="${item.id}"
@@ -74,9 +82,12 @@ function renderCard(catId, item) {
       
       <div>
         <div class="flex justify-between items-start mb-2.5">
-          <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-white/10 text-slate-300 border border-white/15">
-            #${item.num}
-          </span>
+          <div class="flex items-center gap-1.5">
+            <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold ${isAvantGarde ? 'bg-amber-400 text-black' : 'bg-white/10 text-slate-300 border border-white/15'}">
+              #${item.num}
+            </span>
+            ${isAvantGarde ? '<span class="px-1.5 py-0.5 rounded text-[9px] font-mono font-bold bg-rose-500/20 text-rose-300 border border-rose-500/40">AVANT-GARDE</span>' : ''}
+          </div>
           <span class="check-badge w-6 h-6 rounded-full bg-amber-400 text-black flex items-center justify-center font-bold text-xs shadow-md">
             <i class="ph-bold ph-check"></i>
           </span>
@@ -103,20 +114,24 @@ function renderCard(catId, item) {
 let sectionsHtml = '';
 for (const cat of categories) {
   const cardsHtml = cat.data.map(item => renderCard(cat.id, item)).join('\n');
+  const isAvantGarde = cat.id === 'avant_garde';
   sectionsHtml += `
     <section id="section-${cat.id}" class="category-section mb-16 scroll-mt-28" data-category="${cat.id}">
-      <div class="flex flex-col md:flex-row md:items-center justify-between pb-4 mb-6 border-b border-white/10 gap-3">
+      <div class="flex flex-col md:flex-row md:items-center justify-between pb-4 mb-6 border-b border-white/10 gap-3 ${isAvantGarde ? 'bg-gradient-to-r from-amber-950/20 via-transparent to-transparent p-4 rounded-xl border-amber-500/30' : ''}">
         <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-amber-400/15 border border-amber-400/40 text-amber-300 flex items-center justify-center text-xl">
+          <div class="w-10 h-10 rounded-xl ${isAvantGarde ? 'bg-amber-400 text-black shadow-lg shadow-amber-400/30' : 'bg-amber-400/15 border border-amber-400/40 text-amber-300'} flex items-center justify-center text-xl font-bold">
             <i class="ph-bold ${cat.icon}"></i>
           </div>
           <div>
-            <h2 class="text-lg md:text-xl font-bold text-white tracking-wide">${cat.name}</h2>
+            <div class="flex items-center gap-2">
+              <h2 class="text-lg md:text-xl font-bold text-white tracking-wide">${cat.name}</h2>
+              ${isAvantGarde ? '<span class="px-2 py-0.5 rounded text-[10px] font-bold font-mono bg-rose-500 text-white shadow">NUEVO // EXPERIMENTAL</span>' : ''}
+            </div>
             <p class="text-xs text-slate-400">Catálogo curado con ${cat.count} opciones visuales interactivas probadas.</p>
           </div>
         </div>
         <div class="flex items-center gap-2">
-          <span class="px-3 py-1 rounded-full text-xs font-mono font-bold bg-slate-900 border border-slate-700 text-amber-400">
+          <span class="px-3 py-1 rounded-full text-xs font-mono font-bold ${isAvantGarde ? 'bg-amber-400 text-black shadow' : 'bg-slate-900 border border-slate-700 text-amber-400'}">
             ${cat.count} OPCIONES
           </span>
         </div>
@@ -129,22 +144,25 @@ for (const cat of categories) {
   `;
 }
 
-const tabsHtml = categories.map(cat => `
-  <button class="cat-tab px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all bg-slate-900 border border-slate-800 text-slate-400 hover:text-white hover:border-slate-600 flex items-center gap-1.5"
+const tabsHtml = categories.map(cat => {
+  const isAvg = cat.id === 'avant_garde';
+  return `
+  <button class="cat-tab px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all ${isAvg ? 'bg-amber-400/20 text-amber-300 border-amber-400/50 shadow-[0_0_12px_rgba(245,158,11,0.2)]' : 'bg-slate-900 border-slate-800 text-slate-400 hover:text-white'} border hover:border-slate-600 flex items-center gap-1.5"
           data-category="${cat.id}"
           onclick="filterCategory('${cat.id}')">
     <i class="ph-bold ${cat.icon}"></i>
-    <span>${cat.name.split('&')[0].trim()}</span>
-    <span class="text-[10px] font-mono text-slate-500 font-bold ml-1">50</span>
+    <span>${cat.name.split('&')[0].replace('⚡', '').trim()}</span>
+    <span class="text-[10px] font-mono text-slate-500 font-bold ml-1">${cat.count}</span>
   </button>
-`).join('\n');
+  `;
+}).join('\n');
 
 const fullHtml = `<!DOCTYPE html>
 <html lang="es" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Super Design Matrix & Component Studio — 500 UI Options</title>
+    <title>Super Studio Matrix & Visual DNA — 550 UI Options (Vanguardia & Rompen lo Usual)</title>
     
     <!-- Google Fonts: Editorial & Display Palette -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -231,13 +249,13 @@ const fullHtml = `<!DOCTYPE html>
     <!-- Top Floating Announcement Bar -->
     <div class="w-full bg-[#080B10] border-b border-white/10 px-4 py-2 text-xs font-mono flex items-center justify-between text-slate-400">
         <div class="flex items-center gap-3">
-            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-            <span class="text-white font-bold">STUDIO EDITION v2.5</span>
+            <span class="w-2 h-2 rounded-full bg-rose-500 animate-ping"></span>
+            <span class="text-white font-bold">STUDIO EDITION v3.0 // VANGUARDIA PURA</span>
             <span class="text-slate-600">|</span>
-            <span class="text-amber-400 font-bold">500 OPCIONES VISUALES (50 POR CATEGORÍA)</span>
+            <span class="text-amber-400 font-bold">${totalCount} COMPONENTES (50 AVANT-GARDE + 500 MODULARES)</span>
         </div>
         <div class="flex items-center gap-4">
-            <span class="text-slate-400 hidden sm:inline">LOOP 0: SELECCIÓN PREVIA OBLIGATORIA</span>
+            <span class="text-slate-400 hidden sm:inline">ROMPEN LO USUAL • ANTI-GENÉRICO</span>
             <span class="text-emerald-400">STATUS: SOBERANO</span>
         </div>
     </div>
@@ -246,15 +264,15 @@ const fullHtml = `<!DOCTYPE html>
     <header class="max-w-7xl mx-auto px-4 sm:px-6 pt-10 pb-6">
         <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8 border-b border-white/10">
             <div class="space-y-2">
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono bg-amber-400/10 text-amber-300 border border-amber-400/30">
-                    <i class="ph-bold ph-magic-wand"></i>
-                    <span>CATÁLOGO MAESTRO 500 COMPONENTES</span>
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono bg-rose-500/10 text-rose-300 border border-rose-500/30">
+                    <i class="ph-bold ph-lightning"></i>
+                    <span>COLECCIÓN AVANT-GARDE & ROMPEN LO USUAL (${totalCount} OPCIONES)</span>
                 </div>
                 <h1 class="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-white tracking-tight">
-                    Super Studio Matrix & Visual DNA
+                    Super Studio Matrix & Avant-Garde DNA
                 </h1>
                 <p class="text-sm sm:text-base text-slate-400 max-w-2xl leading-relaxed">
-                    Escoge exactamente la atmósfera cromática, tipografía, botones, cards, navegación, KPIs, timelines, tablas, inputs y modales. Haz clic en tus favoritos para ensamblar tu interfaz antes de programar una sola línea de backend.
+                    Diseños que rompen deliberadamente el molde habitual de tarjetas oscuras idénticas: sintetizadores Teenage Engineering, pergaminos japoneses con sellos Hanko, esferas horológicas de fase lunar, tubos Nixie de vacío, pósters constructivistas suizos, anunciadores de cabina de avión, vinilos analógicos y más.
                 </p>
             </div>
 
@@ -265,7 +283,7 @@ const fullHtml = `<!DOCTYPE html>
                 </button>
                 <button onclick="toggleDrawer()" class="px-5 py-3 rounded-xl bg-slate-900 border border-slate-700 hover:border-slate-500 text-white font-bold text-xs tracking-wider uppercase flex items-center gap-2 transition-all">
                     <i class="ph-bold ph-clipboard-text text-amber-400 text-base"></i>
-                    <span id="drawer-counter-btn">Mi Selección (10/10)</span>
+                    <span id="drawer-counter-btn">Mi Selección</span>
                 </button>
             </div>
         </div>
@@ -276,7 +294,7 @@ const fullHtml = `<!DOCTYPE html>
                 <div class="relative w-full md:flex-1">
                     <i class="ph-bold ph-magnifying-glass absolute left-3.5 top-3.5 text-slate-400 text-base"></i>
                     <input type="text" id="catalog-search" 
-                           placeholder="Buscar entre los 500 componentes (ej. #gold, #brutalist, #glass, #mono, #sovereign)..." 
+                           placeholder="Buscar entre los ${totalCount} componentes (ej. #teenage-engineering, #wabi-sabi, #horology, #swiss, #nixie, #synth)..." 
                            oninput="onSearchInput(this.value)"
                            class="w-full bg-slate-900/90 border border-slate-800 rounded-xl pl-10 pr-10 py-3 text-sm text-white placeholder-slate-500 outline-none focus:border-amber-400 transition-colors shadow-inner">
                     <button onclick="clearSearch()" id="clear-search-btn" class="hidden absolute right-3.5 top-3.5 text-slate-400 hover:text-white">
@@ -284,40 +302,41 @@ const fullHtml = `<!DOCTYPE html>
                     </button>
                 </div>
                 <div class="flex items-center gap-2 w-full md:w-auto justify-between text-xs font-mono text-slate-400">
-                    <span id="results-count" class="font-bold text-amber-400">Mostrando 500 de 500</span>
+                    <span id="results-count" class="font-bold text-amber-400">Mostrando ${totalCount} de ${totalCount}</span>
                     <button onclick="filterCategory('all')" class="text-xs text-slate-400 hover:text-white underline">Restablecer</button>
                 </div>
             </div>
 
-            <!-- Quick Filter Chips -->
+            <!-- Curated Avant-Garde Filter Chips -->
             <div class="flex flex-wrap gap-1.5 items-center text-xs">
-                <span class="text-slate-500 font-mono text-[10px] mr-1">TAGS POPULARES:</span>
-                <button onclick="filterByTag('#gold')" class="px-2.5 py-1 rounded-full bg-amber-400/10 text-amber-300 border border-amber-400/30 hover:bg-amber-400 hover:text-black transition-colors font-mono text-[10px]">#gold</button>
-                <button onclick="filterByTag('#brutalist')" class="px-2.5 py-1 rounded-full bg-slate-900 text-slate-300 border border-slate-700 hover:border-white transition-colors font-mono text-[10px]">#brutalist</button>
-                <button onclick="filterByTag('#glass')" class="px-2.5 py-1 rounded-full bg-slate-900 text-slate-300 border border-slate-700 hover:border-white transition-colors font-mono text-[10px]">#glass</button>
-                <button onclick="filterByTag('#cyberpunk')" class="px-2.5 py-1 rounded-full bg-slate-900 text-slate-300 border border-slate-700 hover:border-white transition-colors font-mono text-[10px]">#cyberpunk</button>
-                <button onclick="filterByTag('#sovereign')" class="px-2.5 py-1 rounded-full bg-slate-900 text-slate-300 border border-slate-700 hover:border-white transition-colors font-mono text-[10px]">#sovereign</button>
-                <button onclick="filterByTag('#mono')" class="px-2.5 py-1 rounded-full bg-slate-900 text-slate-300 border border-slate-700 hover:border-white transition-colors font-mono text-[10px]">#mono</button>
-                <button onclick="filterByTag('#clean')" class="px-2.5 py-1 rounded-full bg-slate-900 text-slate-300 border border-slate-700 hover:border-white transition-colors font-mono text-[10px]">#clean</button>
-                <button onclick="filterByTag('#tactical')" class="px-2.5 py-1 rounded-full bg-slate-900 text-slate-300 border border-slate-700 hover:border-white transition-colors font-mono text-[10px]">#tactical</button>
-                <button onclick="filterByTag('#minimal')" class="px-2.5 py-1 rounded-full bg-slate-900 text-slate-300 border border-slate-700 hover:border-white transition-colors font-mono text-[10px]">#minimal</button>
+                <span class="text-amber-400 font-mono text-[10px] font-bold mr-1">⚡ ROMPEN LO USUAL:</span>
+                <button onclick="filterByTag('#teenage-engineering')" class="px-2.5 py-1 rounded-full bg-amber-400 text-black font-bold font-mono text-[10px] shadow">🎛️ Teenage Engineering</button>
+                <button onclick="filterByTag('#wabi-sabi')" class="px-2.5 py-1 rounded-full bg-white text-black font-bold font-mono text-[10px] shadow">⛩️ Wabi-Sabi Zen</button>
+                <button onclick="filterByTag('#horology')" class="px-2.5 py-1 rounded-full bg-amber-950 text-amber-300 border border-amber-500 font-mono text-[10px]">⌚ Alta Horología</button>
+                <button onclick="filterByTag('#nixie')" class="px-2.5 py-1 rounded-full bg-orange-950 text-orange-300 border border-orange-500 font-mono text-[10px]">🔥 Nixie Tubes</button>
+                <button onclick="filterByTag('#swiss')" class="px-2.5 py-1 rounded-full bg-rose-950 text-rose-300 border border-rose-500 font-mono text-[10px]">🇨🇭 Swiss 1968</button>
+                <button onclick="filterByTag('#aviation')" class="px-2.5 py-1 rounded-full bg-slate-800 text-white font-mono text-[10px]">✈️ Cockpit Aviación</button>
+                <button onclick="filterByTag('#vinyl')" class="px-2.5 py-1 rounded-full bg-neutral-900 text-neutral-300 font-mono text-[10px]">🎵 Vinilo Analógico</button>
+                <button onclick="filterByTag('#hologram')" class="px-2.5 py-1 rounded-full bg-cyan-950 text-cyan-300 border border-cyan-500 font-mono text-[10px]">✨ Holográfico</button>
+                <button onclick="filterByTag('#gold')" class="px-2.5 py-1 rounded-full bg-slate-900 text-slate-300 border border-slate-700 font-mono text-[10px]">#gold</button>
+                <button onclick="filterByTag('#brutalist')" class="px-2.5 py-1 rounded-full bg-slate-900 text-slate-300 border border-slate-700 font-mono text-[10px]">#brutalist</button>
             </div>
         </div>
 
-        <!-- Category Navigation Tabs (10 Categories) -->
+        <!-- Category Navigation Tabs (11 Categories) -->
         <div class="pt-6 overflow-x-auto pb-2 scrollbar-none flex gap-2">
             <button class="cat-tab active px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all bg-amber-400 text-black border border-amber-400 flex items-center gap-1.5"
                     data-category="all"
                     onclick="filterCategory('all')">
                 <i class="ph-bold ph-squares-four"></i>
                 <span>Todas las Categorías</span>
-                <span class="text-[10px] font-mono text-black font-bold ml-1">500</span>
+                <span class="text-[10px] font-mono text-black font-bold ml-1">${totalCount}</span>
             </button>
             ${tabsHtml}
         </div>
     </header>
 
-    <!-- Main Content Grid with 10 Sections -->
+    <!-- Main Content Grid with 11 Sections -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 pt-6">
         ${sectionsHtml}
     </main>
@@ -332,7 +351,7 @@ const fullHtml = `<!DOCTYPE html>
                 <div>
                     <h4 class="text-sm font-bold text-white font-serif flex items-center gap-2">
                         <span>Tu ADN Visual Seleccionado</span>
-                        <span id="selected-badge" class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-amber-400/20 text-amber-300 border border-amber-400/40">10 / 10 SELECCIONADOS</span>
+                        <span id="selected-badge" class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-amber-400/20 text-amber-300 border border-amber-400/40">CONFIGURACIÓN ACTIVA</span>
                     </h4>
                     <p id="selection-summary-text" class="text-xs text-slate-400 truncate max-w-xl">
                         Cargando selecciones por defecto...
@@ -359,8 +378,8 @@ const fullHtml = `<!DOCTYPE html>
             <!-- Modal Header -->
             <div class="p-4 bg-slate-950 border-b border-white/10 flex justify-between items-center">
                 <div class="flex items-center gap-2">
-                    <span class="w-3 h-3 rounded-full bg-emerald-400 animate-pulse"></span>
-                    <h3 class="font-serif font-bold text-white text-base">⚡ Simulación de Interfaz Ensamblada en Vivo</h3>
+                    <span class="w-3 h-3 rounded-full bg-rose-500 animate-pulse"></span>
+                    <h3 class="font-serif font-bold text-white text-base">⚡ Simulación de Interfaz Ensamblada en Vivo (Con Pieza Avant-Garde)</h3>
                 </div>
                 <button onclick="closeAssembledModal()" class="text-slate-400 hover:text-white p-1 rounded-lg hover:bg-slate-800 transition-colors">
                     <i class="ph-bold ph-x text-lg"></i>
@@ -374,7 +393,7 @@ const fullHtml = `<!DOCTYPE html>
 
             <!-- Modal Footer -->
             <div class="p-4 bg-slate-950 border-t border-white/10 flex justify-between items-center text-xs">
-                <span class="text-slate-400">Esta pantalla combina tus 10 elecciones en una composición real.</span>
+                <span class="text-slate-400">Esta pantalla combina tus componentes en una composición real no genérica.</span>
                 <button onclick="copySelectionToChat(); closeAssembledModal();" class="px-5 py-2 rounded-lg bg-amber-400 text-black font-bold uppercase tracking-wider">
                     Copiar Elección al Chat
                 </button>
@@ -392,6 +411,7 @@ const fullHtml = `<!DOCTYPE html>
     <script>
         // State of active selections (starts with defaults #01)
         window.selectedDNA = {
+            avant_garde: 'avg_01',
             palettes: 'pal_01',
             typography: 'typo_01',
             buttons: 'btn_01',
@@ -444,6 +464,7 @@ const fullHtml = `<!DOCTYPE html>
         function updateDrawerSummary() {
             const summaryParts = [];
             const labels = {
+                avant_garde: 'Avant-Garde',
                 palettes: 'Paleta', typography: 'Tipografía', buttons: 'Botón',
                 cards: 'Card', menus: 'Menú', metrics: 'Métrica',
                 timelines: 'Timeline', tables: 'Tabla', inputs: 'Input', modals: 'Modal'
@@ -458,7 +479,7 @@ const fullHtml = `<!DOCTYPE html>
 
             const summaryEl = document.getElementById('selection-summary-text');
             if (summaryEl) {
-                summaryEl.innerText = summaryParts.slice(0, 4).join(' • ') + '... (' + summaryParts.length + '/10 listos)';
+                summaryEl.innerText = summaryParts.slice(0, 4).join(' • ') + '... (' + summaryParts.length + ' activos)';
             }
         }
 
@@ -516,7 +537,7 @@ const fullHtml = `<!DOCTYPE html>
 
             const countEl = document.getElementById('results-count');
             if (countEl) {
-                countEl.innerText = 'Mostrando ' + visibleCount + ' de 500';
+                countEl.innerText = 'Mostrando ' + visibleCount + ' de ${totalCount}';
             }
         }
 
@@ -541,12 +562,13 @@ const fullHtml = `<!DOCTYPE html>
         function updateResultsCount() {
             const visible = document.querySelectorAll('.sample-card:not([style*="display: none"])').length;
             const countEl = document.getElementById('results-count');
-            if (countEl) countEl.innerText = 'Mostrando ' + visible + ' de 500';
+            if (countEl) countEl.innerText = 'Mostrando ' + visible + ' de ${totalCount}';
         }
 
         // Copy Selection to Chat
         function copySelectionToChat() {
             const labels = {
+                avant_garde: 'Pieza Avant-Garde / Showstopper',
                 palettes: 'Paleta Cromática & Atmósfera',
                 typography: 'Trío Tipográfico',
                 buttons: 'Botón & Interacción Táctil',
@@ -560,7 +582,7 @@ const fullHtml = `<!DOCTYPE html>
             };
 
             let promptText = '### ADN Visual Seleccionado (Loop 0 Visual Contract)\\n\\n';
-            promptText += 'He seleccionado los siguientes 10 componentes del catálogo de 500 para construir el proyecto:\\n\\n';
+            promptText += 'He seleccionado los siguientes componentes del catálogo de vanguardia para construir el proyecto:\\n\\n';
 
             Object.entries(window.selectedDNA).forEach(([cat, id], idx) => {
                 const item = window.catalogIndex[id];
@@ -583,8 +605,7 @@ const fullHtml = `<!DOCTYPE html>
             const container = document.getElementById('assembled-container');
             
             // Build assembled screen based on selections
-            const p = window.catalogIndex[window.selectedDNA.palettes] || {};
-            const t = window.catalogIndex[window.selectedDNA.typography] || {};
+            const avg = document.getElementById(window.selectedDNA.avant_garde)?.querySelector('.p-2, .p-4')?.innerHTML || '';
             const b = document.getElementById(window.selectedDNA.buttons)?.querySelector('.p-4')?.innerHTML || '';
             const c = document.getElementById(window.selectedDNA.cards)?.querySelector('.p-4')?.innerHTML || '';
             const m = document.getElementById(window.selectedDNA.menus)?.querySelector('.p-4')?.innerHTML || '';
@@ -598,6 +619,18 @@ const fullHtml = `<!DOCTYPE html>
                 <!-- Simulated Masthead Nav -->
                 <div class="mb-4">
                     \${m}
+                </div>
+
+                <!-- Avant-Garde Centerpiece Showcase -->
+                <div class="p-4 bg-gradient-to-r from-amber-950/30 via-slate-900 to-indigo-950/30 border border-amber-500/40 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
+                    <div class="space-y-1">
+                        <span class="text-[10px] font-mono text-amber-400 font-bold uppercase tracking-widest">PIEZA MAESTRA AVANT-GARDE SELECCIONADA</span>
+                        <h4 class="text-base font-serif font-bold text-white">Centro de Comando & Artefacto Táctil</h4>
+                        <p class="text-xs text-slate-400 max-w-md">Esta es la pieza de carácter visual distintivo que rompe con la monotonía genérica.</p>
+                    </div>
+                    <div class="flex-shrink-0">
+                        \${avg}
+                    </div>
                 </div>
 
                 <!-- Bento Grid Body -->
@@ -686,4 +719,4 @@ const repoPath = path.resolve('c:/Users/USER/Documents/agentes/antigravity-agent
 fs.writeFileSync(repoPath, fullHtml, 'utf8');
 console.log('✓ Escrito con éxito en:', repoPath);
 
-console.log('BUILD COMPLETADO: 500 COMPONENTES ACTIVOS.');
+console.log(`BUILD COMPLETADO: ${totalCount} COMPONENTES ACTIVOS (CON 50 AVANT-GARDE).`);
