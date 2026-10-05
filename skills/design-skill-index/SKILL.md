@@ -51,8 +51,10 @@ These are domain-specific and only relevant for certain archetypes:
 
 6. **`chameleon-motion-design`** → 7 visual archetypes, thematic loaders, motion choreography dials.
 7. **`antigravity-design-expert`** → Glassmorphism, spatial/weightless UI, 3D CSS.
-8. **`senior-ui-rescue-anti-ai`** → Fixing existing UIs that look like AI slop.
-9. **`taste-skill`** → Landing pages, portfolios, redesigns.
+8. **`modern-animated-ui-components`** → shadcn/ui + MCP, Magic UI, Aceternity UI, Motion & GSAP blueprints.
+9. **`viral-3d-experience`** → Dual-Engine (Apple Canvas scrubbing + Three.js WebGL Orbit PBR), Lumafield CT slice, fluid particle physics, and procedural Web Audio API haptics (for 3D flagships or when user requests).
+10. **`senior-ui-rescue-anti-ai`** → Fixing existing UIs that look like AI slop.
+11. **`taste-skill`** → Landing pages, portfolios, redesigns.
 
 ---
 

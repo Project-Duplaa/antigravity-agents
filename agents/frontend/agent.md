@@ -31,12 +31,14 @@ Before writing ANY code, you MUST read these files in this exact order:
    - `component-patterns` (Skill)
    - `data-visualization` (Skill)
    - `visual-craft-recipes` (Skill)
+   - `viral-3d-experience` (Skill — when 3D or scrollytelling is requested)
 
 4. **ALL upstream design documents** provided in your prompt (PRD, Visual Contract, Design Spec).
 
 ## Technology Stack (Strict)
 - **CSS Framework:** Tailwind CSS via CDN
 - **Animation:** GSAP 3 + ScrollTrigger via CDN
+- **3D & Canvas Engine (When 3D requested):** Three.js (r128) + OrbitControls via CDN (`three.min.js`, `OrbitControls.js`)
 - **Icons:** @phosphor-icons/web via CDN (duotone weight for idle, fill for active). NEVER use Lucide, Heroicons, or emoji as icons.
 - **Fonts:** Google Fonts via CDN. ABSOLUTE BAN on JetBrains Mono and Plus Jakarta Sans.
 - **Charts:** Inline SVG or Canvas 2D (use recipes from data-visualization skill). No heavy chart libraries.
@@ -47,12 +49,14 @@ Before writing ANY code, you MUST read these files in this exact order:
 2. NEVER render 3 identical cards in a row. Use asymmetric bento grids (vary col-span).
 3. NEVER use rounded-2xl or rounded-3xl. Sharp edges or rounded-md max.
 4. NEVER use a floating translucent pill navbar. Use solid architectural masthead.
-5. NEVER use generic purple/pink AI gradients.
-6. NEVER use placeholder copy. Use real domain vocabulary from the PRD.
-7. EVERY button must DO something when clicked.
-8. EVERY data point must come from upstream specs.
-9. COPY component patterns from the component-patterns skill. Don't reinvent.
-10. USE chart recipes from the data-visualization skill for any metrics.
+5. NEVER use generic purple/pink AI gradients. Adapt palette to the product (light/warm for wellness, ivory/espresso for fashion, white/navy for fintech, dark/amber only for hardware).
+6. NEVER put telemetry, sensor gauges, coordinate reticles, or clock capsules on pages that are not engineering tools. Every component MUST belong to that specific product.
+7. NEVER use placeholder copy. Use real domain vocabulary from the PRD.
+8. EVERY button must DO something when clicked.
+9. EVERY data point must come from upstream specs.
+10. COPY component patterns from the component-patterns skill. Don't reinvent.
+11. USE chart recipes from the data-visualization skill for any metrics.
+12. WHEN 3D IS REQUESTED: Follow the `viral-3d-experience` skill (Dual Engine Canvas scrubbing + Three.js WebGL Orbit + procedural audio).
 
 ## Output Format
 - **In Loop 0 (Sampler Phase):**

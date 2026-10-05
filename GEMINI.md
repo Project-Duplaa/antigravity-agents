@@ -52,6 +52,8 @@ After the `frontend` agent produces a mockup, the orchestrator MUST invoke `crea
 3. Does it use the correct icons (Phosphor, not Lucide)?
 4. Is the data from the PRD (not invented placeholders)?
 5. Are all buttons functional?
+6. **STRICT COMPONENT RELEVANCE CHECK (Anti-Gratuitous Telemetry):** Are all components on the screen 100% relevant to the product domain? If the reviewer finds irrelevant engineering telemetry, sensor gauges, or clock capsules on a non-engineering page, **REJECT IMMEDIATELY**.
+7. **DOMAIN-ADAPTIVE COLOR CHECK:** Does the color palette authentically fit the product domain (light/organic for wellness, pristine navy/white for fintech, ivory/espresso for fashion) rather than defaulting to dark obsidian / amber?
 
 If the reviewer finds violations, the `frontend` agent is re-invoked with specific fixes BEFORE the user sees it. Maximum 2 internal iterations.
 
@@ -79,6 +81,7 @@ Any agent producing HTML/CSS/JS MUST read these skills before writing code:
 5. `component-patterns` — Reusable HTML/Tailwind component blueprints. Copy and customize, don't reinvent.
 6. `data-visualization` — SVG sparklines, donut charts, bar charts, Canvas area charts.
 7. `visual-craft-recipes` — CSS token dictionaries and domain-specific recipes.
+8. `viral-3d-experience` — Dual-Engine visual architecture (Apple Canvas 2D scrubbing + Three.js WebGL Orbit PBR), Lumafield CT slicing lenses, fluid particle physics, and procedural Web Audio API haptics (activated when 3D is requested or for physical flagship showcases).
 
 ## Mandatory Output Format for Creative Agent
 The `creative` agent MUST output a **Visual Contract** (NOT a prose Creative Brief).

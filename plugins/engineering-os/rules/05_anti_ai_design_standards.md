@@ -97,34 +97,44 @@ Every interface designed or built by ANY agent MUST implement deliberate kinetic
 - **Circular Arrow Action Triggers**:
   - Product and catalogue cards should feature refined circular arrow buttons `(→)` that scale and highlight on hover.
 
-## 9. The "Spatial Luxury & Precision Editorial" Master Architecture (The User's Gold Standard)
-Every agent building web pages MUST adhere to the exact design DNA demonstrated in `media_1790476212246.png`:
-1. **Asymmetrical Split Composition (No Centered AI Heros)**:
-   - 50/50 or 45/55 editorial split.
-   - Left side: High-contrast editorial serif display headline (*Playfair Display*, *Cinzel*, *Fraunces*), framed institutional eyebrow badge (`border border-accentGold/40`), editorial paragraph with max-w-[55ch], 3-column engineering metrics strip, and asymmetrical CTA button pairing.
-   - Right side: Contained high-contrast product staging frame with specular lighting.
-2. **The Overlapping Floating Card (Z-Axis Depth Breaker)**:
-   - Always break the bounding box of the main visual with a floating contextual card (`bottom: -20px; left: -24px; z-index: 20;`).
-   - The card features: Eyebrow label, live active pulse (`● 4Hz Live`), bold serif title, technical description, mechanical vector icon with cadence (`28,800 vph`), and price tag in gold (`$425k`).
-   - Deep 3D soft shadow: `box-shadow: 0 20px 40px rgba(0, 0, 0, 0.85); border: 1px solid #2D3748;`.
-3. **The 3-Column Engineering Telemetry Widget**:
-   - Instead of generic marketing claims, place a dark 3-column capsule below the headline:
-     - Col 1: `• REGULATOR` / `Tourbillon 4Hz Active` (with status pill).
-     - Col 2: `RESERVE` / `72h Twin Barrel`.
-     - Col 3: `TOLERANCE` / `+2 / -1 sec/day`.
-4. **Asymmetrical Action Pair (CTAs)**:
-   - Primary: Solid gold filled (`#C5A358`), black text, 2px radius: `CONFIGURE PIECE →`.
-   - Secondary: Dark transparent card with thin 1px gold border and gold text: `VIEW ARCHIVE`.
-5. **Architectural Masthead & Live Timezone Capsule**:
-   - Solid architectural navbar (no floating blurred pill!).
-   - Left: Serif brand logo with micro-descriptor underneath.
-   - Center: Nav links with typographic weight hierarchy (bold white for active, muted slate for others).
-   - Right: Real-time timezone capsule `● GENEVA 02:53:38 CET` + solid gold primary button.
-6. **Atmospheric Horizon Underglow**:
-   - Dark mineral canvas (`#07080B` to `#0A0B0E`) with an organic curved horizon featuring warm coffee/amber/mineral lighting that seamlessly fades into deep obsidian, providing biological warmth and optical depth without neon cliches.
-7. **Complete Zero-Tolerance Font Lock**:
+## 9. Spatial Luxury & Precision Editorial (Domain-Adaptive Architecture)
+
+The high-craft design principles demonstrated in our gold standards represent a quality bar for craftsmanship, visual depth, and typographical excellence, **NOT a template to force watch telemetry onto unrelated products**:
+
+1. **Strict Rule of Component Relevance (Ban on Gratuitous Telemetry)**:
+   - ❌ **NEVER put telemetry, sensor gauges, frequency pulses (`● 4Hz`), timezone capsules (`● GENEVA`), micrometer tolerances, or radar widgets on pages where they do not belong!**
+   - A bakery, a clinic, a fashion store, an educational platform, or a CRM MUST NEVER have telemetry or engineering gauges.
+   - ✅ Every single component on the screen MUST be 100% relevant to the product vertical:
+     - *Gastronomy*: Menus, reservation calendar, wine pairing, allergen notes, chef provenance.
+     - *Healthcare / Wellness*: Medical credentials, specialist intake, treatment pathways, patient testimonials.
+     - *SaaS / Digital Tools*: Feature workflows, interactive live previews, pricing tables, integrations.
+     - *Fashion / Luxury*: High-res lookbook, textile origin, tailoring details, sizing guide, bag cart.
+     - *Engineering / Overclocking / Ops*: Telemetry, sensor logs, watt calculators, FLIR thermal maps (ONLY here is telemetry permitted!).
+
+2. **Domain-Adaptive Bespoke Palettes (Never Monolithic)**:
+   - ❌ **NEVER** force every project into dark obsidian or amber.
+   - ✅ Choose palettes that authentically express the brand:
+     - Organic / Wellness: Sage green, oat cream, eucalyptus, warm terracotta.
+     - FinTech / Corporate: Deep navy, pristine alpine white, emerald, platinum.
+     - Luxury Editorial: Warm alabaster, espresso, charcoal, rich burgundy.
+     - Clinical / Health: Sterile white, arctic cyan, cobalt, frosted glass.
+     - Creative / Consumer: Curated pastels, vibrant cobalt, warm coral accents.
+     - Industrial / Gaming: Obsidian, titanium, thermal amber, cobalt.
+
+3. **Asymmetrical Split Composition & Layered Depth**:
+   - Avoid generic centered AI heroes. Use asymmetrical compositions (50/50, 60/40, or bento grids).
+   - Incorporate layered depth: overlapping elements that break bounding boxes with subtle calibrated shadows.
+   - Avoid `rounded-2xl` or `rounded-3xl` cards. Use sharp or subtle radii (`rounded-none` to `rounded-md`).
+   - Mastheads must have architectural weight and clean borders, avoiding floating translucent pill navbars.
+
+4. **Viral 3D Experiences (viral-3d-experience Skill)**:
+   - When requested by the user or when designing physical hardware flagships, automotive, or luxury devices:
+     - Implement the **Dual Engine Architecture**: Apple-style frame sequence scrubbing on `<canvas>` 2D + real-time Three.js WebGL 360° PBR scene with OrbitControls.
+     - Incorporate interactive Lumafield CT Scanner slicing lenses, fluid particle physics (`THREE.Points`), and procedural Web Audio API haptics (clicks, servos, pings).
+
+5. **Complete Zero-Tolerance Font Lock**:
    - BANNED: `JetBrains Mono`, `Plus Jakarta Sans`.
-   - APPROVED HEADERS: `Playfair Display`, `Cinzel`, `Fraunces`, `Bodoni Moda`.
-   - APPROVED BODY/TELEMETRY: `DM Sans`, `Space Mono`, `Geist Mono`, `Outfit`.
+   - APPROVED HEADERS: `Playfair Display`, `Cinzel`, `Fraunces`, `Bodoni Moda`, `Cabinet Grotesk`.
+   - APPROVED BODY/TEXT: `DM Sans`, `Outfit`, `IBM Plex Mono` (for raw code/tabular numbers only).
 
 

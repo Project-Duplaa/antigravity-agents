@@ -62,14 +62,20 @@ Never force every project into the same aesthetic. Build the design system aroun
 - **SHAPE CONSISTENCY LOCK**: Pick ONE corner-radius scale and stick to it (0px to 2px for machined luxury; 4px to 6px for operational apps).
 - Cards are a layout tool, not a design philosophy. Use sections, dividers, editorial layouts, tables, panels, timelines, split layouts.
 
-### 1.5 Master Blueprint: Spatial Luxury & Precision Editorial (Mandatory DNA)
-Every landing page and high-craft UI designed MUST honor Section 9 of `rules/05_anti_ai_design_standards.md`:
-- Asymmetrical 50/50 editorial split hero (no centered AI template).
-- The Overlapping Floating Card (`bottom: -20px; left: -24px; z-index: 20; box-shadow: 0 20px 40px rgba(0,0,0,0.85)`).
-- Domain-specific 3-column telemetry metrics capsule below headline.
-- Asymmetrical button pair (solid gold primary + outlined dark secondary).
-- Solid architectural masthead with real-time timezone capsule.
-- Organic molten mineral lava lamp canvas or curved atmospheric horizon in background.
+### 1.5 Master Blueprint: Domain-Bespoke Direction & Component Relevance
+Every landing page and UI specified MUST honor Section 9 of `rules/05_anti_ai_design_standards.md`:
+- **Strict Rule of Component Relevance (Anti-Gratuitous Telemetry Veto)**:
+  - ❌ **NEVER put telemetry, sensor gauges, frequency pulses (`● 4Hz`), timezone capsules, micrometer tolerances, or radar widgets on pages where they do not belong!**
+  - If designing a restaurant, a clinic, an e-commerce store, a luxury fashion house, or a standard SaaS, VETO any attempt to inject engineering telemetry!
+  - Every component specified must serve the actual user needs of that domain (menus, booking, workflows, lookbooks, pricing, etc.).
+- **Domain-Bespoke Color Palette**:
+  - Do NOT force obsidian/amber onto every product. Match the palette to the brand vertical (light/organic for wellness, crisp white/navy for fintech, ivory/espresso for fashion, sterile/cyan for biotech, obsidian/amber only for hardware/overclocking).
+- **Asymmetrical Split Composition & Layered Depth**:
+  - Asymmetrical 50/50 or 60/40 editorial layout (no centered AI template).
+  - Clean architectural masthead (never floating translucent pill navbars).
+  - Overlapping floating cards breaking container bounding boxes with calibrated soft shadows.
+- **Viral 3D Experiences (viral-3d-experience Skill)**:
+  - When requested by the user or when designing physical hardware, luxury devices, or automotive, design the layout and tokens for Dual-Engine Canvas sequence scrubbing + Three.js WebGL 360° PBR scene.
 
 ---
 

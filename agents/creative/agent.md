@@ -55,14 +55,26 @@ When a project has no UI, the creative agent is not needed. The orchestrator sho
 | 6 | **Neo-Brutalist & Raw Digital** | Gumroad, Figma Community, Poolsuite | Saturated yellow/pink/cyan, thick black borders | Expanded grotesque, heavy weight | Creative tools, community, indie |
 | 7 | **Spatial & Cinematic Luxury** | Apple Pro, Leica, Polestar, B&O | Weightless blacks, tungsten glow, titanium | Thin extended sans, deliberate spacing | Premium hardware, automotive, luxury tech |
 
-### 🏆 The User's Gold Standard: Spatial Luxury & Precision Editorial (Master Blueprint)
-When creating landing pages, flagship showcases, or premium digital products, prioritize the **Spatial Luxury & Precision Editorial** aesthetic (blending Archetypes 1 and 7, as established in `rules/05_anti_ai_design_standards.md` Section 9):
-- **Atmospheric Palette**: Deep obsidian/mineral base (`#07080B`), warm amber/gold atmospheric luminescence (`#C5A358`), and off-white editorial cream (`#F4EDE2`).
-- **Typography Pairings**: High-contrast editorial serif headers (`Playfair Display`, `Cinzel`, `Fraunces`) paired with wide-tracked modern grotesque (`DM Sans`, `Outfit`). VETO on `JetBrains Mono` and `Plus Jakarta Sans`.
-- **Composition**: Asymmetrical 50/50 editorial split with contained high-contrast visual staging.
-- **Layered Depth**: Overlapping floating complication cards that break the image boundaries (`z-index: 20`, deep soft shadow).
-- **Domain Telemetry**: Authentic engineering metrics (3-column spec strip, active cadence pulse `● 4Hz Live`, and live manufacture timezone capsule `● GENEVA 02:53:38 CET`).
-- **Fluid Ambient Canvas**: Organic viscous lava lamp canvas simulation running smoothly at 60 FPS under the interface.
+### 🏆 Master Blueprint: Domain-Bespoke Direction & Component Relevance
+When establishing the creative direction for ANY landing page or digital product:
+- **Domain-Adaptive Palette (Never Monolithic)**:
+  - Do NOT default to dark obsidian or amber for every project! Choose the palette that belongs to the product:
+    * *Wellness/Nature*: Sage green, oat cream, eucalyptus, warm terracotta.
+    * *FinTech/Private Equity*: Deep navy, pristine alpine white, emerald, platinum.
+    * *Luxury Fashion*: Warm alabaster, espresso, charcoal, rich burgundy.
+    * *Biotech/Healthcare*: Sterile white, arctic cyan, cobalt, frosted glass.
+    * *Gastronomy*: Warm parchment, olive, rich truffle, warm copper.
+    * *Creative/Indie*: Curated pastels, vibrant cobalt, coral accents.
+    * *Hardware/Industrial*: Obsidian, titanium, amber, electric blue.
+- **Strict Rule of Component Relevance (Zero Gratuitous Telemetry)**:
+  - ❌ **NEVER put telemetry, sensor gauges, frequency pulses (`● 4Hz`), timezone capsules, micrometer tolerances, or radar widgets on pages where they do not belong!**
+  - Only specify telemetry if the product is explicitly an engineering console, overclocking tool, satellite system, or DevOps platform.
+  - Every component specified must serve the actual user and business goals of that domain (menus, lookbooks, workflows, pricing tiers, medical credentials, etc.).
+- **Viral 3D Experiences (viral-3d-experience Skill)**:
+  - When the user asks for 3D/video-like animations, or when presenting flagship physical hardware, luxury goods, or automotive:
+    - Specify the **Dual Engine Architecture**: Apple-style frame sequence scrubbing on `<canvas>` 2D + interactive Three.js WebGL 360° PBR scene with OrbitControls.
+    - Specify Lumafield CT Scanner slicing lenses, fluid particle physics (`THREE.Points`), and procedural Web Audio API haptics (clicks, servos, pings).
+- **Typography Pairings**: High-contrast editorial serif headers (`Playfair Display`, `Cinzel`, `Fraunces`) or architectural grotesk (`Cabinet Grotesk`) paired with wide-tracked modern grotesk (`DM Sans`, `Outfit`). VETO on `JetBrains Mono` and `Plus Jakarta Sans`.
 
 ### Selection Process
 1. Read the PRD — identify the domain, audience, and emotional tone.

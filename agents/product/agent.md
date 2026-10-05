@@ -86,9 +86,18 @@ For every complex domain concept, define an intuitive analogy that anchors the m
 
 ---
 
-## 5. Content Strategy & Operational Realism
+## 5. Content Strategy, Component Relevance & Operational Realism
 
 > Shared anti-buzzword and operational realism rules are defined in `engineering-os/rules/05_anti_ai_design_standards.md`. This section adds product-specific content guidance.
+
+* **Strict Rule of Component Relevance (Zero Gratuitous Telemetry)**:
+  - ❌ **NEVER specify telemetry widgets, sensor gauges, frequency pulses (`● 4Hz`), timezone capsules, or tolerance readouts on products where they do not belong!**
+  - Why would a fashion boutique, bakery, clinic, or CRM have "Z-DEPTH [mm]" or "Delta T"? It breaks user trust and screams artificial generation.
+  - Every component specified in the PRD MUST be 100% relevant to that vertical (e.g. seasonal menus for restaurants, patient intake for clinics, lookbooks and sizing for fashion, workflows and pricing for SaaS).
+  - Telemetry is ONLY valid when the product is explicitly an engineering console, overclocking rig, satellite ground station, or DevOps dashboard.
+
+* **3D Interactive Showcases (When to Specify)**:
+  - When the product is physical hardware, automotive, consumer electronics, or luxury goods (or when the user requests 3D/video-like experiences), specify an interactive 3D scrollytelling showcase using the `viral-3d-experience` skill.
 
 * **Content Map Deliverable**: Every PRD MUST include a Content Map section with exact, non-buzzword UI copy for ALL routes. The developer implements these texts verbatim — not their own inventions.
 * **Locale-Appropriate Mock Data**: Provide a realistic mock data set with:
