@@ -8,7 +8,7 @@ Whenever starting a project from scratch (greenfield), executing a major feature
 4. **ALWAYS** follow the Mockup-First Workflow for visual products (see `mockup-first-workflow` skill).
 5. **ALWAYS** ensure every agent reads `.preferences.md` in the workspace root before producing any output. User preferences override all other rules.
 
-## Specialized Agent Roster (13 Agents)
+## Specialized Agent Roster (14 Agents)
 
 | # | Agent | Role | Invoked For |
 |---|-------|------|-------------|
@@ -19,12 +19,13 @@ Whenever starting a project from scratch (greenfield), executing a major feature
 | 5 | `security` | Security Engineer & DevSecOps | STRIDE, OWASP, AI/LLM security, supply chain, infra security, Security Veto |
 | 6 | `designer` | UI/UX Designer & Motion Art Director | Design tokens, motion choreography, icon system, route layouts, Anti-AI Design Veto |
 | 7 | `frontend` | **Principal Frontend Engineer** | **Static mockups, interactive prototypes, HTML/CSS/GSAP/Canvas. Produces visual artifacts, not documents.** |
-| 8 | `blender` | **Principal 3D Modeler & CAD Specialist** | **Image-to-3D reference research, anatomical CAD deconstruction, PBR texture synthesis, Three.js/GLTF models, 3D asset testing.** |
-| 9 | `developer` | Senior Backend Developer | Backend APIs, data access layer, server logic, tests. **Does NOT produce frontend code.** |
-| 10 | `qa` | Lead QA & SDET | Test pyramid, BVA, E2E (Playwright), performance, accessibility, QA Veto |
-| 11 | `enhancer` | Code Quality & Optimization | Code reviews, refactoring blueprints, performance, a11y, before/after diffs |
-| 12 | `documentation` | Knowledge Architect & Docs Specialist | README, API docs (OpenAPI), CHANGELOG, Obsidian knowledge vault |
-| 13 | `orchestrator` | Pipeline Coordinator | Phase sequencing, quality gates, error recovery, progress tracking |
+| 8 | `blender` | **Principal CGI & CAD Director (v3.0)** | **Photorealistic Blender 5.2.2 headless renders (AgX, 4-point studio lighting, PBR materials), hard-surface CAD modeling, visual self-inspection loop, WebP frame sequences, Draco GLB export.** |
+| 9 | `motion` | **Creative Motion & Interaction Specialist** | **GSAP ScrollTrigger choreography, spring physics micro-interactions, cinematic boot sequences, scroll-scrub timelines, Canvas/WebGL particles, Web Audio haptics, Motion Veto.** |
+| 10 | `developer` | Senior Backend Developer | Backend APIs, data access layer, server logic, tests. **Does NOT produce frontend code.** |
+| 11 | `qa` | Lead QA & SDET | Test pyramid, BVA, E2E (Playwright), performance, accessibility, QA Veto |
+| 12 | `enhancer` | Code Quality & Optimization | Code reviews, refactoring blueprints, performance, a11y, before/after diffs |
+| 13 | `documentation` | Knowledge Architect & Docs Specialist | README, API docs (OpenAPI), CHANGELOG, Obsidian knowledge vault |
+| 14 | `orchestrator` | Pipeline Coordinator | Phase sequencing, quality gates, error recovery, progress tracking |
 
 ## Adaptive Orchestration Flow (Replaces Rigid 11-Phase)
 
@@ -118,10 +119,11 @@ Every agent MUST read and honor ALL upstream artifacts before starting work:
 | `database` | PRD from `product` + ADR from `architect` |
 | `security` | ADR from `architect` + Developer's implementation |
 | `designer` | PRD + Visual Contract from `creative` + `.golden-samples/` (for design review) |
-| `blender` | PRD from `product` + Visual Contract from `creative` + Real-world CAD benchmarks & photos |
-| `frontend` | PRD + **Visual Contract** (NOT prose brief) + 3D Geometries/Assets from `blender` + Design Spec + `.golden-samples/` + `component-patterns` + `data-visualization` + `visual-craft-recipes` |
+| `blender` | PRD from `product` + Visual Contract from `creative` + Real-world CAD benchmarks & photos + Motion Choreography from `motion` (if animation sequences) |
+| `motion` | PRD from `product` + Visual Contract from `creative` + Design Spec from `designer` + `.preferences.md` motion rules |
+| `frontend` | PRD + **Visual Contract** (NOT prose brief) + 3D Geometries/Assets from `blender` + Motion Choreography from `motion` + Design Spec + `.golden-samples/` + `component-patterns` + `data-visualization` + `visual-craft-recipes` |
 | `developer` | PRD + ADR + DATA spec + Security spec (NO frontend work) |
-| `qa` | PRD + Design Spec + Frontend mockup + Developer's implementation + Security Report |
+| `qa` | PRD + Design Spec + Frontend mockup + Developer's implementation + Security Report + Motion Choreography |
 | `enhancer` | ALL upstream artifacts |
 | `documentation` | ALL upstream artifacts + source code |
 

@@ -11,4 +11,6 @@ See [GEMINI.md](./GEMINI.md) for the complete Multi-Agent Orchestration Protocol
 - **QA Feedback Loop:** Automatic re-invocation cycle when QA exercises veto (max 3 iterations).
 - **New Skills:** `mockup-first-workflow`, `component-patterns`, `data-visualization`.
 - **New Agent (v2.1):** `blender` — Dedicated Principal 3D Modeler & CAD Specialist that bridges real-world reference images and tested 3D models/materials.
-- **Roster:** 13 agents (was 12).
+- **Upgraded Agent (v3.0):** `blender` — Dedicated Principal CGI & CAD Director with Blender 5.2.2 LTS headless CLI, studio 4-point softbox lighting, AgX color management, high-contrast PBR materials, and mandatory visual self-inspection loop (`render → view_file → critique → fix`).
+- **New Agent (v3.0):** `motion` — Dedicated Principal Creative Motion & Interaction Specialist (GSAP ScrollTrigger choreography, spring physics micro-interactions, cinematic boot sequences, scroll-scrub timelines, Canvas/WebGL particles, Web Audio haptics, Motion Veto power).
+- **Roster:** 14 agents (was 13).
