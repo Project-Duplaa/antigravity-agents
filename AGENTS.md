@@ -10,4 +10,5 @@ See [GEMINI.md](./GEMINI.md) for the complete Multi-Agent Orchestration Protocol
 - **Adaptive Pipeline:** Three orchestration modes (Mockup-First, Backend-First, Full Parallel) replace the rigid 11-phase pipeline.
 - **QA Feedback Loop:** Automatic re-invocation cycle when QA exercises veto (max 3 iterations).
 - **New Skills:** `mockup-first-workflow`, `component-patterns`, `data-visualization`.
-- **Roster:** 12 agents (was 11).
+- **New Agent (v2.1):** `blender` — Dedicated Principal 3D Modeler & CAD Specialist that bridges real-world reference images and tested 3D models/materials.
+- **Roster:** 13 agents (was 12).

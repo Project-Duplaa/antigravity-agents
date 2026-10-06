@@ -46,15 +46,29 @@ These provide philosophy and anti-patterns. Skim them if your output feels gener
 5. **`anti-generic-premium-web-design`** → Anti-slop patterns, asymmetric compositions, typography intentionality.
    Path: `.agents/skills/anti-generic-premium-web-design/SKILL.md`
 
+6. **`design-taste-frontend`** / **`taste-skill`** → Anti-slop frontend intelligence for landing pages and portfolios. Brief inference, 3 dials (Variance, Motion, Density), pre-flight checks.
+   Path: `.agents/skills/design-taste-frontend/SKILL.md`
+
+7. **`image-to-code`** → Elite image-first website design. Takes screenshots or generated mockups, deeply analyzes composition, and produces faithful, high-craft frontend code.
+   Path: `.agents/skills/image-to-code/SKILL.md`
+
+8. **`web-design-guidelines`** → Vercel Web Interface Guidelines compliance, UX audit, accessibility review.
+   Path: `.agents/skills/web-design-guidelines/SKILL.md`
+
 ### Tier 3 — SPECIALIZED (Read only when the project matches)
 These are domain-specific and only relevant for certain archetypes:
 
-6. **`chameleon-motion-design`** → 7 visual archetypes, thematic loaders, motion choreography dials.
-7. **`antigravity-design-expert`** → Glassmorphism, spatial/weightless UI, 3D CSS.
-8. **`modern-animated-ui-components`** → shadcn/ui + MCP, Magic UI, Aceternity UI, Motion & GSAP blueprints.
-9. **`viral-3d-experience`** → Dual-Engine (Apple Canvas scrubbing + Three.js WebGL Orbit PBR), Lumafield CT slice, fluid particle physics, and procedural Web Audio API haptics (for 3D flagships or when user requests).
-10. **`senior-ui-rescue-anti-ai`** → Fixing existing UIs that look like AI slop.
-11. **`taste-skill`** → Landing pages, portfolios, redesigns.
+9. **`awesome-design`** → Master taxonomy and tokens for 67 modular design archetypes (bento, glassmorphism, premium, minimal, neobrutalism, editorial, enterprise, skeumorphism, sleek, modern, etc.).
+   Path: `.agents/skills/awesome-design/SKILL.md`
+10. **`scroll-world`** → Immersive camera flight through diorama / 3D worlds driven by continuous scroll (Higgsfield / video scrub engine).
+    Path: `.agents/skills/scroll-world/SKILL.md`
+11. **`chameleon-motion-design`** → 7 visual archetypes, thematic loaders, motion choreography dials.
+12. **`antigravity-design-expert`** → Glassmorphism, spatial/weightless UI, 3D CSS.
+13. **`modern-animated-ui-components`** → shadcn/ui + MCP, Magic UI, Aceternity UI, Motion & GSAP blueprints.
+14. **`viral-3d-experience`** → Dual-Engine (Apple Canvas scrubbing + Three.js WebGL Orbit PBR), Lumafield CT slice, fluid particle physics, and procedural Web Audio API haptics (for 3D flagships or when user requests).
+15. **`senior-ui-rescue-anti-ai`** → Fixing existing UIs that look like AI slop.
+16. **`find-skills`** → Meta-skill for discovering and installing open agent skills from skills.sh via `npx skills find`.
+    Path: `.agents/skills/find-skills/SKILL.md`
 
 ---
 
