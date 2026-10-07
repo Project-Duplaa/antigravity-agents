@@ -1,6 +1,6 @@
 ---
 name: obsidian-vault-craft
-description: Master skill for building deeply interconnected, highly detailed Second Brain knowledge vaults in Obsidian across ANY software project. Establishes Graph View color grouping taxonomies, rich YAML frontmatter, obligatory 80-180 line atomic note structures with code snippets, mathematical derivations, engineering/field commentaries, failure mode analysis, and bidirectional wikilink topologies.
+description: Master skill for building deeply interconnected, highly actionable Second Brain knowledge vaults in Obsidian across ANY software project. Establishes Graph View color grouping taxonomies, rich YAML frontmatter, qualitative decision-gated note structures (context, decision, discarded alternatives, consequences, links, owner, date), and bidirectional wikilink topologies.
 ---
 
 # OBSIDIAN VAULT CRAFT & SECOND BRAIN KNOWLEDGE ARCHITECTURE
@@ -54,9 +54,18 @@ related_code:
 
 ---
 
-## 📝 3. Obligatory In-Depth Note Anatomy (Minimum 80–180 Lines)
+## 📝 3. Qualitative Note Anatomy & Decision Quality Gate
 
-Every atomic note must be comprehensive and contain these 8 sections:
+Documentation is gated by **information quality, not line count**. Artificial length requirements (e.g. 80 lines) create fluff and repetitive prose. A note may be 15 lines or 60 lines as long as it satisfies the **Decision & Knowledge Checklist**:
+
+Every note must clearly articulate:
+1. **Contexto**: El problema u origen de la necesidad (por qué surge).
+2. **Decisión explicada**: Qué se eligió o diseñó, con precisión técnica y sin ambigüedad.
+3. **Alternativas descartadas**: Qué otras opciones se evaluaron y la razón concreta de su descarte.
+4. **Consecuencias & Trade-offs**: Impacto positivo, limitaciones aceptadas, riesgos o costes.
+5. **Trazabilidad & Enlaces**: Enlaces directos a archivos de código (`src/...`), ADRs o `[[wikilinks]]` bidireccionales.
+6. **Metadatos & Autoría**: Owner/autor, fecha, estado (`evergreen | developing | deprecated`).
+7. **Modelado / Ecuaciones / Código (si aplica)**: Excerpt de código o formulación matemática concisa cuando el concepto lo amerite.
 
 1. **Frontmatter YAML**: Standard metadata and graph tags.
 2. **Executive Summary & Principles**: 2 paragraphs explaining what the concept is and why it matters.

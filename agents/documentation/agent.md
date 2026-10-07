@@ -16,15 +16,14 @@ Every document you produce must read like it was written by a senior staff engin
 
 ---
 
-## 🔍 0. Inter-Agent Reading Protocol (MANDATORY — Do This First)
+## 🔍 0. Inter-Agent Reading Protocol (Decision-Driven)
 
 Before starting documentation work, you MUST read:
-1. **All source code** (`src/`) — understand what was actually built, not just what was planned.
-2. **PRD from Product** (`docs/prd/PRD-XXX.md`) — understand the domain, personas, and user flows.
-3. **ADR from Architect** (`docs/adr/ADR-XXX.md`) — understand architectural decisions, data models, API contracts.
-4. **Creative Brief** (`docs/creative/CREATIVE-XXX.md`) — understand the visual identity and domain context.
-5. **Security Report** (`docs/security/SEC-XXX.md`) — understand security decisions and constraints.
-6. **Enhancement Reports** (`docs/enhancements/ENHANCE-XXX.md`) — understand code quality findings.
+1. **ADR from Architect** (`docs/adr/ADR-XXX.md`) & **Canonical API Contract** (`docs/api/openapi.yaml`) — understand structural decisions, bounded contexts, and API endpoints.
+2. **PRD from Product** (`docs/prd/PRD-XXX.md`) — understand the domain rules, personas, and user flows.
+3. **Data Spec from Database** (`docs/data/DATA-XXX.md`) — understand data models and schema relationships.
+4. **Security Reports** (`docs/security/SEC-SPEC.md`, `SEC-AUDIT.md`) — understand trust boundaries and auth policies.
+5. **Key domain source code** (`src/domain/`, `src/api/`) — reference concrete implementations for snippets, file links, and runbooks (without requiring line-by-line reading of the entire repo).
 
 If upstream artifacts are missing, request them. Never document blindly.
 
@@ -269,16 +268,17 @@ Configure in Obsidian Graph View (`Ctrl/Cmd + G` → Groups):
 - **🔵 Concepts & Algorithms** (`tag:#type/concept` OR `tag:#type/algorithm`): `#3b82f6` — Pure logic and theory.
 - **🔴 Failure Modes & Postmortems** (`tag:#type/postmortem`): `#ef4444` — Incidents and edge cases.
 
-### Pillar 2: Obligatory In-Depth Structure (Minimum 80–180 Lines per Note)
-No note may be a superficial summary. Every note must contain:
-1. **YAML Frontmatter** — Complete metadata and hierarchical tags.
-2. **Executive Summary** — What is this and why it matters (2 concise paragraphs).
-3. **Feynman Explanation** — Intuitive explanation using real-world analogies, no unnecessary jargon.
-4. **Formal Formulation** — Rigorous equations in LaTeX (`$$...$$`), step-by-step derivations (when applicable).
-5. **Code Implementation** — Real code snippets from the project (`src/domain/...`) with line-by-line "why" explanations.
-6. **Engineering Commentary** — Problems encountered during development, trade-offs made, practical field notes.
-7. **Edge Cases & Failure Modes** — What happens with zero, negative, or overflowing inputs. Symptoms when this principle is violated.
-8. **Connection Graph** — Bidirectional wikilinks to parent MOC, sibling concepts, and engineering docs.
+### Pillar 2: Qualitative Note Anatomy & Decision Quality Gate (Quality > Line Count)
+Documentation is strictly gated by **clarity and decision density, NOT by arbitrary line counts**. Enforcing artificial minimums (like 80 lines) incentivizes AI fluff, repetition, and filler text. A note may be 15 lines or 60 lines as long as it satisfies the **Decision & Knowledge Checklist**:
+
+Every note MUST clearly document:
+1. **Contexto**: El problema o necesidad concreta (por qué surge).
+2. **Decisión explicada**: Qué solución o patrón técnico se adoptó, con total precisión.
+3. **Alternativas descartadas**: Qué otras opciones se evaluaron y la razón específica de su descarte.
+4. **Consecuencias & Trade-offs**: Qué ventajas aporta y qué limitaciones/costes se asumen.
+5. **Trazabilidad & Enlaces**: Enlaces directos a archivos (`src/domain/...`, `docs/adr/...`) o `[[wikilinks]]`.
+6. **Metadatos & Autoría**: Owner/autor, fecha, estado (`evergreen | developing | deprecated`).
+7. **Modelado o Código (si aplica)**: Snippet conciso o formulación matemática cuando el concepto lo requiera. Zero relleno innecesario.
 
 ### Pillar 3: Dense Bidirectional Linking (`[[WikiLink]]`)
 - **Zero orphan notes**: Every note must be linked from at least one other note.

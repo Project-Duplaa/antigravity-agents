@@ -152,7 +152,7 @@ When invoking any subagent via `invoke_subagent`, the Orchestrator deterministic
 | `frontend` | `PRD.md`, `VISUAL-CONTRACT.md`, `DESIGN-SPEC.md`, 3D/Motion assets | `mockup-first-workflow`, `design-taste-frontend`, `component-patterns`, `data-visualization`, `visual-craft-recipes`, `motion-choreography-system` | `iconify`, `magicui`, `shadcn`, `playwright` | Quality Self-Check (100% interactive, 0 dead buttons, zero console errors). |
 | `qa` | All upstream code & specs | `web-design-guidelines` | `playwright` | **QA Veto**: Blocks any failing automated test, accessibility violation, or broken flow. |
 | `enhancer` | All upstream code & test reports | `web-design-guidelines` | `playwright` | Optimization & Refactoring blueprint. |
-| `documentation` | All upstream artifacts & source code | `obsidian-vault-craft` | — | Vault gate: Blocks if notes < 80 lines or graph links missing. |
+| `documentation` | `PRD.md`, `ADR.md`, `docs/api/openapi.yaml`, `DATA.md`, `SEC-SPEC.md` | `obsidian-vault-craft` | — | **Documentation Gate**: Blocks if technical decisions lack context, rationale, discarded alternatives, consequences, or links. Quality over line count. |
 | `orchestrator` | Entire project tree | `agy-customizations`, `antigravity-guide` | All | Master Pipeline Governor. |
 
 ---

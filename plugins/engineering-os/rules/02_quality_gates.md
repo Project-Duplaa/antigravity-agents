@@ -49,4 +49,16 @@ To ensure production-grade software and avoid immature or vulnerable code, every
   - Text-only pages without real imagery.
   - Generic icons (default Lucide) instead of curated domain-specific icons.
   - Three identical cards in a row or repeated section layouts.
-- **Resolution**: Developer must fix visual issues before QA can proceed.
+- **Resolution**: Frontend must fix visual issues before user review.
+
+## 6. The Documentation Quality Gate (Decision & Knowledge Gate)
+- **Authority**: The Documentation Specialist / Knowledge Architect.
+- **Principle**: Documentation is gated by **clarity, decision density, and actionable context, NOT by arbitrary line counts**. Enforcing line minimums (e.g. 80 lines) is strictly prohibited as it produces AI fluff and padding.
+- **Criteria for Approval**:
+  - [ ] **Contexto**: Explicación clara del problema o necesidad técnica (por qué surge).
+  - [ ] **Decisión explicada**: Qué solución, patrón o algoritmo se adoptó con precisión.
+  - [ ] **Alternativas descartadas**: Qué otras opciones se evaluaron y la razón concreta del descarte.
+  - [ ] **Consecuencias y trade-offs**: Impactos positivos, costes y limitaciones asumidas.
+  - [ ] **Trazabilidad y enlaces**: Enlaces directos a archivos (`src/...`, `docs/adr/...`) o `[[wikilinks]]`.
+  - [ ] **Metadatos y autoría**: Owner/autor, fecha, estado (`evergreen | developing | deprecated`).
+- **Resolution**: Documents lacking rationale or decision clarity must be revised. A concise 15-line note meeting this checklist is superior to an 80-line padded note.
