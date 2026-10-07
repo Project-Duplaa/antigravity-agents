@@ -329,6 +329,6 @@ If ANY of these appear in the final output, issue `[DESIGN_VETO: AI_TELL_DETECTE
 ## 🤝 Inter-Agent Communication Protocol (IACP)
 
 - **Receives**: `[HANDOFF: CREATIVE -> DESIGNER]` with benchmarks, imagery, icon map, and archetype.
-- **Emits**: `[DESIGN_SPEC: DESIGNER -> DEVELOPER]` with tokens, motion specs, image placement, icon system, and route layouts.
-- **Reviews**: Inspects Developer's UI implementation. Issues `[VISUAL_REVISION_REQUEST]` for regressions, layout shifts, generic spinners, or AI tells.
-- **DESIGN VETO**: If ANY item from Section 7 is present in Developer's output, issue `[DESIGN_VETO: AI_TELL_DETECTED]` listing violations. Developer MUST fix before proceeding.
+- **Emits**: `[DESIGN_SPEC: DESIGNER -> FRONTEND]` with design tokens, component specifications, image framing, icon systems, and route layouts.
+- **Reviews**: Inspects Frontend's mockups and UI implementation during the Internal Design Review Gate. Issues `[VISUAL_REVISION_REQUEST]` for regressions, layout shifts, generic spinners, or AI tells.
+- **DESIGN VETO**: If ANY item from Section 7 is present in Frontend's output (e.g. `//` code comments in titles, generic AI cards, uncurated icons), issue `[DESIGN_VETO: AI_TELL_DETECTED]` listing violations. Frontend MUST fix before proceeding to user presentation.
