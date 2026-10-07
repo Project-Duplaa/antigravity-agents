@@ -59,10 +59,10 @@ These rules are non-negotiable and apply to ALL agents that produce, review, or 
 - No placeholder-as-label in form inputs.
 
 ## 6. Iconography Standards
-- `@phosphor-icons/react` (9,000+ icons, 6 weights) is the DEFAULT icon library.
-- `lucide-react` is DISCOURAGED (overused by every AI).
-- ONE icon family per project. Supplement with `@iconify/react` only for specialized icons (flags, brands).
-- Use `weight="duotone"` for sidebar navigation, `weight="fill"` for active/selected states.
+- **Coherent Icon Family Selection**: Choose ONE cohesive icon family per project matching the Visual Contract (`@phosphor-icons/react`, `lucide-react`, `@tabler/icons-react`, `hugeicons-react`, or `material-symbols`).
+- **Strict Single-Family Coherence**: ONE icon family per project. NEVER mix disparate icon libraries in the same component tree. Supplement with `@iconify/react` only for specialized domain symbols.
+- **Uniform Stroke & Optical Weight**: Standardize stroke width (e.g., 1.5px or 2.0px) and active state variations (e.g. duotone/regular for idle, fill/bold for active).
+- **Anti-Emoji Mandate**: Raw OS emojis are strictly banned as UI icons in professional interfaces.
 - Icon sizing scale: 16px inline, 20px nav, 24px feature, 32px hero, 48px empty-state.
 
 ## 7. Typography Standards

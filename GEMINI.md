@@ -74,7 +74,7 @@ To prevent **epistemic drift** (where AI interpretations or unverified web stati
 After the `frontend` agent produces a mockup, the orchestrator MUST invoke `creative` or `designer` to review the HTML source before presenting it to the user. The reviewer checks:
 1. Does the mockup honor the Creative Brief's visual archetype?
 2. Does it follow `.preferences.md` rules (no images in cards, correct fonts, etc.)?
-3. Does it use the correct icons (Phosphor, not Lucide)?
+3. **ICON SYSTEM COHERENCE:** Does it strictly adhere to the single coherent icon system chosen in the Visual Contract (`icon_system.provider`: Phosphor, Lucide, Tabler, Material Symbols, or custom brand SVGs) with uniform optical weight, ZERO mixing of icon families, and ZERO raw emoji icons?
 4. Is the data from the PRD (not invented placeholders)?
 5. Are all buttons functional?
 6. **STRICT COMPONENT RELEVANCE CHECK (Anti-Gratuitous Telemetry):** Are all components on the screen 100% relevant to the product domain? If the reviewer finds irrelevant engineering telemetry, sensor gauges, or clock capsules on a non-engineering page, **REJECT IMMEDIATELY**.

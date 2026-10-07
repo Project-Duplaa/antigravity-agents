@@ -87,7 +87,15 @@ If a section doesn't apply to the project, write `N/A` — do NOT remove the sec
 | Completed | [e.g. Emerald, opacity-60 on row] | |
 | Danger / Overload | [e.g. Red-400] | |
 
-## 5. COMPONENT CONTRACTS
+## 5. ICON SYSTEM CONTRACT
+- Provider: [e.g. phosphor | lucide | tabler | heroicons | material-symbols | custom-svg]
+- Package / CDN: [e.g. "@phosphor-icons/web" | "lucide" | "@tabler/icons-react"]
+- Primary weight / stroke: [e.g. regular (1.5px) | light (1.25px) | duotone | bold]
+- Active state variant: [e.g. fill | bold | high-contrast accent]
+- Optical size: [e.g. 20px / 24px]
+- Rule: Single coherent icon library across the entire project. ZERO mixing of icon families. ZERO raw emoji icons.
+
+## 6. COMPONENT CONTRACTS
 
 ### Section Header Pattern
 - Eyebrow: [e.g. "Colored bar (w-1.5 h-4) + mono uppercase text-[10px] tracking-[0.25em]"]
@@ -120,7 +128,7 @@ If a section doesn't apply to the project, write `N/A` — do NOT remove the sec
 - Numbering: [e.g. "font-mono text-[11px] before label: 01, 02, 03, 04"]
 - Footer: [e.g. "Status beacon — emerald pulse dot + 'LIVE ENGINE / ONLINE'"]
 
-## 6. LAYOUT CONTRACTS
+## 7. LAYOUT CONTRACTS
 
 ### Grid Structure
 - Main: [e.g. "grid-cols-12, primary content 8 cols, telemetry panel 4 cols"]
@@ -131,19 +139,19 @@ If a section doesn't apply to the project, write `N/A` — do NOT remove the sec
 ### Section Dividers
 - Between sections: [e.g. "border-t border-white/[0.05] + pt-12 mt-12"]
 
-## 7. MOTION CONTRACTS
+## 8. MOTION CONTRACTS
 - Page transitions: [e.g. "fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1)"]
 - Hover on interactive rows: [e.g. "translateY(-1px) + border-color lighten"]
 - Button press: [e.g. "scale(0.98) translateY(1px)"]
 - Progress bar: [e.g. "transition-all duration-700"]
 
-## 8. ANTI-PATTERN CHECKLIST
+## 9. ANTI-PATTERN CHECKLIST
 Before submitting, verify:
 - [ ] No 3 identical cards in a row
 - [ ] No rounded-2xl or rounded-3xl on any container
 - [ ] No floating translucent pill navbar
 - [ ] No images inside cards
-- [ ] No Lucide / Heroicons / emoji icons
+- [ ] Icon system is 100% coherent (no mixed icon families, no raw OS emoji icons)
 - [ ] No JetBrains Mono or Plus Jakarta Sans
 - [ ] No generic SaaS copy ("revolutionize", "leverage", "empower")
 - [ ] All data uses real PRD mock data, not "Lorem ipsum" or "Task 1"

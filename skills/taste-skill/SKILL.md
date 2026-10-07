@@ -138,11 +138,10 @@ Unless the design read picks a real design system (Section 2.A), these are the d
 * **NEVER** use `useState` to track continuous values driven by user input (mouse position, scroll progress, pointer physics, magnetic hover). Use Motion's `useMotionValue` / `useTransform` / `useScroll`. `useState` re-renders the React tree on every change and collapses on mobile.
 
 ### 3.C Icons
-* **Allowed libraries (priority order):** `@phosphor-icons/react`, `hugeicons-react`, `@radix-ui/react-icons`, `@tabler/icons-react`.
-* **Discouraged:** `lucide-react`. Acceptable only when the user explicitly asks for it or the project already depends on it.
-* **NEVER hand-roll SVG icons.** If a glyph is missing, install a second library or compose from primitives - do not draw icon paths from scratch.
-* **One family per project.** Do not mix Phosphor with Lucide in the same component tree.
-* **Standardize `strokeWidth` globally** (e.g. `1.5` or `2.0`).
+* **Coherent Icon Family Selection:** Choose ONE cohesive icon family per project matching the Visual Contract (`@phosphor-icons/react`, `lucide-react`, `hugeicons-react`, `@tabler/icons-react`, `@radix-ui/react-icons`, or `material-symbols`).
+* **One family per project.** NEVER mix disparate icon sets (e.g. Phosphor with Lucide or Tabler) in the same component tree.
+* **NEVER hand-roll SVG icons.** If a glyph is missing, source it from Iconify or the project's selected family.
+* **Standardize `strokeWidth` and optical weight globally** (e.g. `1.5` or `2.0`, regular or duotone).
 
 ### 3.D Emoji Policy
 Discouraged by default in code, markup, and visible text. Replace symbols with icon-library glyphs. **Override:** allow emojis only when the user explicitly asks for a playful / chat-style / social-native vibe - and even then use them sparingly with intent.
@@ -620,7 +619,7 @@ Avoid these signatures unless the brief explicitly asks for them.
 * **NO filler verbs.** "Elevate", "Seamless", "Unleash", "Next-Gen", "Revolutionize" → concrete verbs only.
 
 ### 9.E External Resources & Components
-* **NO hand-rolled SVG icons.** Use Phosphor / HugeIcons / Radix / Tabler. Lucide on explicit request only.
+* **NO hand-rolled SVG icons.** Use the single cohesive icon family selected in the Visual Contract (Phosphor, Lucide, HugeIcons, Radix, Tabler). Never mix families.
 * **Hand-rolled decorative SVGs strongly discouraged** as default (see Section 4.8).
 * **NO div-based fake screenshots.** Never build a fake product UI out of `<div>` rectangles to simulate a screenshot. Use real images, generated images, or skip the preview.
 * **NO broken Unsplash links.** Use `https://picsum.photos/seed/{descriptive-string}/{w}/{h}`, or generated photo placeholders, or actual assets.
@@ -970,7 +969,7 @@ Run this matrix before outputting code. This is the last filter.
 - [ ] **`useEffect` animations** have strict cleanup functions?
 - [ ] **Empty / loading / error** states provided?
 - [ ] **Cards omitted** in favor of spacing where possible?
-- [ ] **Icons** from an allowed library only (Phosphor / HugeIcons / Radix / Tabler), no hand-rolled SVG paths?
+- [ ] **Icons** from the project's selected cohesive icon family, uniform stroke/weight, no mixed sets, no hand-rolled SVG paths?
 - [ ] **Motion** isolated in client-leaf components with `'use client'` at the top, memoized?
 - [ ] **No AI Tells** from Section 9 (Inter as default, AI-purple, three-equal cards, Jane Doe, Acme, "Quietly in use at")?
 - [ ] **Core Web Vitals** plausibly hit (LCP < 2.5s, INP < 200ms, CLS < 0.1)?

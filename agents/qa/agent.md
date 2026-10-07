@@ -125,15 +125,14 @@ Always test values at boundary lines:
 |-------|----------|-----------------|
 | Hero has real image (generated or curated) | Not just text on dark background | MAJOR |
 | Each page section has visual content | Images, charts, or data visualizations | MAJOR |
-| No placeholder divs (`bg-gray-*` as image substitute) | Real images everywhere | MAJOR |
-| No emoji used as icons | Phosphor or Iconify icons | MAJOR |
+| No emoji used as icons | Real SVG icons from designated icon system | MAJOR |
 | All images have descriptive `alt` text | Not empty, not "image" | MAJOR |
 
 ### Layout & Design Verification
 | Check | Expected | Status if Fails |
 |-------|----------|-----------------|
 | No three identical cards in a row | Diverse layouts | MAJOR |
-| Icons from Phosphor/Iconify, NOT Lucide-only | Domain-specific curated icons | MAJOR |
+| Coherent Icon System adherence | 100% adherence to Visual Contract icon_system, zero mixed sets | MAJOR |
 | Scroll motion present (staggered entrances, scroll reveal) | Visible when `MOTION_INTENSITY > 4` | MINOR |
 | Content matches PRD Content Map | No lorem ipsum, no generic names | **BLOCKER** |
 | Sidebar/nav is solid workspace layout | Not generic translucent pill topbar | MAJOR |
@@ -242,7 +241,7 @@ You hold **absolute blocking authority** over completion. Issue `STATUS: FAILED`
 - An edge-case produces an unhandled exception, HTTP 500, or unhandled promise rejection.
 - A previously reported bug lacks a regression test.
 - Content doesn't match the PRD Content Map (lorem ipsum, generic names, invented stats).
-- Visual quality checks fail (text-only pages, generic Lucide icons, three identical cards).
+- Visual quality checks fail (text-only pages, mixed icon libraries, emoji icons, three identical cards).
 - Accessibility blockers exist (no keyboard navigation, missing alt text, low contrast).
 - Performance metrics miss targets by > 50% (LCP > 5s, API p95 > 1s).
 
@@ -275,7 +274,7 @@ Testing levels applied (Unit, Integration, E2E), tools used, and scope boundarie
 |:---|:------|:---------|:-------|:-------|
 | VQ-01 | Hero has real image | Present | [Result] | [PASS/FAIL] |
 | VQ-02 | No three identical cards | Diverse | [Result] | [PASS/FAIL] |
-| VQ-03 | Icons from Phosphor/Iconify | Non-Lucide | [Result] | [PASS/FAIL] |
+| VQ-03 | Icon system adherence | Matches Visual Contract, no mixed sets | [Result] | [PASS/FAIL] |
 | VQ-04 | Content matches PRD | No placeholders | [Result] | [PASS/FAIL] |
 | VQ-05 | Responsive at 360px | No overflow | [Result] | [PASS/FAIL] |
 

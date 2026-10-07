@@ -158,7 +158,7 @@ When invoking any subagent via `invoke_subagent`, the Orchestrator deterministic
 | `security` (Pre-Code) | `PRD.md`, `ADR.md` | `gcs-security-assessment` | — | Emits `SEC-SPEC.md` (Threat model, auth/RBAC matrix, rate limits, trust boundaries). |
 | `developer` | `PRD.md`, `ADR.md`, `DATA.md`, `SEC-SPEC.md` | `managing-python-dependencies` | — | Code quality gate (100% test pass rate, strict types, zero frontend code). |
 | `security` (Post-Code) | `SEC-SPEC.md`, `src/` (implementation code) | `gcs-security-assessment` | — | **Security Veto**: Blocks any unresolved Critical/High OWASP/STRIDE vulnerability or unauthenticated route. |
-| `designer` | `PRD.md`, `VISUAL-CONTRACT.md`, `ADR.md` | `design-skill-index`, `awesome-design`, `component-patterns` | `iconify`, `shadcn` | **Anti-AI Design Veto**: Blocks generic AI templates, `//` in titles, uncurated icons. |
+| `designer` | `PRD.md`, `VISUAL-CONTRACT.md`, `ADR.md` | `design-skill-index`, `awesome-design`, `component-patterns` | `iconify`, `shadcn` | **Anti-AI Design Veto**: Blocks generic AI templates, `//` in titles, incoherent/mixed icon sets, or emoji icons. |
 | `blender` | `PRD.md`, `VISUAL-CONTRACT.md`, CAD references | `blender-studio-pipeline`, `viral-3d-experience` | — | Visual self-audit gate (`audit.py` passes contrast/clipping thresholds). |
 | `motion` | `PRD.md`, `DESIGN-SPEC.md`, `VISUAL-CONTRACT.md` | `motion-choreography-system`, `motion-design` | `playwright` | **Motion Veto**: Blocks jarring, unmotivated, bouncy, or frame-dropping animations. |
 | `frontend` | `PRD.md`, `VISUAL-CONTRACT.md`, `DESIGN-SPEC.md`, 3D/Motion assets | `mockup-first-workflow`, `design-taste-frontend`, `component-patterns`, `data-visualization`, `visual-craft-recipes`, `motion-choreography-system` | `iconify`, `magicui`, `shadcn`, `playwright` | Quality Self-Check (100% interactive, 0 dead buttons, zero console errors). |
@@ -187,7 +187,7 @@ After `frontend` creates a mockup:
    - Does it honor the Visual Contract?
    - Are there any `//` comments in titles, buttons, or badges? (STRICT REJECT)
    - Are images full-bleed and not caged inside cards?
-   - Are icons 100% Phosphor Icons?
+   - Are icons 100% compliant with the project's selected `icon_system` (coherent family, consistent optical weight, zero mixed libraries, zero emoji icons)?
    - Are all buttons and toggles functional?
    - Are components 100% domain-relevant (zero gratuitous telemetry)?
 3. If violations are found, `frontend` is re-invoked with explicit line numbers and fixes (max 2 iterations). Only approved mockups are shown to the user.
