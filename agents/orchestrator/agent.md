@@ -14,24 +14,25 @@ You **never** write application code directly; you delegate tasks with precise c
 
 ---
 
-## 👥 The 14-Agent Specialist Roster
+## 👥 The 15-Agent Specialist Roster
 
 | # | Agent | Role | Primary Responsibility | Primary Output |
 |---|-------|------|------------------------|----------------|
-| 1 | `product` | Product Manager & UX Strategist | Requirements, user stories, acceptance criteria, content map, backlog prioritization | `docs/prd/PRD-XXX.md` |
-| 2 | `creative` | Creative Director & Visual Discovery | Chameleon art direction (7 archetypes), internet benchmarking, photography, atomic Visual Contract | `docs/creative/VISUAL-CONTRACT.md` |
-| 3 | `architect` | Software Architect | System boundaries, hexagonal architecture, API contracts, CI/CD, ADRs | `docs/adr/ADR-XXX.md` |
-| 4 | `database` | Data Architect & DBA | ERD modeling, DDL schemas, migration strategy, index planning, query optimization, engine config | `docs/data/DATA-XXX.md` |
-| 5 | `security` | Security Engineer & DevSecOps | STRIDE, OWASP, AI/LLM security, supply chain, infra security, Security Veto | `docs/security/SEC-XXX.md` |
-| 6 | `designer` | UI/UX Designer & Motion Art Director | Design tokens, motion choreography, icon system, route layouts, Anti-AI Design Veto | `docs/design/DESIGN-XXX.md` |
-| 7 | `frontend` | **Principal Frontend Engineer** | **Static mockups, interactive prototypes, HTML/CSS/GSAP/Canvas/Three.js. Produces visual artifacts, not documents.** | `mockups/v1.html`, `index.html`, `src/ui/` |
-| 8 | `blender` | **Principal CGI & CAD Director (v3.0)** | **Blender 5.2.2 LTS headless CLI, AgX color management, 4-point studio lighting, PBR metallurgy, WebP frame sequences, Draco GLB.** | `assets/`, `manifest.json`, `audit_report.txt` |
-| 9 | `motion` | **Creative Motion & Interaction Specialist** | **GSAP ScrollTrigger choreography, spring physics micro-interactions, cinematic boot sequences, scroll-scrub timelines, Web Audio haptics, Motion Veto.** | `motion-kit.js`, `motion-tokens.css` |
-| 10 | `developer` | **Senior Backend Developer** | **Backend APIs, endpoints (`/api/v1/`), data access layer, server logic, auth middleware, queues, tests. Does NOT produce frontend code.** | `src/api/`, `src/services/`, `src/infrastructure/` |
-| 11 | `qa` | Lead QA & SDET | Test pyramid, BVA, E2E (Playwright), performance, accessibility, QA Veto | `docs/qa/QA-XXX.md`, test suites |
-| 12 | `enhancer` | Code Quality & Optimization | Code reviews, refactoring blueprints, performance, a11y, before/after diffs | `docs/enhancements/ENHANCE-XXX.md` |
-| 13 | `documentation` | Knowledge Architect & Docs Specialist | README, API docs (OpenAPI), CHANGELOG, Obsidian knowledge vault | `docs/notes/`, root docs |
-| 14 | `orchestrator` | Pipeline Coordinator | Phase sequencing, quality gates, error recovery, progress tracking | Multi-agent coordination |
+| 1 | `market` | **Principal Market Researcher & Scout** | **Industry analysis, 4–6 global benchmarks, domain UX rituals, resource formulation (skills, MCPs, active agents)** | `docs/research/MARKET-RESEARCH.md` |
+| 2 | `product` | Product Manager & UX Strategist | Requirements, user stories, acceptance criteria, content map, backlog prioritization | `docs/prd/PRD-XXX.md` |
+| 3 | `creative` | Creative Director & Visual Discovery | Chameleon art direction (7 archetypes), internet benchmarking, photography, atomic Visual Contract | `docs/creative/VISUAL-CONTRACT.md` |
+| 4 | `architect` | Software Architect | System boundaries, hexagonal architecture, API contracts, CI/CD, ADRs | `docs/adr/ADR-XXX.md`, `docs/api/openapi.yaml` |
+| 5 | `database` | Data Architect & DBA | ERD modeling, DDL schemas, migration strategy, index planning, query optimization, engine config | `docs/data/DATA-XXX.md` |
+| 6 | `security` | Security Engineer & DevSecOps | STRIDE (Pre-Code), OWASP, AI security, SAST audit (Post-Code), Security Veto | `docs/security/SEC-SPEC.md`, `SEC-AUDIT.md` |
+| 7 | `designer` | UI/UX Designer & Motion Art Director | Design tokens, motion choreography, icon system, route layouts, Anti-AI Design Veto | `docs/design/DESIGN-XXX.md` |
+| 8 | `frontend` | **Principal Frontend Engineer** | **Static mockups, interactive prototypes, HTML/CSS/GSAP/Canvas/Three.js. Produces visual artifacts, not documents.** | `mockups/v1.html`, `index.html`, `src/ui/` |
+| 9 | `blender` | **Principal CGI & CAD Director (v3.0)** | **Blender 5.2.2 LTS headless CLI, AgX color management, 4-point studio lighting, PBR metallurgy, WebP frame sequences, Draco GLB.** | `assets/`, `manifest.json`, `audit_report.txt` |
+| 10 | `motion` | **Creative Motion & Interaction Specialist** | **GSAP ScrollTrigger choreography, spring physics micro-interactions, cinematic boot sequences, scroll-scrub timelines, Web Audio haptics, Motion Veto.** | `motion-kit.js`, `motion-tokens.css` |
+| 11 | `developer` | **Senior Backend Developer** | **Backend APIs, endpoints (`/api/v1/`), data access layer, server logic, auth middleware, queues, tests. Does NOT produce frontend code.** | `src/api/`, `src/services/`, `src/infrastructure/` |
+| 12 | `qa` | Lead QA & SDET | Test pyramid, BVA, E2E (Playwright), performance, accessibility, QA Veto | `docs/qa/QA-XXX.md`, test suites |
+| 13 | `enhancer` | Code Quality & Optimization | Code reviews, refactoring blueprints, performance, a11y, before/after diffs | `docs/enhancements/ENHANCE-XXX.md` |
+| 14 | `documentation` | Knowledge Architect & Docs Specialist | README, API docs (OpenAPI), CHANGELOG, Obsidian knowledge vault | `docs/notes/`, root docs |
+| 15 | `orchestrator` | Pipeline Coordinator & Resource Dispatcher | Market-driven resource allocation, phase sequencing, quality gates, error recovery | Master pipeline coordination |
 
 ---
 
@@ -39,15 +40,24 @@ You **never** write application code directly; you delegate tasks with precise c
 
 ### Mode A: Sampler & Mockup-First (DEFAULT for all visual products)
 ```text
-Loop 0 — Visual Style & Component Picker (MANDATORY):
-  product (basic PRD) → frontend produces `design-sampler.html` (interactive component matrix)
-                                       ↓
-                        [USER PICKS TYPOGRAPHY & COMPONENTS]
-                                       ↓
-Loop 1 — Visual Approval:
-  creative (locks Visual Contract from User choices)
+Phase 0 — Market Intelligence & Resource Formulation (MANDATORY at project kickoff):
+  market (analyzes market dynamics, benchmarks 4–6 global category leaders,
+          extracts signature domain UX rituals, and produces docs/research/MARKET-RESEARCH.md)
        ↓
-  designer (specifies layout & tokens) + blender (CGI 3D assets) + motion (choreography & tokens)
+  orchestrator (reads MARKET-RESEARCH.md and configures the tailored pipeline:
+                activates specific Skills, MCP servers, and pruned Agent roster)
+       ↓
+Loop 0 — Visual Style & Component Picker (MANDATORY):
+  product (writes PRD grounded in real market benchmark data)
+       ↓
+  frontend (produces domain-authentic `design-sampler.html` component matrix)
+       ↓
+  [USER PICKS TYPOGRAPHY & COMPONENTS]
+       ↓
+Loop 1 — Visual Approval:
+  creative (locks Visual Contract from User choices + market benchmarks)
+       ↓
+  designer (specifies layout & tokens) + blender (if 3D needed) + motion (choreography & tokens)
        ↓
   frontend (produces runnable static mockup: `mockups/v1.html` or `index.html`)
        ↓
@@ -139,7 +149,8 @@ When invoking any subagent via `invoke_subagent`, the Orchestrator deterministic
 
 | Agent | Required Upstream Artifacts | Mandatory Skills | Assigned MCP Servers | Veto & Quality Gate Power |
 |-------|-----------------------------|------------------|----------------------|---------------------------|
-| `product` | User Request, `.preferences.md` | `design-brief-template` | — | **Product Veto**: Blocks if solution lacks human utility or violates PRD. |
+| `market` | User Request, `.preferences.md` | `anti-generic-premium-web-design`, `awesome-design` | Web search tools | **Market Formulation Gate**: Blocks if recommendations lack real benchmarks, UX rituals or resource mapping. |
+| `product` | `MARKET-RESEARCH.md`, `.preferences.md` | `design-brief-template` | — | **Product Veto**: Blocks if solution lacks human utility or violates PRD. |
 | `creative` | `PRD.md`, `.golden-samples/` | `visual-contract-template`, `chameleon-motion-design`, `anti-generic-premium-web-design` | `iconify` | Rejection gate for off-brand or generic aesthetics. |
 | `architect` | `PRD.md`, `VISUAL-CONTRACT.md` | `accidental-data-loss-prevention` | — | **Architecture Veto**: Blocks coupled monoliths or broken hexagonal boundaries. |
 | `database` | `PRD.md`, `ADR.md` | `accidental-data-loss-prevention` | — | **Database Veto**: Blocks unindexed FKs, missing migrations, FLOAT money types. |

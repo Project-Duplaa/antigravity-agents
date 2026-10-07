@@ -8,36 +8,42 @@ Whenever starting a project from scratch (greenfield), executing a major feature
 4. **ALWAYS** follow the Mockup-First Workflow for visual products (see `mockup-first-workflow` skill).
 5. **ALWAYS** ensure every agent reads `.preferences.md` in the workspace root before producing any output. User preferences override all other rules.
 
-## Specialized Agent Roster (14 Agents)
+## Specialized Agent Roster (15 Agents)
 
 | # | Agent | Role | Invoked For |
 |---|-------|------|-------------|
-| 1 | `product` | Product Manager & UX Strategist | Requirements, user stories, acceptance criteria, content map, backlog prioritization |
-| 2 | `creative` | Creative Director & Visual Discovery | Chameleon art direction (7 archetypes), internet benchmarking, photography, icon curation |
-| 3 | `architect` | Software Architect | System boundaries, hexagonal architecture, API contracts, CI/CD, ADRs |
-| 4 | `database` | Data Architect & DBA | ERD modeling, DDL schemas, migration strategy, index planning, query optimization, engine config |
-| 5 | `security` | Security Engineer & DevSecOps | STRIDE, OWASP, AI/LLM security, supply chain, infra security, Security Veto |
-| 6 | `designer` | UI/UX Designer & Motion Art Director | Design tokens, motion choreography, icon system, route layouts, Anti-AI Design Veto |
-| 7 | `frontend` | **Principal Frontend Engineer** | **Static mockups, interactive prototypes, HTML/CSS/GSAP/Canvas. Produces visual artifacts, not documents.** |
-| 8 | `blender` | **Principal CGI & CAD Director (v3.0)** | **Photorealistic Blender 5.2.2 headless renders (AgX, 4-point studio lighting, PBR materials), hard-surface CAD modeling, visual self-inspection loop, WebP frame sequences, Draco GLB export.** |
-| 9 | `motion` | **Creative Motion & Interaction Specialist** | **GSAP ScrollTrigger choreography, spring physics micro-interactions, cinematic boot sequences, scroll-scrub timelines, Canvas/WebGL particles, Web Audio haptics, Motion Veto.** |
-| 10 | `developer` | Senior Backend Developer | Backend APIs, data access layer, server logic, tests. **Does NOT produce frontend code.** |
-| 11 | `qa` | Lead QA & SDET | Test pyramid, BVA, E2E (Playwright), performance, accessibility, QA Veto |
-| 12 | `enhancer` | Code Quality & Optimization | Code reviews, refactoring blueprints, performance, a11y, before/after diffs |
-| 13 | `documentation` | Knowledge Architect & Docs Specialist | README, API docs (OpenAPI), CHANGELOG, Obsidian knowledge vault |
-| 14 | `orchestrator` | Pipeline Coordinator | Phase sequencing, quality gates, error recovery, progress tracking |
+| 1 | `market` | **Principal Market Researcher & Scout** | **Industry analysis, 4–6 global benchmarks, domain UX rituals, resource formulation (skills, MCPs, active agents)** |
+| 2 | `product` | Product Manager & UX Strategist | Requirements, user stories, acceptance criteria, content map, backlog prioritization |
+| 3 | `creative` | Creative Director & Visual Discovery | Chameleon art direction (7 archetypes), internet benchmarking, photography, icon curation |
+| 4 | `architect` | Software Architect | System boundaries, hexagonal architecture, API contracts, CI/CD, ADRs |
+| 5 | `database` | Data Architect & DBA | ERD modeling, DDL schemas, migration strategy, index planning, query optimization, engine config |
+| 6 | `security` | Security Engineer & DevSecOps | STRIDE, OWASP, AI/LLM security, supply chain, infra security, Security Veto |
+| 7 | `designer` | UI/UX Designer & Motion Art Director | Design tokens, motion choreography, icon system, route layouts, Anti-AI Design Veto |
+| 8 | `frontend` | **Principal Frontend Engineer** | **Static mockups, interactive prototypes, HTML/CSS/GSAP/Canvas. Produces visual artifacts, not documents.** |
+| 9 | `blender` | **Principal CGI & CAD Director (v3.0)** | **Photorealistic Blender 5.2.2 headless renders (AgX, 4-point studio lighting, PBR materials), hard-surface CAD modeling, visual self-inspection loop, WebP frame sequences, Draco GLB export.** |
+| 10 | `motion` | **Creative Motion & Interaction Specialist** | **GSAP ScrollTrigger choreography, spring physics micro-interactions, cinematic boot sequences, scroll-scrub timelines, Canvas/WebGL particles, Web Audio haptics, Motion Veto.** |
+| 11 | `developer` | Senior Backend Developer | Backend APIs, data access layer, server logic, tests. **Does NOT produce frontend code.** |
+| 12 | `qa` | Lead QA & SDET | Test pyramid, BVA, E2E (Playwright), performance, accessibility, QA Veto |
+| 13 | `enhancer` | Code Quality & Optimization | Code reviews, refactoring blueprints, performance, a11y, before/after diffs |
+| 14 | `documentation` | Knowledge Architect & Docs Specialist | README, API docs (OpenAPI), CHANGELOG, Obsidian knowledge vault |
+| 15 | `orchestrator` | Pipeline Coordinator & Resource Dispatcher | Phase sequencing, quality gates, dynamic resource dispatching, error recovery |
 
 ## Adaptive Orchestration Flow (Replaces Rigid 11-Phase)
 
 ### Mode A: Sampler & Mockup-First (DEFAULT for visual products)
 ```
+Phase 0 — Market Intelligence & Resource Formulation (MANDATORY at kickoff):
+  market (industry deep dive, 4–6 global benchmarks, UX rituals, outputs `docs/research/MARKET-RESEARCH.md`)
+                                       ↓
+  orchestrator (reads MARKET-RESEARCH.md, selects active Skills, MCPs, and tailored Agent roster)
+                                       ↓
 Loop 0 — Visual Style & Component Picker (MANDATORY):
-  product (basic PRD) → frontend produces `design-sampler.html` (interactive component matrix)
+  product (PRD grounded in benchmarks) → frontend produces `design-sampler.html` (interactive component matrix)
                                        ↓
                         [USER PICKS TYPOGRAPHY & COMPONENTS]
                                        ↓
 Loop 1 — Visual Approval:
-  creative (locks Visual Contract from User choices) → designer → frontend (static mockup)
+  creative (locks Visual Contract from User choices + market benchmarks) → designer → frontend (static mockup)
                                        ↓
                               INTERNAL DESIGN REVIEW (creative or designer reviews the HTML)
                                        ↓
@@ -124,8 +130,10 @@ Every agent MUST read and honor ALL upstream artifacts before starting work:
 
 | Agent | MUST Read Before Starting |
 |-------|--------------------------|
-| `creative` | PRD from `product` + `.golden-samples/` (study approved patterns) + `visual-contract-template` skill |
-| `architect` | PRD from `product` |
+| `market` | User request + `.preferences.md` |
+| `product` | `MARKET-RESEARCH.md` from `market` + `.preferences.md` |
+| `creative` | PRD from `product` + `MARKET-RESEARCH.md` from `market` + `.golden-samples/` + `visual-contract-template` skill |
+| `architect` | PRD from `product` + `MARKET-RESEARCH.md` |
 | `database` | PRD from `product` + ADR from `architect` |
 | `security (Pre-Code)` | PRD from `product` + ADR from `architect` (threat modeling, trust boundaries, auth model) |
 | `developer` | PRD + ADR + **canonical `openapi.yaml`** + DATA spec + **SEC-SPEC from `security (Pre-Code)`** (NO frontend work) |
