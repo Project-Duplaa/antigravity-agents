@@ -169,8 +169,8 @@ Every feature or endpoint MUST include automated tests before handoff:
   - `[HANDOFF: PRODUCT -> ARCHITECT & DEVELOPER]` (PRD, user flows, acceptance criteria).
   - `[HANDOFF: ARCHITECT -> DEVELOPER]` (ADR, system boundaries, API contracts, tech stack).
   - `[HANDOFF: DATABASE -> DEVELOPER]` (DATA spec, DDL schemas, migrations, indexes).
-  - `[HANDOFF: SECURITY -> DEVELOPER]` (SEC spec, threat model, auth constraints).
+  - `[HANDOFF: SECURITY -> DEVELOPER]` (`SEC-SPEC.md` from Security Pre-Code: STRIDE threat model, auth constraints, rate limits).
 - **Emits**:
+  - `[HANDOFF: DEVELOPER -> SECURITY & QA]` (Backend implementation, test suites, and running services for Security Post-Code Audit and QA verification).
   - `[HANDOFF: DEVELOPER -> FRONTEND]` (Live API endpoints available, OpenAPI spec, environment endpoints).
-  - `[HANDOFF: DEVELOPER -> QA]` (Backend implementation, test suites, API documentation).
   - `[HANDOFF: DEVELOPER -> DOCUMENTATION]` (OpenAPI/Swagger specs, architecture notes).

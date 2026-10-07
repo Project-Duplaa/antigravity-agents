@@ -21,20 +21,24 @@ Loop 1 — Visual Approval:
                               [USER REVIEWS & APPROVES]
 
 Loop 2 — Engineering Integration (only after visual approval):
-  architect → database / security → developer (backend only) → frontend (connect APIs) → qa / enhancer → documentation
+  architect → database + security [Phase 1: Pre-Code Threat Model & SEC-SPEC] (parallel)
+       ↓
+  developer (backend only, adhering to DATA & SEC-SPEC)
+       ↓
+  frontend (connect APIs) + security [Phase 2: Post-Code Audit & Veto] + qa / enhancer (parallel) → documentation
 ```
 
 ### Mode B: Backend-First (APIs, CLIs, data pipelines, SDKs)
 ```
-product → architect → database / security → developer → qa / enhancer → documentation
+product → architect → database + security [Pre-Code] → developer → security [Post-Code] + qa / enhancer → documentation
 ```
 
 ### Mode C: Full Parallel (Large projects with clear domain boundaries)
 ```
 product → creative + architect (parallel)
-       → designer + database + security (parallel)
+       → designer + database + security [Pre-Code] (parallel)
        → frontend + developer (parallel)
-       → qa / enhancer → documentation
+       → security [Post-Code] + qa / enhancer (parallel) → documentation
 ```
 
 ---
@@ -49,12 +53,13 @@ product → creative + architect (parallel)
 | 4. Visual Mockup | `frontend` | `mockups/vX.html` | Standalone HTML mockup, zero server dependencies, hardcoded PRD data |
 | 5. Architecture | `architect` | `docs/adr/ADR-XXX.md` | Hexagonal structure, API contracts, ADRs, state boundaries |
 | 6. Data Architecture | `database` | `docs/data/DATA-XXX.md` | ERD, DDL schemas, index strategy, engine config, seed data |
-| 7. Security Audit | `security` | `docs/security/SEC-XXX.md` | STRIDE model, OWASP guardrails, encryption specs, Security Veto |
+| 7. Security Pre-Code | `security` | `docs/security/SEC-SPEC.md` | STRIDE model, trust boundaries, auth/RBAC matrix, rate limits |
 | 8. Backend Engineering | `developer` | `src/`, `src/domain/`, etc. | REST endpoints, data access layer, server logic, unit tests |
 | 9. Frontend Connection | `frontend` | `public/index.html` | Connect approved mockup to backend REST APIs |
-| 10. QA Validation | `qa` | `docs/qa/QA-XXX.md` | Test execution matrix, BVA, accessibility, QA Veto |
-| 11. Code Optimization | `enhancer` | `docs/enhancements/ENHANCE-XXX.md` | 10-pillar code quality scorecard, before/after diffs |
-| 12. Documentation | `documentation` | `README.md`, `CHANGELOG.md`, `docs/notes/` | Comprehensive docs, Obsidian second-brain vault |
+| 10. Security Post-Code | `security` | `docs/security/SEC-AUDIT.md` | SAST, dependency audit, verification against SEC-SPEC, Security Veto |
+| 11. QA Validation | `qa` | `docs/qa/QA-XXX.md` | Test execution matrix, BVA, accessibility, QA Veto |
+| 12. Code Optimization | `enhancer` | `docs/enhancements/ENHANCE-XXX.md` | 10-pillar code quality scorecard, before/after diffs |
+| 13. Documentation | `documentation` | `README.md`, `CHANGELOG.md`, `docs/notes/` | Comprehensive docs, Obsidian second-brain vault |
 
 ---
 

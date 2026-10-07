@@ -58,28 +58,26 @@ Loop 1 — Visual Approval:
 Loop 2 — Engineering & Integration (ONLY after user visual approval):
   architect (defines ADR & OpenAPI endpoint contracts)
        ↓
-  database (DDL, migrations) + security (threat model & auth)
+  database (DDL, migrations) + security [Phase 1: Pre-Code Threat Model & SEC-SPEC] (parallel)
        ↓
-  developer (implements backend APIs: /api/v1/..., controllers, services, tests)
+  developer (implements backend APIs: /api/v1/..., controllers, services, tests adhering to DATA & SEC-SPEC)
        ↓
-  frontend (connects live endpoints into UI, replacing mock fixtures)
+  frontend (connects live endpoints) + security [Phase 2: Post-Code Audit & Veto] + qa (Playwright E2E) (parallel)
        ↓
-  qa (Playwright E2E + backend integration tests) + enhancer (code review)
-       ↓
-  documentation (OpenAPI docs, README, Obsidian knowledge vault)
+  enhancer (code review) → documentation (OpenAPI docs, README, Obsidian knowledge vault)
 ```
 
 ### Mode B: Backend-First (Headless APIs, CLIs, data pipelines, background workers)
 ```text
-product → architect → database / security → developer → qa / enhancer → documentation
+product → architect → database + security [Pre-Code] → developer → security [Post-Code] + qa → enhancer → documentation
 ```
 
 ### Mode C: Full Parallel (Large enterprise projects with clear component boundaries)
 ```text
 product → creative + architect (parallel)
-       → designer + database + security (parallel)
+       → designer + database + security [Pre-Code] (parallel)
        → frontend + developer (parallel)
-       → qa / enhancer → documentation
+       → security [Post-Code] + qa + enhancer (parallel) → documentation
 ```
 
 ---
@@ -137,12 +135,13 @@ When invoking any subagent via `invoke_subagent`, the Orchestrator deterministic
 | `creative` | `PRD.md`, `.golden-samples/` | `visual-contract-template`, `chameleon-motion-design`, `anti-generic-premium-web-design` | `iconify` | Rejection gate for off-brand or generic aesthetics. |
 | `architect` | `PRD.md`, `VISUAL-CONTRACT.md` | `accidental-data-loss-prevention` | — | **Architecture Veto**: Blocks coupled monoliths or broken hexagonal boundaries. |
 | `database` | `PRD.md`, `ADR.md` | `accidental-data-loss-prevention` | — | **Database Veto**: Blocks unindexed FKs, missing migrations, FLOAT money types. |
-| `security` | `ADR.md`, implementation code | `gcs-security-assessment` | — | **Security Veto**: Blocks any unresolved Critical/High OWASP/STRIDE vulnerability. |
+| `security` (Pre-Code) | `PRD.md`, `ADR.md` | `gcs-security-assessment` | — | Emits `SEC-SPEC.md` (Threat model, auth/RBAC matrix, rate limits, trust boundaries). |
+| `developer` | `PRD.md`, `ADR.md`, `DATA.md`, `SEC-SPEC.md` | `managing-python-dependencies` | — | Code quality gate (100% test pass rate, strict types, zero frontend code). |
+| `security` (Post-Code) | `SEC-SPEC.md`, `src/` (implementation code) | `gcs-security-assessment` | — | **Security Veto**: Blocks any unresolved Critical/High OWASP/STRIDE vulnerability or unauthenticated route. |
 | `designer` | `PRD.md`, `VISUAL-CONTRACT.md`, `ADR.md` | `design-skill-index`, `awesome-design`, `component-patterns` | `iconify`, `shadcn` | **Anti-AI Design Veto**: Blocks generic AI templates, `//` in titles, uncurated icons. |
 | `blender` | `PRD.md`, `VISUAL-CONTRACT.md`, CAD references | `blender-studio-pipeline`, `viral-3d-experience` | — | Visual self-audit gate (`audit.py` passes contrast/clipping thresholds). |
 | `motion` | `PRD.md`, `DESIGN-SPEC.md`, `VISUAL-CONTRACT.md` | `motion-choreography-system`, `motion-design` | `playwright` | **Motion Veto**: Blocks jarring, unmotivated, bouncy, or frame-dropping animations. |
 | `frontend` | `PRD.md`, `VISUAL-CONTRACT.md`, `DESIGN-SPEC.md`, 3D/Motion assets | `mockup-first-workflow`, `design-taste-frontend`, `component-patterns`, `data-visualization`, `visual-craft-recipes`, `motion-choreography-system` | `iconify`, `magicui`, `shadcn`, `playwright` | Quality Self-Check (100% interactive, 0 dead buttons, zero console errors). |
-| `developer` | `PRD.md`, `ADR.md`, `DATA.md`, `SEC.md` | `managing-python-dependencies` | — | Code quality gate (100% test pass rate, strict types, zero frontend code). |
 | `qa` | All upstream code & specs | `web-design-guidelines` | `playwright` | **QA Veto**: Blocks any failing automated test, accessibility violation, or broken flow. |
 | `enhancer` | All upstream code & test reports | `web-design-guidelines` | `playwright` | Optimization & Refactoring blueprint. |
 | `documentation` | All upstream artifacts & source code | `obsidian-vault-craft` | — | Vault gate: Blocks if notes < 80 lines or graph links missing. |

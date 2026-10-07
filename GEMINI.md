@@ -44,7 +44,11 @@ Loop 1 — Visual Approval:
                               [USER SEES AND APPROVES]
 
 Loop 2 — Engineering (only after approval):
-  architect → database / security → developer (backend only) → frontend (connect APIs) → qa / enhancer → documentation
+  architect → database + security [Phase 1: Pre-Code Threat Model & SEC-SPEC] (parallel)
+       ↓
+  developer (backend only, adhering to DATA & SEC-SPEC)
+       ↓
+  frontend (connect APIs) + security [Phase 2: Post-Code Audit & Veto] + qa / enhancer (parallel) → documentation
 ```
 
 #### Internal Design Review Gate (New in v2)
@@ -61,15 +65,15 @@ If the reviewer finds violations, the `frontend` agent is re-invoked with specif
 
 ### Mode B: Backend-First (APIs, CLIs, data pipelines)
 ```
-product → architect → database / security → developer → qa / enhancer → documentation
+product → architect → database + security [Pre-Code] → developer → security [Post-Code] + qa / enhancer → documentation
 ```
 
 ### Mode C: Full Parallel (Large projects with clear boundaries)
 ```
 product → creative + architect (parallel)
-       → designer + database + security (parallel)
+       → designer + database + security [Pre-Code] (parallel)
        → frontend + developer (parallel)
-       → qa / enhancer → documentation
+       → security [Post-Code] + qa / enhancer (parallel) → documentation
 ```
 
 **The orchestrator selects the mode based on project type. If unsure, default to Mode A.**
@@ -119,12 +123,13 @@ Every agent MUST read and honor ALL upstream artifacts before starting work:
 | `creative` | PRD from `product` + `.golden-samples/` (study approved patterns) + `visual-contract-template` skill |
 | `architect` | PRD from `product` |
 | `database` | PRD from `product` + ADR from `architect` |
-| `security` | ADR from `architect` + Developer's implementation |
+| `security (Pre-Code)` | PRD from `product` + ADR from `architect` (threat modeling, trust boundaries, auth model) |
+| `developer` | PRD + ADR + DATA spec + **SEC-SPEC from `security (Pre-Code)`** (NO frontend work) |
+| `security (Post-Code)` | ADR + SEC-SPEC + Developer's implementation (SAST, vulnerability scan, Security Veto) |
 | `designer` | PRD + Visual Contract from `creative` + `.golden-samples/` (for design review) |
 | `blender` | PRD from `product` + Visual Contract from `creative` + Real-world CAD benchmarks & photos + Motion Choreography from `motion` (if animation sequences) |
 | `motion` | PRD from `product` + Visual Contract from `creative` + Design Spec from `designer` + `.preferences.md` motion rules |
 | `frontend` | PRD + **Visual Contract** (NOT prose brief) + 3D Geometries/Assets from `blender` + Motion Choreography from `motion` + Design Spec + `.golden-samples/` + `component-patterns` + `data-visualization` + `visual-craft-recipes` |
-| `developer` | PRD + ADR + DATA spec + Security spec (NO frontend work) |
 | `qa` | PRD + Design Spec + Frontend mockup + Developer's implementation + Security Report + Motion Choreography |
 | `enhancer` | ALL upstream artifacts |
 | `documentation` | ALL upstream artifacts + source code |
