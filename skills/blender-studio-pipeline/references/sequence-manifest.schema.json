@@ -1,0 +1,122 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SequenceManifest",
+  "type": "object",
+  "required": [
+    "version",
+    "name",
+    "frameCount",
+    "fps",
+    "aspect",
+    "indexPad",
+    "background",
+    "sources",
+    "poster",
+    "chapters",
+    "hotspots"
+  ],
+  "properties": {
+    "version": {
+      "type": "integer",
+      "const": 1
+    },
+    "name": {
+      "type": "string"
+    },
+    "frameCount": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "fps": {
+      "type": "number",
+      "default": 24
+    },
+    "aspect": {
+      "type": "number",
+      "description": "Aspect ratio (width / height, e.g. 1.6 for 1024x640)"
+    },
+    "indexPad": {
+      "type": "integer",
+      "default": 4,
+      "description": "Zero-padding width for frame index, e.g. 4 for frame_0001"
+    },
+    "background": {
+      "type": "string",
+      "enum": ["transparent", "dark", "light"]
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["width", "pattern"],
+        "properties": {
+          "width": {
+            "type": "integer"
+          },
+          "pattern": {
+            "type": "string",
+            "description": "Relative path pattern containing {index}, e.g. 'frames/960/frame_{index}.webp'"
+          }
+        }
+      }
+    },
+    "poster": {
+      "type": "string",
+      "description": "Relative path to poster image fallback"
+    },
+    "chapters": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "label", "start", "end"],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "start": {
+            "type": "integer"
+          },
+          "end": {
+            "type": "integer"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "hotspots": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "label", "track"],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "subtitle": {
+            "type": "string"
+          },
+          "track": {
+            "type": "array",
+            "description": "Array of [x, y, visible] tuples per frame (normalized 0-1, y=0 at top). Length must match frameCount.",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              },
+              "minItems": 3,
+              "maxItems": 3
+            }
+          }
+        }
+      }
+    }
+  }
+}

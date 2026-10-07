@@ -84,6 +84,8 @@ Any agent producing HTML/CSS/JS MUST read these skills before writing code:
 6. `data-visualization` — SVG sparklines, donut charts, bar charts, Canvas area charts.
 7. `visual-craft-recipes` — CSS token dictionaries and domain-specific recipes.
 8. `viral-3d-experience` — Dual-Engine visual architecture (Apple Canvas 2D scrubbing + Three.js WebGL Orbit PBR), Lumafield CT slicing lenses, fluid particle physics, and procedural Web Audio API haptics (activated when 3D is requested or for physical flagship showcases).
+9. `blender-studio-pipeline` — Headless Blender 5.2.2 LTS CAD modeling, studio lighting presets (`product_dark`), PBR metallurgy, automated quality audit (`audit.py`), and per-frame tracking manifests.
+10. `motion-choreography-system` — Master motion engine (`motion-kit.js`, `motion-tokens.css`), split-text masking reveals, scroll-scrub image sequences with tracking hotspots, tactile micro-interactions, and procedural Web Audio haptics.
 
 ## Mandatory Output Format for Creative Agent
 The `creative` agent MUST output a **Visual Contract** (NOT a prose Creative Brief).

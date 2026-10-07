@@ -1,0 +1,81 @@
+/**
+ * Motion Tokens — CSS Custom Properties
+ * Calibrated for tactile, physical micro-interactions and cinematic reveals.
+ * Strict adherence to .preferences.md (no bouncy physics).
+ */
+
+:root {
+  /* Durations */
+  --motion-duration-instant: 100ms;
+  --motion-duration-fast: 220ms;
+  --motion-duration-base: 380ms;
+  --motion-duration-slow: 700ms;
+  --motion-duration-cinematic: 1200ms;
+
+  /* Easing Curves */
+  --motion-ease-out-damped: cubic-bezier(0.22, 1, 0.36, 1);    /* User preferences standard */
+  --motion-ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);       /* Staggered entrance standard */
+  --motion-ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);        /* Symmetrical transitions */
+  --motion-ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);        /* Heavy panel slide */
+  --motion-ease-snap: cubic-bezier(0.2, 0.8, 0.2, 1);          /* Technical snap */
+
+  /* Stagger Intervals */
+  --motion-stagger-micro: 35ms;
+  --motion-stagger-base: 60ms;
+  --motion-stagger-macro: 110ms;
+}
+
+/* Tactile Micro-Interactions */
+.motion-btn-press {
+  transition: transform var(--motion-duration-instant) var(--motion-ease-out-damped),
+              box-shadow var(--motion-duration-instant) var(--motion-ease-out-damped);
+}
+.motion-btn-press:active {
+  transform: scale(0.98) translateY(1px);
+}
+
+.motion-card-lift {
+  transition: transform var(--motion-duration-base) var(--motion-ease-out-expo),
+              box-shadow var(--motion-duration-base) var(--motion-ease-out-expo),
+              border-color var(--motion-duration-fast) var(--motion-ease-out-damped);
+}
+.motion-card-lift:hover {
+  transform: translateY(-4px);
+}
+
+/* Perspective Tilt Shell */
+.motion-perspective-shell {
+  perspective: 1200px;
+  transform-style: preserve-3d;
+}
+
+/* Text Masking Reveal Container */
+.motion-mask-line {
+  overflow: hidden;
+  display: block;
+}
+.motion-mask-inner {
+  display: block;
+  transform: translateY(100%);
+  transition: transform var(--motion-duration-slow) var(--motion-ease-out-expo);
+}
+.motion-mask-line.is-revealed .motion-mask-inner {
+  transform: translateY(0%);
+}
+
+/* Accessibility: Full reduced motion compliance */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .motion-card-lift:hover,
+  .motion-btn-press:active {
+    transform: none !important;
+  }
+}

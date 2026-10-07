@@ -13,4 +13,5 @@ See [GEMINI.md](./GEMINI.md) for the complete Multi-Agent Orchestration Protocol
 - **New Agent (v2.1):** `blender` — Dedicated Principal 3D Modeler & CAD Specialist that bridges real-world reference images and tested 3D models/materials.
 - **Upgraded Agent (v3.0):** `blender` — Dedicated Principal CGI & CAD Director with Blender 5.2.2 LTS headless CLI, studio 4-point softbox lighting, AgX color management, high-contrast PBR materials, and mandatory visual self-inspection loop (`render → view_file → critique → fix`).
 - **New Agent (v3.0):** `motion` — Dedicated Principal Creative Motion & Interaction Specialist (GSAP ScrollTrigger choreography, spring physics micro-interactions, cinematic boot sequences, scroll-scrub timelines, Canvas/WebGL particles, Web Audio haptics, Motion Veto power).
+- **New Skills (v3.1):** `blender-studio-pipeline` (studio lighting presets, `studio_lib.py`, `audit.py`) and `motion-choreography-system` (`MotionKit`, `motion-tokens.css`, hotspot-tracking frame scrubber).
 - **Roster:** 14 agents (was 13).

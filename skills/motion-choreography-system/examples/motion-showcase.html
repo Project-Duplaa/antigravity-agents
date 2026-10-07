@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth bg-[#05070B] text-slate-200 antialiased selection:bg-cyan-500/30 selection:text-cyan-200">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FORGE // Interactive Motion Showcase</title>
+
+    <!-- Google Fonts: Outfit + DM Sans + IBM Plex Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        void: '#05070B',
+                        titanium: '#161A22',
+                        chrome: '#E2E8F0',
+                        cryo: '#00F0FF',
+                        surface: {
+                            800: '#1A202C',
+                            900: '#0E121A',
+                            950: '#070A0F'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['DM Sans', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif'],
+                        mono: ['IBM Plex Mono', 'monospace']
+                    }
+                }
+            }
+        };
+    </script>
+
+    <!-- Phosphor Icons CDN -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- GSAP 3.12 & ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <!-- Motion Tokens & MotionKit -->
+    <link rel="stylesheet" href="../scripts/motion-tokens.css">
+    <script src="../scripts/motion-kit.js"></script>
+
+    <style>
+        body { font-family: 'DM Sans', sans-serif; }
+        h1, h2, h3, .font-display { font-family: 'Outfit', sans-serif; }
+        .font-mono { font-family: 'IBM Plex Mono', monospace; }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+
+    <!-- 1. CINEMATIC THEMATIC BOOT SEQUENCE -->
+    <div id="intro-loader" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-void text-white">
+        <div class="relative flex flex-col items-center space-y-6">
+            <div class="w-16 h-16 rounded-full border border-cryo/30 flex items-center justify-center relative animate-pulse">
+                <i class="ph ph-cpu text-2xl text-cryo"></i>
+                <div class="absolute inset-0 rounded-full border-t border-cryo animate-spin"></div>
+            </div>
+            <div class="text-center space-y-2">
+                <h2 class="font-display text-2xl font-bold tracking-[0.25em] text-chrome">FORGE ATELIER</h2>
+                <p class="font-mono text-xs uppercase tracking-widest text-slate-500">Calibrando Sensores Ópticos & Shaders PBR</p>
+            </div>
+            <div class="w-64 h-1 bg-surface-800 rounded-full overflow-hidden">
+                <div class="boot-progress-bar w-full h-full bg-cryo origin-left transform scale-x-0"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. ARCHITECTURAL MASTHEAD -->
+    <header class="fixed top-0 left-0 w-full h-14 bg-void/85 backdrop-blur-xl border-b border-white/10 z-40 flex items-center justify-between px-6 lg:px-12">
+        <div class="flex items-center space-x-3">
+            <span class="font-display font-extrabold tracking-wider text-lg text-white">FORGE</span>
+            <span class="text-xs font-mono uppercase px-2 py-0.5 rounded bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">Motion v3</span>
+        </div>
+        <nav class="hidden md:flex items-center space-x-8 text-xs font-mono tracking-wider uppercase text-slate-400">
+            <a href="#hero" class="hover:text-cryo transition-colors" data-haptic="click">Inicio</a>
+            <a href="#sec-dissection" class="hover:text-cryo transition-colors" data-haptic="click">Disección 3D</a>
+            <a href="#sec-features" class="hover:text-cryo transition-colors" data-haptic="click">Ingeniería</a>
+        </nav>
+        <button data-magnetic data-magnetic-strength="0.3" class="motion-btn-press px-4 py-1.5 rounded-md text-xs font-mono uppercase bg-white/10 border border-white/15 hover:border-cryo/50 hover:text-cryo transition-all">
+            Reservar Cupo
+        </button>
+    </header>
+
+    <!-- 3. CINEMATIC HERO SECTION -->
+    <section id="hero" class="relative min-h-screen pt-32 pb-20 px-6 lg:px-16 flex flex-col justify-center items-center text-center">
+        <div class="max-w-4xl space-y-6">
+            <div data-reveal="blur-in" class="inline-flex items-center space-x-2 px-3 py-1 rounded-full border border-white/10 bg-white/[0.03] text-xs font-mono text-slate-400">
+                <span class="w-2 h-2 rounded-full bg-cryo animate-ping"></span>
+                <span>Ingeniería Térmica &bull; Grado Aeroespacial</span>
+            </div>
+            
+            <h1 id="hero-title" class="font-display text-5xl sm:text-7xl font-extrabold tracking-tight text-white leading-tight">
+                El Ritual de la Máxima Precisión
+            </h1>
+
+            <p data-reveal="fade-up" data-reveal-delay="0.1" class="text-base sm:text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed">
+                Hardware esculpido mediante mecanizado CNC, tolerancias de grado quirúrgico y cámaras de cobre pulido espejo para disipación térmica sin compromiso.
+            </p>
+
+            <div data-reveal="scale-in" data-reveal-delay="0.2" class="pt-4 flex flex-wrap items-center justify-center gap-4">
+                <a href="#sec-dissection" data-magnetic class="motion-btn-press px-6 py-3 rounded-md bg-cryo text-void font-display font-semibold text-sm hover:shadow-[0_0_25px_rgba(0,240,255,0.4)] transition-all">
+                    Explorar Disección 3D
+                </a>
+                <button data-magnetic data-magnetic-strength="0.2" class="motion-btn-press px-6 py-3 rounded-md border border-white/15 text-white font-mono text-xs uppercase hover:bg-white/[0.05] transition-all">
+                    Descargar Ficha CAD
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. APPLE-STYLE SCROLL-SCRUBBED DISSECTION SECTION -->
+    <section id="sec-dissection" class="relative w-full py-28 px-6 lg:px-16 border-t border-white/10 bg-gradient-to-b from-void via-surface-950 to-void">
+        <div class="max-w-7xl mx-auto flex flex-col items-center">
+            
+            <div class="text-center space-y-3 mb-10">
+                <span class="text-xs font-mono uppercase tracking-widest text-cryo">Desensamble de Precisión &bull; 48 Cuadros</span>
+                <h2 class="font-display text-4xl sm:text-5xl font-bold text-white tracking-tight">Disección Interna del Acelerador KRONOS</h2>
+                <p class="text-sm text-slate-400 max-w-lg mx-auto">
+                    Scrollea para inspeccionar cada capa mecánica desacoplándose en tiempo real con seguimiento 2D.
+                </p>
+            </div>
+
+            <!-- Chapters Pill Switcher -->
+            <div class="flex flex-wrap items-center justify-center gap-2 mb-8">
+                <span id="chapter-assembled" class="px-3 py-1 rounded-full text-xs font-mono uppercase border border-white/10 bg-white/[0.02] text-slate-400 transition-colors">
+                    1. Ensamblado
+                </span>
+                <span id="chapter-thermal_split" class="px-3 py-1 rounded-full text-xs font-mono uppercase border border-white/10 bg-white/[0.02] text-slate-400 transition-colors">
+                    2. Desacople Térmico
+                </span>
+                <span id="chapter-vapor_chamber" class="px-3 py-1 rounded-full text-xs font-mono uppercase border border-white/10 bg-white/[0.02] text-slate-400 transition-colors">
+                    3. Cámara de Cobre
+                </span>
+                <span id="chapter-silicon_core" class="px-3 py-1 rounded-full text-xs font-mono uppercase border border-white/10 bg-white/[0.02] text-slate-400 transition-colors">
+                    4. Silicio 4nm
+                </span>
+            </div>
+
+            <!-- Interactive Canvas Container with Floating Hotspots -->
+            <div id="dissection-container" class="relative w-full max-w-4xl h-[400px] sm:h-[580px] rounded-xl border border-white/10 bg-surface-900/40 backdrop-blur-sm overflow-hidden flex items-center justify-center shadow-2xl">
+                
+                <canvas id="dissection-canvas" class="w-full h-full object-contain"></canvas>
+
+                <!-- Floating Tracked Hotspots (Positions dynamically bound by MotionKit) -->
+                <div id="hotspot-gpu_shroud" class="absolute top-0 left-0 opacity-0 pointer-events-none transition-all duration-75">
+                    <div class="px-2.5 py-1 rounded bg-void/90 border border-white/20 text-[11px] font-mono text-chrome backdrop-blur shadow-lg flex items-center space-x-1.5 -translate-x-1/2 -translate-y-1/2">
+                        <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+                        <span>Chasis Titanio</span>
+                    </div>
+                </div>
+
+                <div id="hotspot-copper_coldplate" class="absolute top-0 left-0 opacity-0 pointer-events-none transition-all duration-75">
+                    <div class="px-2.5 py-1 rounded bg-void/90 border border-amber-500/30 text-[11px] font-mono text-amber-300 backdrop-blur shadow-lg flex items-center space-x-1.5 -translate-x-1/2 -translate-y-1/2">
+                        <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+                        <span>Vapor Chamber Cobre</span>
+                    </div>
+                </div>
+
+                <div id="hotspot-finstack" class="absolute top-0 left-0 opacity-0 pointer-events-none transition-all duration-75">
+                    <div class="px-2.5 py-1 rounded bg-void/90 border border-white/20 text-[11px] font-mono text-slate-300 backdrop-blur shadow-lg flex items-center space-x-1.5 -translate-x-1/2 -translate-y-1/2">
+                        <span class="w-1.5 h-1.5 rounded-full bg-white"></span>
+                        <span>Microaletas 22 FPI</span>
+                    </div>
+                </div>
+
+                <div id="hotspot-pcb_gold" class="absolute top-0 left-0 opacity-0 pointer-events-none transition-all duration-75">
+                    <div class="px-2.5 py-1 rounded bg-void/90 border border-yellow-500/30 text-[11px] font-mono text-yellow-300 backdrop-blur shadow-lg flex items-center space-x-1.5 -translate-x-1/2 -translate-y-1/2">
+                        <span class="w-1.5 h-1.5 rounded-full bg-yellow-400"></span>
+                        <span>PCIe Oro 18K</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 5. TACTILE ENGINEERING BENTO GRID -->
+    <section id="sec-features" class="py-32 px-6 lg:px-16 max-w-7xl mx-auto">
+        <div class="space-y-4 mb-16">
+            <span class="text-xs font-mono uppercase tracking-widest text-cryo">Telemetría & Rendimiento</span>
+            <h2 class="font-display text-4xl sm:text-5xl font-bold text-white tracking-tight">Estándares de Fabricación</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            
+            <!-- Card 1: 3D Tilt + Counter -->
+            <div data-tilt data-reveal="fade-up" class="motion-card-lift p-8 rounded-xl bg-surface-900/60 border border-white/10 flex flex-col justify-between">
+                <div class="space-y-3">
+                    <i class="ph ph-lightning text-3xl text-cryo"></i>
+                    <h3 class="font-display text-xl font-bold text-white">Disipación Térmica</h3>
+                    <p class="text-sm text-slate-400">Cámara de vapor de cobre maquinada CNC con capilaridad bidireccional.</p>
+                </div>
+                <div class="pt-8">
+                    <span class="font-display text-5xl font-extrabold text-white" data-count-to="845" data-count-suffix="W">0W</span>
+                    <span class="block text-xs font-mono text-slate-500 uppercase tracking-widest mt-1">Capacidad Térmica Sostenida</span>
+                </div>
+            </div>
+
+            <!-- Card 2: 3D Tilt + Counter -->
+            <div data-tilt data-reveal="fade-up" data-reveal-delay="0.1" class="motion-card-lift p-8 rounded-xl bg-surface-900/60 border border-white/10 flex flex-col justify-between">
+                <div class="space-y-3">
+                    <i class="ph ph-gauge text-3xl text-cyan-400"></i>
+                    <h3 class="font-display text-xl font-bold text-white">Delta Térmico</h3>
+                    <p class="text-sm text-slate-400">Diferencial de temperatura ambiente bajo tortura sostenida a 1.2 bar.</p>
+                </div>
+                <div class="pt-8">
+                    <span class="font-display text-5xl font-extrabold text-white" data-count-to="12" data-count-prefix="+" data-count-suffix="°C">0°C</span>
+                    <span class="block text-xs font-mono text-slate-500 uppercase tracking-widest mt-1">Margen Delta T Óptimo</span>
+                </div>
+            </div>
+
+            <!-- Card 3: 3D Tilt + Counter -->
+            <div data-tilt data-reveal="fade-up" data-reveal-delay="0.2" class="motion-card-lift p-8 rounded-xl bg-surface-900/60 border border-white/10 flex flex-col justify-between">
+                <div class="space-y-3">
+                    <i class="ph ph-shield-check text-3xl text-yellow-400"></i>
+                    <h3 class="font-display text-xl font-bold text-white">Certificación de Fuga</h3>
+                    <p class="text-sm text-slate-400">Prueba neumática de presión diferencial de helio durante 72 horas.</p>
+                </div>
+                <div class="pt-8">
+                    <span class="font-display text-5xl font-extrabold text-white" data-count-to="72" data-count-suffix="h">0h</span>
+                    <span class="block text-xs font-mono text-slate-500 uppercase tracking-widest mt-1">Stress Test Homologado</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 6. FOOTER -->
+    <footer class="border-t border-white/10 py-12 px-6 lg:px-16 text-center text-xs font-mono uppercase text-slate-500">
+        <p>FORGE ATELIER &bull; SISTEMA DE MOTIONCOREOGRAFÍA & BLENDER STUDIO PIPELINE v3.0</p>
+    </footer>
+
+    <!-- SCRIPT INITIALIZATION -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Initialize MotionKit Declarative Handlers
+            MotionKit.init();
+
+            // 2. Split Text on Hero Title
+            const heroTitle = document.getElementById('hero-title');
+            if (heroTitle) {
+                const words = MotionKit.splitText(heroTitle, { type: 'words', mask: true });
+                gsap.from(words, {
+                    y: '100%',
+                    opacity: 0,
+                    duration: 0.9,
+                    stagger: 0.05,
+                    ease: 'cubic-bezier(0.16, 1, 0.3, 1)',
+                    delay: 0.2
+                });
+            }
+
+            // 3. Boot Sequence Veil Dismissal
+            MotionKit.bootSequence();
+
+            // 4. Initialize Image Sequence Scrubber with Manifest
+            const canvas = document.getElementById('dissection-canvas');
+            
+            // Inline manifest payload guaranteeing 100% operation via file:/// without CORS block
+            const localManifest = {
+                "version": 1,
+                "name": "gpu-exploded-v2",
+                "frameCount": 48,
+                "aspect": 1.6,
+                "indexPad": 4,
+                "sources": [
+                    { "width": 960, "pattern": "../../../scratch/forge-pc-peripherals/assets/exploded_v2/frames/960/frame_{index}.webp" },
+                    { "width": 1600, "pattern": "../../../scratch/forge-pc-peripherals/assets/exploded_v2/frames/1600/frame_{index}.webp" }
+                ],
+                "poster": "../../../scratch/forge-pc-peripherals/assets/exploded_v2/poster.webp",
+                "chapters": [
+                    { "id": "assembled", "label": "Ensamblado de Precisión", "start": 1, "end": 12 },
+                    { "id": "thermal_split", "label": "Desacople Térmico", "start": 13, "end": 24 },
+                    { "id": "vapor_chamber", "label": "Cámara de Cobre Puro", "start": 25, "end": 36 },
+                    { "id": "silicon_core", "label": "Silicio y Arquitectura", "start": 37, "end": 48 }
+                ],
+                "hotspots": [
+                    { "id": "gpu_shroud", "label": "Chasis Titanio", "track": Array(48).fill([0.50, 0.28, 1]) },
+                    { "id": "finstack", "label": "Microaletas 22 FPI", "track": Array(48).fill([0.50, 0.45, 1]) },
+                    { "id": "copper_coldplate", "label": "Vapor Chamber Cobre", "track": Array(48).fill([0.48, 0.58, 1]) },
+                    { "id": "pcb_gold", "label": "PCIe Oro 18K", "track": Array(48).fill([0.32, 0.70, 1]) }
+                ]
+            };
+
+            MotionKit.imageSequence(canvas, localManifest, {
+                trigger: document.getElementById('sec-dissection'),
+                scrub: 0.6,
+                start: 'top top',
+                end: '+=300%'
+            });
+        });
+    </script>
+</body>
+</html>
