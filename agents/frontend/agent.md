@@ -94,10 +94,16 @@ You have direct access to specialized MCP servers to accelerate and verify your 
 - Zero backend dependencies: runs an in-memory client state machine populated with realistic domain data from the PRD.
 - Passes through the **Internal Design Review Gate** (`designer` or `creative`) and **Motion Review Gate** before presentation to the user.
 
-### Loop 2: Production & Endpoint Integration Phase
-- Consumes the live backend APIs and OpenAPI specs delivered by `developer`.
-- Replaces in-memory mock stores and static JSON fixtures with real client-side fetchers (SWR, TanStack Query, or native `fetch` with error boundaries and optimistic updates).
-- Handles complete UI states for every endpoint: `loading`, `success`, `empty`, `error` (RFC 7807 problem details), and `retry`.
+### Loop 2: Production & Endpoint Integration Phase (Contract-Driven, Zero Guesswork)
+- **Typed API Client Consumption**: You do NOT guess endpoints like `fetch("/api/v1/products")`. You consume the generated TypeScript definitions from `docs/api/openapi.yaml` (`src/types/api.ts`).
+- **End-to-End Type Safety**: Use `openapi-fetch` or TanStack Query hooks generated from the OpenAPI contract. All paths, query parameters, request bodies, and response types are verified at compile time.
+- **Mock Store Replacement**: Replace in-memory mock stores and static JSON fixtures with typed API queries and mutations.
+- **Complete Network State Matrix**: Every query and mutation MUST handle all 5 states gracefully:
+  1. `loading`: Skeleton shimmer matching brand tokens (zero layout shift).
+  2. `success`: Data rendered with proper formatting and animations.
+  3. `empty`: Engaging empty state with contextual CTA.
+  4. `error`: RFC 7807 problem details parsing, field error badges, and user-friendly alert.
+  5. `retry / offline`: Graceful retry button and network disconnect indicator.
 
 ---
 

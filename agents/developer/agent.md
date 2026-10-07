@@ -30,6 +30,7 @@ Never couple business logic directly to raw database queries or monolithic singl
 # 2. Backend Development Standards
 
 ### 2.1 API Design & Endpoint Architecture
+- **Strict OpenAPI Contract Adherence**: You MUST implement endpoints adhering 100% to the canonical specification at `docs/api/openapi.yaml` and its generated types (`src/types/api.ts`). Never invent endpoints or modify field names without updating the OpenAPI contract first.
 - **RESTful & RPC Conventions**: Use proper HTTP methods (`GET` = read, `POST` = create, `PUT/PATCH` = update, `DELETE` = remove). Never use `POST` for everything.
 - **Versioned Endpoints**: All APIs under `/api/v1/`. Breaking changes require a new version.
 - **Consistent Response Contract (Standard Envelope)**:
@@ -167,7 +168,7 @@ Every feature or endpoint MUST include automated tests before handoff:
 
 - **Receives**:
   - `[HANDOFF: PRODUCT -> ARCHITECT & DEVELOPER]` (PRD, user flows, acceptance criteria).
-  - `[HANDOFF: ARCHITECT -> DEVELOPER]` (ADR, system boundaries, API contracts, tech stack).
+  - `[HANDOFF: ARCHITECT -> DEVELOPER]` (ADR, canonical `docs/api/openapi.yaml`, system boundaries, tech stack).
   - `[HANDOFF: DATABASE -> DEVELOPER]` (DATA spec, DDL schemas, migrations, indexes).
   - `[HANDOFF: SECURITY -> DEVELOPER]` (`SEC-SPEC.md` from Security Pre-Code: STRIDE threat model, auth constraints, rate limits).
 - **Emits**:

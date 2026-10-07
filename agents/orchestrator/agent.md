@@ -55,28 +55,32 @@ Loop 1 — Visual Approval:
        ↓
   [USER SEES AND APPROVES VISUAL PRODUCT]
 
-Loop 2 — Engineering & Integration (ONLY after user visual approval):
-  architect (defines ADR & OpenAPI endpoint contracts)
+Loop 2 — Engineering & API Integration (ONLY after user visual approval):
+  architect (defines ADR-XXX.md + canonical docs/api/openapi.yaml)
+       ↓
+  [CONTRACT CODE-GEN: openapi-typescript → src/types/api.ts & typed client]
        ↓
   database (DDL, migrations) + security [Phase 1: Pre-Code Threat Model & SEC-SPEC] (parallel)
        ↓
-  developer (implements backend APIs: /api/v1/..., controllers, services, tests adhering to DATA & SEC-SPEC)
+  developer (implements backend APIs against openapi.yaml, DATA & SEC-SPEC)
        ↓
-  frontend (connects live endpoints) + security [Phase 2: Post-Code Audit & Veto] + qa (Playwright E2E) (parallel)
+  frontend (connects live endpoints using typed client / TanStack Query)
+       ↓
+  security [Phase 2: Post-Code Audit & Veto] + qa (Playwright E2E + contract tests) (parallel)
        ↓
   enhancer (code review) → documentation (OpenAPI docs, README, Obsidian knowledge vault)
 ```
 
 ### Mode B: Backend-First (Headless APIs, CLIs, data pipelines, background workers)
 ```text
-product → architect → database + security [Pre-Code] → developer → security [Post-Code] + qa → enhancer → documentation
+product → architect (ADR + openapi.yaml) → database + security [Pre-Code] → developer → security [Post-Code] + qa → enhancer → documentation
 ```
 
 ### Mode C: Full Parallel (Large enterprise projects with clear component boundaries)
 ```text
-product → creative + architect (parallel)
+product → creative + architect [ADR + openapi.yaml] (parallel)
        → designer + database + security [Pre-Code] (parallel)
-       → frontend + developer (parallel)
+       → frontend + developer (parallel, both typed against openapi.yaml)
        → security [Post-Code] + qa + enhancer (parallel) → documentation
 ```
 
@@ -107,19 +111,23 @@ A common mistake in traditional workflows is building backend endpoints before k
                                        │
                                        ▼ [USER APPROVAL]
 ┌──────────────────────────────────────────────────────────────────────────────────┐
-│ LOOP 2: BACKEND ENGINEERING & API INTEGRATION                                    │
-│ 1. API Contract Definition (architect):                                          │
-│    • Produces OpenAPI / tRPC specification in ADR (`/api/v1/products`, etc.)     │
+│ LOOP 2: CONTRACT-FIRST BACKEND ENGINEERING & API INTEGRATION                     │
+│ 1. Canonical API Contract & Code-Gen (architect):                                │
+│    • Produces `docs/api/openapi.yaml` (OpenAPI 3.1 specification).               │
+│    • Runs code-gen: `openapi-typescript` generates `src/types/api.ts`.           │
+│    • Generates typed client / TanStack Query hooks (zero blind string fetch).    │
 │ 2. Backend Implementation (developer):                                           │
-│    • Builds Express/Fastify/FastAPI routes with Zod/Pydantic validation schemas. │
-│    • Connects database repositories, migrations, connection pools, and Redis.    │
+│    • Implements route handlers matching `openapi.yaml` & `src/types/api.ts`.     │
+│    • Validates payloads with Zod/Pydantic; integrates DB repositories & Redis.   │
 │    • Enforces RFC 7807 error format and returns `{ data, meta }` envelopes.      │
 │ 3. Client Connection (frontend):                                                 │
-│    • Replaces in-memory mock stores with live API client (fetch, SWR, React      │
-│      Query) pointing to `/api/v1/...`.                                           │
-│    • Handles complete state matrix: `loading`, `success`, `empty`, `error`.      │
-│ 4. Verification (qa):                                                            │
-│    • Runs Playwright tests validating live round-trips from UI to DB.            │
+│    • Replaces in-memory mock stores with typed client / TanStack Query hooks.    │
+│    • End-to-end type safety: compile-time check for paths, params and responses. │
+│    • Handles 5-state matrix: `loading`, `success`, `empty`, `error`, `retry`.    │
+│ 4. Verification & Contract Testing (qa & security):                              │
+│    • QA runs contract tests validating live API responses against openapi.yaml.  │
+│    • QA executes Playwright E2E verifying round-trip UI → API → Database.       │
+│    • Security Phase 2 runs SAST and verifies auth compliance against SEC-SPEC.   │
 └──────────────────────────────────────────────────────────────────────────────────┘
 ```
 

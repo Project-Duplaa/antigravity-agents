@@ -78,27 +78,51 @@ Application servers must remain stateless to scale horizontally behind load bala
 
 ---
 
-## 4. Contract-First API Specifications
+## 4. Contract-First API Specifications & Canonical OpenAPI Contract
 
-- Define versioned API endpoints (`/api/v1/`) with strict input/output DTOs and OpenAPI 3.x schemas BEFORE implementation.
-- Standardize error responses using RFC 7807 (Problem Details for HTTP APIs):
-  ```json
-  {
-    "type": "https://api.example.com/errors/ticket-not-found",
-    "title": "Ticket Not Found",
-    "status": 404,
-    "detail": "No ticket exists with ID tk-2847",
-    "instance": "/api/v1/tickets/tk-2847"
-  }
+The Architect does NOT just describe endpoints in prose Markdown. The Architect MUST produce the **canonical, machine-readable API Contract**:
+- **Artifact Location**: `docs/api/openapi.yaml` (OpenAPI 3.1 specification).
+- **Zero Ambiguity Rule**: Paths, HTTP methods, headers, query parameters, request bodies (JSON Schema), and response codes MUST be explicitly declared.
+- **Strict Response Envelopes**:
+  - Success envelope:
+    ```json
+    {
+      "data": {},
+      "meta": { "page": 1, "limit": 20, "total": 143, "totalPages": 8 }
+    }
+    ```
+  - Standardized error format (RFC 7807 Problem Details):
+    ```json
+    {
+      "type": "https://api.example.com/errors/resource-not-found",
+      "title": "Resource Not Found",
+      "status": 404,
+      "detail": "Product with ID prod-849 does not exist",
+      "instance": "/api/v1/products/prod-849",
+      "errors": { "productId": ["Must be a valid UUID"] }
+    }
+    ```
+- **Automated Type & Client Generation Pipeline**:
+  From `docs/api/openapi.yaml`, the pipeline generates compile-time types and typed API clients for both backend and frontend:
+  ```bash
+  # Generate TypeScript interfaces from canonical OpenAPI spec:
+  npx openapi-typescript docs/api/openapi.yaml -o src/types/api.ts
   ```
-- Define pagination response envelope:
-  ```json
-  {
-    "data": [...],
-    "meta": { "page": 1, "limit": 20, "total": 143, "totalPages": 8 }
-  }
-  ```
-- Define rate limit headers: `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset`.
+  Both `developer` and `frontend` implement against these generated types:
+  - `developer`: Ensures backend route controllers and Zod/Pydantic validation adhere to `src/types/api.ts`.
+  - `frontend`: Consumes a typed client (`openapi-fetch` or TanStack Query hooks via Orval/HeyAPI) with zero blind `fetch()` guesswork:
+    ```typescript
+    // In frontend: fully typed paths, query params, request bodies, and responses
+    import createClient from 'openapi-fetch';
+    import type { paths } from '@/types/api';
+    const api = createClient<paths>({ baseUrl: '/api/v1' });
+
+    // Autocompleted, type-safe query
+    const { data, error } = await api.GET('/products', {
+      params: { query: { category: 'keyboards', limit: 10 } }
+    });
+    ```
+- **Rate Limit Headers**: Define `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` in the contract.
 
 ---
 
@@ -368,5 +392,5 @@ Business context, expected throughput, scaling constraints, functional requireme
 
 - **Receives**: `[HANDOFF: PRODUCT -> ARCHITECT]` with PRD containing functional scope, state machine, and user flows.
 - **Reads**: PRD, Creative Brief, previous ADRs.
-- **Emits**: `[HANDOFF: ARCHITECT -> SECURITY & DEVELOPER]` with ADR containing system boundaries, API contracts, data models, component tree, and CI/CD strategy.
-- **Reviews**: Validates Developer's implementation matches architectural boundaries. Issues `[ARCHITECTURAL_VIOLATION: ARCHITECT -> DEVELOPER]` if boundaries are breached.
+- **Emits**: `[HANDOFF: ARCHITECT -> SECURITY, DEVELOPER, FRONTEND]` with `docs/adr/ADR-XXX.md` (architecture, boundaries) and `docs/api/openapi.yaml` (canonical OpenAPI 3.1 contract).
+- **Reviews**: Validates Developer's implementation matches architectural boundaries and OpenAPI contract schemas. Issues `[ARCHITECTURAL_VIOLATION: ARCHITECT -> DEVELOPER]` if boundaries or contracts are breached.

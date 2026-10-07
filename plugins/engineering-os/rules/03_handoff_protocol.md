@@ -20,24 +20,28 @@ Loop 1 — Visual Approval:
                                        ▼
                               [USER REVIEWS & APPROVES]
 
-Loop 2 — Engineering Integration (only after visual approval):
-  architect → database + security [Phase 1: Pre-Code Threat Model & SEC-SPEC] (parallel)
+Loop 2 — Engineering & API Integration (only after visual approval):
+  architect (defines ADR + canonical docs/api/openapi.yaml)
        ↓
-  developer (backend only, adhering to DATA & SEC-SPEC)
+  [CONTRACT CODE-GEN: openapi-typescript → src/types/api.ts & typed client]
        ↓
-  frontend (connect APIs) + security [Phase 2: Post-Code Audit & Veto] + qa / enhancer (parallel) → documentation
+  database + security [Phase 1: Pre-Code Threat Model & SEC-SPEC] (parallel)
+       ↓
+  developer (backend only, adhering to openapi.yaml, DATA & SEC-SPEC)
+       ↓
+  frontend (connect APIs via typed client / TanStack Query) + security [Phase 2: Post-Code Audit & Veto] + qa / enhancer (parallel) → documentation
 ```
 
 ### Mode B: Backend-First (APIs, CLIs, data pipelines, SDKs)
 ```
-product → architect → database + security [Pre-Code] → developer → security [Post-Code] + qa / enhancer → documentation
+product → architect (ADR + openapi.yaml) → database + security [Pre-Code] → developer → security [Post-Code] + qa / enhancer → documentation
 ```
 
 ### Mode C: Full Parallel (Large projects with clear domain boundaries)
 ```
-product → creative + architect (parallel)
+product → creative + architect [ADR + openapi.yaml] (parallel)
        → designer + database + security [Pre-Code] (parallel)
-       → frontend + developer (parallel)
+       → frontend + developer (parallel, typed against openapi.yaml)
        → security [Post-Code] + qa / enhancer (parallel) → documentation
 ```
 
@@ -51,13 +55,14 @@ product → creative + architect (parallel)
 | 2. Creative Discovery | `creative` | `docs/creative/CREATIVE-XXX.md` | Archetype, internet benchmarks, imagery, icon mapping |
 | 3. Design Tokens | `designer` | `docs/design/DESIGN-XXX.md` | Tokens, motion spec, component state matrix, Anti-AI veto |
 | 4. Visual Mockup | `frontend` | `mockups/vX.html` | Standalone HTML mockup, zero server dependencies, hardcoded PRD data |
-| 5. Architecture | `architect` | `docs/adr/ADR-XXX.md` | Hexagonal structure, API contracts, ADRs, state boundaries |
+| 5. Architecture | `architect` | `docs/adr/ADR-XXX.md` | Hexagonal structure, system boundaries, ADRs, state boundaries |
+| 5B. API Contract | `architect` | `docs/api/openapi.yaml` | Canonical OpenAPI 3.1 contract, generated types (`src/types/api.ts`) & typed client |
 | 6. Data Architecture | `database` | `docs/data/DATA-XXX.md` | ERD, DDL schemas, index strategy, engine config, seed data |
 | 7. Security Pre-Code | `security` | `docs/security/SEC-SPEC.md` | STRIDE model, trust boundaries, auth/RBAC matrix, rate limits |
-| 8. Backend Engineering | `developer` | `src/`, `src/domain/`, etc. | REST endpoints, data access layer, server logic, unit tests |
-| 9. Frontend Connection | `frontend` | `public/index.html` | Connect approved mockup to backend REST APIs |
+| 8. Backend Engineering | `developer` | `src/`, `src/domain/`, etc. | REST endpoints matching `openapi.yaml`, data access layer, server logic, unit tests |
+| 9. Frontend Connection | `frontend` | `src/` / `public/` | Connect approved mockup to backend APIs via typed client / TanStack Query |
 | 10. Security Post-Code | `security` | `docs/security/SEC-AUDIT.md` | SAST, dependency audit, verification against SEC-SPEC, Security Veto |
-| 11. QA Validation | `qa` | `docs/qa/QA-XXX.md` | Test execution matrix, BVA, accessibility, QA Veto |
+| 11. QA Validation | `qa` | `docs/qa/QA-XXX.md` | Contract testing, BVA, E2E Playwright, accessibility, QA Veto |
 | 12. Code Optimization | `enhancer` | `docs/enhancements/ENHANCE-XXX.md` | 10-pillar code quality scorecard, before/after diffs |
 | 13. Documentation | `documentation` | `README.md`, `CHANGELOG.md`, `docs/notes/` | Comprehensive docs, Obsidian second-brain vault |
 

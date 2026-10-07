@@ -43,12 +43,16 @@ Loop 1 — Visual Approval:
                                        ↓
                               [USER SEES AND APPROVES]
 
-Loop 2 — Engineering (only after approval):
-  architect → database + security [Phase 1: Pre-Code Threat Model & SEC-SPEC] (parallel)
+Loop 2 — Engineering & API Integration (only after approval):
+  architect (defines ADR + canonical docs/api/openapi.yaml)
        ↓
-  developer (backend only, adhering to DATA & SEC-SPEC)
+  [CONTRACT CODE-GEN: openapi-typescript → src/types/api.ts & typed client]
        ↓
-  frontend (connect APIs) + security [Phase 2: Post-Code Audit & Veto] + qa / enhancer (parallel) → documentation
+  database + security [Phase 1: Pre-Code Threat Model & SEC-SPEC] (parallel)
+       ↓
+  developer (backend only, adhering to openapi.yaml, DATA & SEC-SPEC)
+       ↓
+  frontend (connects APIs via typed client / TanStack Query) + security [Phase 2: Post-Code Audit & Veto] + qa / enhancer (parallel) → documentation
 ```
 
 #### Internal Design Review Gate (New in v2)
@@ -65,14 +69,14 @@ If the reviewer finds violations, the `frontend` agent is re-invoked with specif
 
 ### Mode B: Backend-First (APIs, CLIs, data pipelines)
 ```
-product → architect → database + security [Pre-Code] → developer → security [Post-Code] + qa / enhancer → documentation
+product → architect (ADR + openapi.yaml) → database + security [Pre-Code] → developer → security [Post-Code] + qa / enhancer → documentation
 ```
 
 ### Mode C: Full Parallel (Large projects with clear boundaries)
 ```
-product → creative + architect (parallel)
+product → creative + architect [ADR + openapi.yaml] (parallel)
        → designer + database + security [Pre-Code] (parallel)
-       → frontend + developer (parallel)
+       → frontend + developer (parallel, typed against openapi.yaml)
        → security [Post-Code] + qa / enhancer (parallel) → documentation
 ```
 
@@ -124,12 +128,12 @@ Every agent MUST read and honor ALL upstream artifacts before starting work:
 | `architect` | PRD from `product` |
 | `database` | PRD from `product` + ADR from `architect` |
 | `security (Pre-Code)` | PRD from `product` + ADR from `architect` (threat modeling, trust boundaries, auth model) |
-| `developer` | PRD + ADR + DATA spec + **SEC-SPEC from `security (Pre-Code)`** (NO frontend work) |
+| `developer` | PRD + ADR + **canonical `openapi.yaml`** + DATA spec + **SEC-SPEC from `security (Pre-Code)`** (NO frontend work) |
 | `security (Post-Code)` | ADR + SEC-SPEC + Developer's implementation (SAST, vulnerability scan, Security Veto) |
 | `designer` | PRD + Visual Contract from `creative` + `.golden-samples/` (for design review) |
 | `blender` | PRD from `product` + Visual Contract from `creative` + Real-world CAD benchmarks & photos + Motion Choreography from `motion` (if animation sequences) |
 | `motion` | PRD from `product` + Visual Contract from `creative` + Design Spec from `designer` + `.preferences.md` motion rules |
-| `frontend` | PRD + **Visual Contract** (NOT prose brief) + 3D Geometries/Assets from `blender` + Motion Choreography from `motion` + Design Spec + `.golden-samples/` + `component-patterns` + `data-visualization` + `visual-craft-recipes` |
+| `frontend` | PRD + **Visual Contract** (NOT prose brief) + 3D Geometries/Assets from `blender` + Motion Choreography from `motion` + Design Spec + **canonical `openapi.yaml` & generated types (Loop 2)** + `.golden-samples/` + `component-patterns` + `data-visualization` + `visual-craft-recipes` |
 | `qa` | PRD + Design Spec + Frontend mockup + Developer's implementation + Security Report + Motion Choreography |
 | `enhancer` | ALL upstream artifacts |
 | `documentation` | ALL upstream artifacts + source code |
