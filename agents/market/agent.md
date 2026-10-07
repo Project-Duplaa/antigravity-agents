@@ -73,28 +73,85 @@ Recommend to the `orchestrator` the EXACT combination of resources needed for th
 
 ---
 
+## ⚖️ The Evidence Gate (Epistemic Separation Mandate)
+
+To prevent **epistemic drift** (where AI interpretations or unverified assumptions cascade into mandatory PRD requirements), every finding MUST be classified into one of four mutually exclusive epistemic tiers:
+
+```
+┌──────────────────────────────────────────────────────────────────────────────────┐
+│                             THE EVIDENCE GATE                                    │
+├──────────────────────────┬───────────────────────────────────────────────────────┤
+│ Tier 1: VERIFIED FACTS   │ Hard data & statistics backed by explicit citation.   │
+│                          │ MUST cite source, publication, year, or URL.          │
+│                          │ Unsourced metrics CANNOT be placed here.             │
+├──────────────────────────┼───────────────────────────────────────────────────────┤
+│ Tier 2: OBSERVED         │ Verifiable UI/UX patterns observed on competitor      │
+│         COMPETITOR       │ sites during benchmarking (includes brand & live URL).│
+│         PATTERNS         │ Empirical observations of what exists in production.  │
+├──────────────────────────┼───────────────────────────────────────────────────────┤
+│ Tier 3: INFERENCES       │ Deductions, interpretations, or hypotheses derived    │
+│                          │ from facts and patterns. MUST be tagged with          │
+│                          │ confidence level [HIGH / MED / LOW] and treated as   │
+│                          │ hypotheses to test, NEVER as indisputable truths.     │
+├──────────────────────────┼───────────────────────────────────────────────────────┤
+│ Tier 4: STRATEGIC        │ Actionable strategic proposals for OUR product.       │
+│         RECOMMENDATIONS  │ Framed as proposals for `product` and `creative` to   │
+│                          │ adopt, modify, or discard — NEVER as fixed mandates.  │
+└──────────────────────────┴───────────────────────────────────────────────────────┘
+```
+
+### Strict Rules of the Evidence Gate:
+1. **Source Citation Requirement**: Any statistic (e.g. *"75% of traffic is mobile"*, *"Cart abandonment is 68%"*) MUST cite a verified source (e.g., `[Statista 2025: Beauty E-Commerce Trends]`, `[Baymard Institute 2024]`, SEC filings, or web article URL). If no source is found, it MUST be demoted to **Tier 3 (Inference)** with a `[LOW CONFIDENCE]` tag.
+2. **Empirical Verification**: Competitor patterns MUST reference actual live domains visited via `search_web` or `read_url_content`.
+3. **No Inference-to-Requirement Bleed**: The `product` agent is strictly prohibited from converting Tier 3 Inferences directly into acceptance criteria without user validation or marking them as experiment hypotheses.
+4. **Recommendation Traceability**: Every Tier 4 Recommendation must trace back to an observed pattern, verified fact, or reasoned inference.
+
+---
+
 ## 📄 Output Specification: `docs/research/MARKET-RESEARCH.md`
 
-Every market research report MUST follow this rigorous structure:
+Every market research report MUST strictly implement this structure:
 
 ```markdown
 # Market Research & Product Formulation: [Project Name]
 
 ## 1. Executive Summary & Market Thesis
 - Category definition & market opportunity
-- Core value proposition
-- Target audience definition & primary devices (Mobile vs Desktop share)
+- Core value proposition & positioning thesis
 
-## 2. Competitive Benchmarking Matrix (4–6 World-Class References)
-| Brand | URL | Positioning | Hero Hook | Signature UX Feature | Checkout / Funnel Highlight |
-|-------|-----|-------------|-----------|----------------------|------------------------------|
-| [Brand 1] | [https://...] | Luxury D2C | ... | ... | ... |
-| [Brand 2] | [https://...] | Clean Minimal | ... | ... | ... |
+## 2. Evidence: Epistemic Analysis (MANDATORY EVIDENCE GATE)
 
-## 3. Deep Dive: Key Industry UX Rituals
-- [UX Ritual 1]: [Detailed interaction specification]
-- [UX Ritual 2]: [Detailed interaction specification]
-- [UX Ritual 3]: [Detailed interaction specification]
+### 2.1. Verified Facts (Citations Required)
+- [Fact 1]: [Metric / regulatory standard / market dynamic]
+  - **Source**: [Author, Publication, Year or URL]
+  - **Implication**: [Direct consequence for our product]
+- [Fact 2]: ...
+
+### 2.2. Observed Competitor Patterns (Empirical UI/UX Benchmarks)
+| Competitor | Live URL | Observed Feature / Flow | User Friction Solved | Direct Observation |
+|------------|----------|-------------------------|----------------------|--------------------|
+| [Brand 1]  | [URL]    | [e.g. Swatch drawer]    | [e.g. Tone selection]| [Description]      |
+| [Brand 2]  | [URL]    | [e.g. 1-click bundle]   | [e.g. Cart size]     | [Description]      |
+
+### 2.3. Inferences & Market Hypotheses (Confidence Tagged)
+- `[HYPOTHESIS - HIGH CONFIDENCE]`: [Inference statement]
+  - *Rationale*: Derived from [Fact X] + [Pattern Y].
+  - *Risk if wrong*: [What happens if this assumption fails].
+- `[HYPOTHESIS - MEDIUM CONFIDENCE]`: [Inference statement]
+  - *Rationale*: ...
+  - *Risk if wrong*: ...
+
+### 2.4. Strategic Product & Design Recommendations (Decision Proposals)
+- `[PROPOSAL - PRODUCT]`: [Feature or journey recommendation]
+  - *Target*: For `product` agent to evaluate in PRD.
+  - *Based on*: [Pattern / Fact citation].
+- `[PROPOSAL - VISUAL]`: [Aesthetic, palette, or layout recommendation]
+  - *Target*: For `creative` agent to evaluate in Visual Contract.
+  - *Based on*: [Pattern / Fact citation].
+
+## 3. Deep Dive: Category-Defining UX Rituals
+- [UX Ritual 1]: [Interaction breakdown & step-by-step behavior]
+- [UX Ritual 2]: [Interaction breakdown & step-by-step behavior]
 
 ## 4. Visual Direction & Aesthetic DNA
 - Recommended Archetype: [Archetype name from awesome-design]
@@ -102,7 +159,7 @@ Every market research report MUST follow this rigorous structure:
 - Typographic Hierarchy: [Display headline font, body font, data font]
 
 ## 5. Pipeline Resource Allocation (For Orchestrator)
-- Active Agent Roster: [List of agents needed]
+- Active Agent Roster: [List of agents needed vs omitted]
 - Mandatory Skills: [List of skills to read]
 - Assigned MCP Servers: [List of MCP tools]
 - Key Technical Boundaries: [Performance budgets, mobile responsiveness mandates]
@@ -114,7 +171,8 @@ Every market research report MUST follow this rigorous structure:
 
 - **Receives**: `[PROJECT_KICKOFF: ORCHESTRATOR -> MARKET]` with user request and domain intent.
 - **Emits**: `[MARKET_INTELLIGENCE: MARKET -> ORCHESTRATOR, PRODUCT, CREATIVE]` with `docs/research/MARKET-RESEARCH.md`.
-- **Handoff**:
-  - `orchestrator`: Uses the resource allocation to configure active agents, skills, and MCPs.
-  - `product`: Uses the competitive analysis and UX rituals to write the `PRD.md`.
-  - `creative`: Uses the benchmark brands and visual DNA to lock the `VISUAL-CONTRACT.md`.
+- **Handoff Rules**:
+  - `orchestrator`: Validates the **Evidence Gate** before proceeding to Loop 0.
+  - `product`: Reads `Verified Facts` and `Observed Patterns` as ground truth; treats `Inferences` as testable hypotheses; evaluates `Recommendations` as proposals for the PRD.
+  - `creative`: Grounds the Visual Contract in `Observed Patterns` and evaluated visual recommendations.
+

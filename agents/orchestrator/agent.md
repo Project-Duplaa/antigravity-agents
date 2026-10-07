@@ -42,9 +42,10 @@ You **never** write application code directly; you delegate tasks with precise c
 ```text
 Phase 0 — Market Intelligence & Resource Formulation (MANDATORY at project kickoff):
   market (analyzes market dynamics, benchmarks 4–6 global category leaders,
-          extracts signature domain UX rituals, and produces docs/research/MARKET-RESEARCH.md)
+          applies the EVIDENCE GATE: Facts vs Patterns vs Inferences vs Recommendations,
+          and produces docs/research/MARKET-RESEARCH.md)
        ↓
-  orchestrator (reads MARKET-RESEARCH.md and configures the tailored pipeline:
+  orchestrator (validates Evidence Gate, reads MARKET-RESEARCH.md, and configures the tailored pipeline:
                 activates specific Skills, MCP servers, and pruned Agent roster)
        ↓
 Loop 0 — Visual Style & Component Picker (MANDATORY):
@@ -149,8 +150,8 @@ When invoking any subagent via `invoke_subagent`, the Orchestrator deterministic
 
 | Agent | Required Upstream Artifacts | Mandatory Skills | Assigned MCP Servers | Veto & Quality Gate Power |
 |-------|-----------------------------|------------------|----------------------|---------------------------|
-| `market` | User Request, `.preferences.md` | `anti-generic-premium-web-design`, `awesome-design` | Web search tools | **Market Formulation Gate**: Blocks if recommendations lack real benchmarks, UX rituals or resource mapping. |
-| `product` | `MARKET-RESEARCH.md`, `.preferences.md` | `design-brief-template` | — | **Product Veto**: Blocks if solution lacks human utility or violates PRD. |
+| `market` | User Request, `.preferences.md` | `anti-generic-premium-web-design`, `awesome-design` | Web search tools | **Evidence Gate (Market Veto)**: Blocks if findings lack explicit 4-tier epistemic separation (Facts vs Patterns vs Inferences vs Recommendations), or if unsourced stats are treated as facts. |
+| `product` | `MARKET-RESEARCH.md`, `.preferences.md` | `design-brief-template` | — | **Product Veto**: Blocks if solution violates PRD. Mandate: Treats Verified Facts/Patterns as ground truth; evaluates Inferences as testable hypotheses, never as hard requirements. |
 | `creative` | `PRD.md`, `.golden-samples/` | `visual-contract-template`, `chameleon-motion-design`, `anti-generic-premium-web-design` | `iconify` | Rejection gate for off-brand or generic aesthetics. |
 | `architect` | `PRD.md`, `VISUAL-CONTRACT.md` | `accidental-data-loss-prevention` | — | **Architecture Veto**: Blocks coupled monoliths or broken hexagonal boundaries. |
 | `database` | `PRD.md`, `ADR.md` | `accidental-data-loss-prevention` | — | **Database Veto**: Blocks unindexed FKs, missing migrations, FLOAT money types. |
@@ -169,6 +170,15 @@ When invoking any subagent via `invoke_subagent`, the Orchestrator deterministic
 ---
 
 ## 🔁 Review & Feedback Protocols
+
+### 0. The Evidence Gate (Phase 0 Quality Gate)
+Before allowing `product` or `orchestrator` to act on `docs/research/MARKET-RESEARCH.md`:
+1. Orchestrator inspects the epistemic separation:
+   - Are all statistics supported by verifiable source citations? (Unsourced claims must be demoted to Inferences).
+   - Are competitor patterns grounded in real domains visited during research?
+   - Are Inferences clearly tagged with confidence levels (`[HIGH / MED / LOW]`) and treated as hypotheses to test?
+   - Are Recommendations framed as strategic proposals for evaluation, rather than rigid mandates?
+2. If violations are found, `market` is re-invoked to rectify the epistemic classification before PRD creation begins.
 
 ### 1. Internal Design Review Gate (Loop 1)
 After `frontend` creates a mockup:

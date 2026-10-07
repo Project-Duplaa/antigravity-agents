@@ -33,12 +33,12 @@ Whenever starting a project from scratch (greenfield), executing a major feature
 ### Mode A: Sampler & Mockup-First (DEFAULT for visual products)
 ```
 Phase 0 — Market Intelligence & Resource Formulation (MANDATORY at kickoff):
-  market (industry deep dive, 4–6 global benchmarks, UX rituals, outputs `docs/research/MARKET-RESEARCH.md`)
+  market (industry deep dive, 4–6 global benchmarks, UX rituals, enforces Evidence Gate, outputs `docs/research/MARKET-RESEARCH.md`)
                                        ↓
-  orchestrator (reads MARKET-RESEARCH.md, selects active Skills, MCPs, and tailored Agent roster)
+  orchestrator (validates Evidence Gate, reads MARKET-RESEARCH.md, selects active Skills, MCPs, and tailored Agent roster)
                                        ↓
 Loop 0 — Visual Style & Component Picker (MANDATORY):
-  product (PRD grounded in benchmarks) → frontend produces `design-sampler.html` (interactive component matrix)
+  product (PRD grounded in benchmarks & facts) → frontend produces `design-sampler.html` (interactive component matrix)
                                        ↓
                         [USER PICKS TYPOGRAPHY & COMPONENTS]
                                        ↓
@@ -60,6 +60,15 @@ Loop 2 — Engineering & API Integration (only after approval):
        ↓
   frontend (connects APIs via typed client / TanStack Query) + security [Phase 2: Post-Code Audit & Veto] + qa / enhancer (parallel) → documentation
 ```
+
+#### The Evidence Gate (Phase 0 Epistemic Separation Protocol)
+To prevent **epistemic drift** (where AI interpretations or unverified web statistics cascade into mandatory PRD requirements), `MARKET-RESEARCH.md` enforces a strict 4-tier taxonomy:
+1. **Tier 1: Verified Facts (`FACT`)**: Hard metrics or regulatory data backed by explicit citations (source, year, URL). Unsourced claims are banned from this tier.
+2. **Tier 2: Observed Competitor Patterns (`OBSERVED PATTERN`)**: Empirical UI/UX behaviors observed directly on live competitor sites visited during benchmarking.
+3. **Tier 3: Inferences & Hypotheses (`INFERENCE`)**: Interpretations by the agent, tagged with confidence levels (`[HIGH / MED / LOW]`). Must be treated as testable hypotheses, NEVER as proven ground truth.
+4. **Tier 4: Strategic Recommendations (`RECOMMENDATION`)**: Actionable proposals for our product, explicitly framed as options for `product` and `creative` to evaluate, refine, or discard.
+
+**Anti-Bleed Mandate**: The `product` agent is strictly forbidden from converting Tier 3 Inferences directly into immutable PRD requirements without validating them as experimental hypotheses.
 
 #### Internal Design Review Gate (New in v2)
 After the `frontend` agent produces a mockup, the orchestrator MUST invoke `creative` or `designer` to review the HTML source before presenting it to the user. The reviewer checks:
@@ -131,8 +140,8 @@ Every agent MUST read and honor ALL upstream artifacts before starting work:
 | Agent | MUST Read Before Starting |
 |-------|--------------------------|
 | `market` | User request + `.preferences.md` |
-| `product` | `MARKET-RESEARCH.md` from `market` + `.preferences.md` |
-| `creative` | PRD from `product` + `MARKET-RESEARCH.md` from `market` + `.golden-samples/` + `visual-contract-template` skill |
+| `product` | `MARKET-RESEARCH.md` from `market` (respecting Evidence Gate: Facts/Patterns = ground truth; Inferences = testable hypotheses, NOT requirements; Recommendations = proposals) + `.preferences.md` |
+| `creative` | PRD from `product` + `MARKET-RESEARCH.md` from `market` (Observed Patterns & visual recommendations) + `.golden-samples/` + `visual-contract-template` skill |
 | `architect` | PRD from `product` + `MARKET-RESEARCH.md` |
 | `database` | PRD from `product` + ADR from `architect` |
 | `security (Pre-Code)` | PRD from `product` + ADR from `architect` (threat modeling, trust boundaries, auth model) |

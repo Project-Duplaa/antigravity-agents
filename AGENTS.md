@@ -15,4 +15,5 @@ See [GEMINI.md](./GEMINI.md) for the complete Multi-Agent Orchestration Protocol
 - **New Agent (v3.0):** `motion` — Dedicated Principal Creative Motion & Interaction Specialist (GSAP ScrollTrigger choreography, spring physics micro-interactions, cinematic boot sequences, scroll-scrub timelines, Canvas/WebGL particles, Web Audio haptics, Motion Veto power).
 - **New Skills (v3.1):** `blender-studio-pipeline` (studio lighting presets, `studio_lib.py`, `audit.py`) and `motion-choreography-system` (`MotionKit`, `motion-tokens.css`, hotspot-tracking frame scrubber).
 - **New Agent (v3.2):** `market` — Dedicated Principal Market Researcher & Competitive Intelligence Specialist (Phase 0: Market Intelligence, global competitive benchmarking, category-defining UX rituals, dynamic pipeline resource formulation).
+- **New Quality Gate (v3.2):** **The Evidence Gate** — Strict 4-tier epistemic separation in Market Research (`Verified Facts`, `Observed Competitor Patterns`, `Inferences`, `Recommendations`), banning unsourced statistics from becoming unvalidated PRD requirements.
 - **Roster:** 15 agents (was 14).
