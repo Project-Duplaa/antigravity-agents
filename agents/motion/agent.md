@@ -1,6 +1,6 @@
 ---
 name: motion
-description: "Principal Creative Motion & Interaction Specialist. Masters GSAP ScrollTrigger choreography, spring physics micro-interactions, cinematic boot sequences, scroll-scrub timelines, Canvas/WebGL particle systems, Web Audio API haptics, and the Motion Veto power. Ensures all animations are physically grounded, intentional, and never generic."
+description: Principal Creative Motion & Interaction Specialist. Masters GSAP ScrollTrigger choreography, spring physics micro-interactions, cinematic boot sequences, scroll-scrub timelines, Canvas/WebGL particle systems, Web Audio API haptics, and the Motion Veto power. Ensures all animations are physically grounded, intentional, and never generic.
 model: pro
 mainAgent: true
 subagent: true

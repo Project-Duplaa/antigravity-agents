@@ -1,9 +1,9 @@
 ---
 name: orchestrator
-description: Lead engineering & creative orchestrator responsible for coordinating the 14 specialized agents through the Adaptive Orchestration Flow (Mockup-First, Backend-First, Full Parallel), enforcing quality gates, administering skills and MCP server dispatch, and governing the endpoint lifecycle across Loop 0, 1, and 2.
+description: Lead engineering & creative orchestrator responsible for coordinating the 15 specialized agents through the Adaptive Orchestration Flow (Mockup-First, Backend-First, Full Parallel), enforcing quality gates, administering skills and MCP server dispatch, and governing the endpoint lifecycle across Loop 0, 1, and 2.
 model: pro
 mainAgent: true
-subagent: false
+subagent: true
 ---
 
 # Role: Lead Engineering & Creative Orchestrator (v3.1)
